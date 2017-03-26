@@ -5,6 +5,9 @@ public class Seat {
     private Integer place;
     private boolean isVip;
 
+    public Seat() {
+    }
+
     public Seat(Integer row, Integer place, boolean isVip) {
         this.row = row;
         this.place = place;

@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <import resource="prod-profile.xml"/>
+
+    <bean id="userService" class="com.epam.cinema.service.impl.UserServiceImpl">
+        <constructor-arg index="0" ref="userRepository"/>
+    </bean>
+    <bean id="eventService" class="com.epam.cinema.service.impl.EventServiceImpl">
+        <constructor-arg index="0" ref="eventRepository"/>
+    </bean>
+
+
+    <bean id="userRepository" class="com.epam.cinema.repository.impl.UserRepositoryImpl"/>
+    <bean id="eventRepository" class="com.epam.cinema.repository.impl.EventRepositoryImpl"/>
+    <bean id="handler" class="com.epam.cinema.handler.AuditoriumHandler"/>
+    <bean id="starAuditorium" factory-bean="handler" factory-method="starAuditorium"/>
+    <bean id="bookingRepository" class="com.epam.cinema.repository.impl.BookingRepositoryImpl">
+        <property name="auditoriums">
+            <list>
+                <ref bean="starAuditorium"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="auditoriumService" class="com.epam.cinema.service.impl.AuditoriumServiceImpl">
+        <property name="auditoriums">
+            <list>
+                <ref bean="starAuditorium"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <util:set id="registeredUsers" value-type="com.epam.cinema.model.User"/>
+    <util:list id="events" value-type="com.epam.cinema.model.Event"/>
+
+    <alias name="userService" alias="userServiceImpl"/>
+    <context:property-placeholder location="classpath*:auditorium.properties"/>
+    <context:component-scan base-package="com.epam.cinema.repository.impl"/>
 </beans>

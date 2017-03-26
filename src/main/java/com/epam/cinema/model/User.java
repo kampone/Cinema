@@ -9,6 +9,16 @@ public class User {
     private Integer id;
     private LocalDate birthDate;
 
+    public User() {
+    }
+
+    public User(String name, String email, Integer id, LocalDate birthDate) {
+        this.name = name;
+        this.email = email;
+        this.id = id;
+        this.birthDate = birthDate;
+    }
+
     public LocalDate getBirthDate() {
         return birthDate;
     }

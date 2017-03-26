@@ -6,6 +6,14 @@ public class Auditorium {
     private String name;
     private List<Seat> seats;
 
+    public Auditorium() {
+    }
+
+    public Auditorium(String name, List<Seat> seats) {
+        this.name = name;
+        this.seats = seats;
+    }
+
     public String getName() {
         return name;
     }

@@ -8,6 +8,16 @@ public class Ticket {
     private Seat seat;
     private User user;
 
+    public Ticket() {
+    }
+
+    public Ticket(Event event, LocalDateTime dateTime, Seat seat, User user) {
+        this.event = event;
+        this.dateTime = dateTime;
+        this.seat = seat;
+        this.user = user;
+    }
+
     public Event getEvent() {
         return event;
     }

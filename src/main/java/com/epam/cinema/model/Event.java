@@ -11,6 +11,12 @@ public class Event {
     public Event() {
     }
 
+    public Event(String name, BigDecimal basePrice, Rating rating) {
+        this.name = name;
+        this.basePrice = basePrice;
+        this.rating = rating;
+    }
+
     public String getName() {
         return name;
     }
