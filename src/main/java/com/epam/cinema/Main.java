@@ -1,10 +1,12 @@
 package com.epam.cinema;
 
 import com.epam.cinema.model.*;
+import com.epam.cinema.repository.impl.TicketRepositoryImpl;
 import com.epam.cinema.service.AuditoriumService;
 import com.epam.cinema.service.BookingService;
 import com.epam.cinema.service.EventService;
 import com.epam.cinema.service.TicketService;
+import com.epam.cinema.service.impl.TicketServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,27 +21,35 @@ public class Main {
         EventService eventService = context.getBean("eventService", EventService.class);
         TicketService ticketService = context.getBean("ticketService", TicketService.class);
         BookingService bookingService = context.getBean("bookingService", BookingService.class);
-        AuditoriumService auditoriumService = context.getBean("auditoriumService", AuditoriumService.class);
         Auditorium starAuditorium = context.getBean("starAuditorium", Auditorium.class);
+
+
         addEvents(eventService);
         Event event = eventService.getById(1);
         List<Ticket> tickets = getTickets(ticketService, starAuditorium, event);
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose ticket by id");
-        System.out.println(tickets);
-
-        int ticketId = scanner.nextInt();
-        Ticket ticket = tickets.stream().filter(it -> it.getId().equals(ticketId)).findFirst().get();
-        bookingService.bookTicket(ticket);
-        System.out.println("Ticket is booked");
 
 
+        while (true) {
+            System.out.println("PURCHASED TICKETS:");
+            System.out.println(ticketService.getPurchasedTicketsForEventAndDate(event, LocalDateTime.of(2017, 12, 11, 12, 30)));
+            System.out.println("==============================================================");
+            System.out.println("TICKETS TO BUY");
+            System.out.println("Choose ticket by id");
+            System.out.println(tickets);
+            int ticketId = scanner.nextInt();
 
+            Ticket ticket = tickets.stream().filter(it -> it.getId().equals(ticketId)).findFirst().get();
+            bookingService.bookTicket(ticket);
+            System.out.println("Ticket is booked");
+            System.out.println("==============================================================");
 
+        }
     }
 
     private static List<Ticket> getTickets(TicketService ticketService, Auditorium starAuditorium, Event event) {
-        List<Ticket> ticketsForEvent = ticketService.getTicketsForEvent(event);
+        List<Ticket> ticketsForEvent =((TicketRepositoryImpl)((TicketServiceImpl) ticketService).getTicketRepository()).getTickets();
         int i = 0;
         for (Seat seat : starAuditorium.getSeats()) {
             ticketsForEvent.add(new Ticket(++i, event, LocalDateTime.of(2017,12,11,12,30),seat,null,false ));

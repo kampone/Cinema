@@ -17,6 +17,10 @@ public class TicketServiceImpl implements TicketService {
         this.ticketRepository = ticketRepository;
     }
 
+    public TicketRepository getTicketRepository() {
+        return ticketRepository;
+    }
+
     @Override
     public List<Ticket> getTicketsForEvent(Event event) {
         return ticketRepository.getAll().stream()
