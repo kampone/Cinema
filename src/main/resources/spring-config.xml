@@ -4,29 +4,18 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Imports-->
     <import resource="prod-profile.xml"/>
     <import resource="discount-strategies.xml"/>
 
+    <!--Services-->
     <bean id="userService" class="com.epam.cinema.service.impl.UserServiceImpl">
         <constructor-arg index="0" ref="userRepository"/>
     </bean>
     <bean id="eventService" class="com.epam.cinema.service.impl.EventServiceImpl">
         <constructor-arg index="0" ref="eventRepository"/>
     </bean>
-
-
-    <bean id="userRepository" class="com.epam.cinema.repository.impl.UserRepositoryImpl"/>
-    <bean id="eventRepository" class="com.epam.cinema.repository.impl.EventRepositoryImpl"/>
-    <bean id="handler" class="com.epam.cinema.handler.AuditoriumHandler"/>
-    <bean id="starAuditorium" factory-bean="handler" factory-method="starAuditorium"/>
-    <bean id="bookingRepository" class="com.epam.cinema.repository.impl.BookingRepositoryImpl">
-        <property name="auditoriums">
-            <list>
-                <ref bean="starAuditorium"/>
-            </list>
-        </property>
-    </bean>
-
     <bean id="auditoriumService" class="com.epam.cinema.service.impl.AuditoriumServiceImpl">
         <property name="auditoriums">
             <list>
@@ -35,9 +24,24 @@
         </property>
     </bean>
 
+    <!--Repositories-->
+    <bean id="userRepository" class="com.epam.cinema.repository.impl.UserRepositoryImpl"/>
+    <bean id="eventRepository" class="com.epam.cinema.repository.impl.EventRepositoryImpl"/>
+    <bean id="ticketRepository" class="com.epam.cinema.repository.impl.TicketRepositoryImpl"/>
+    <bean id="bookingRepository" class="com.epam.cinema.repository.impl.BookingRepositoryImpl">
+        <property name="auditoriums">
+            <list>
+                <ref bean="starAuditorium"/>
+            </list>
+        </property>
+    </bean>
 
+    <!--Util-->
+    <bean id="handler" class="com.epam.cinema.handler.AuditoriumHandler"/>
+    <bean id="starAuditorium" factory-bean="handler" factory-method="starAuditorium"/>
     <util:set id="registeredUsers" value-type="com.epam.cinema.model.User"/>
     <util:list id="events" value-type="com.epam.cinema.model.Event"/>
+    <util:list id="tickets" value-type="com.epam.cinema.model.Ticket"/>
 
     <alias name="userService" alias="userServiceImpl"/>
     <context:component-scan base-package="com.epam.cinema.repository.impl"/>
