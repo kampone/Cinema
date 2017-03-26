@@ -13,6 +13,6 @@ public class MoreThanTenTicketsDiscountStrategy implements DiscountStrategy {
 
     @Override
     public Integer getDiscount(User user, Event event, LocalDateTime dateTime, Integer numberOfTickets) {
-        return numberOfTickets > TICKETS_BORDER ? DISCOUNT_SIZE : WITHOUT_DISCOUNT;
+            return numberOfTickets > TICKETS_BORDER ? DISCOUNT_SIZE : WITHOUT_DISCOUNT;
     }
 }

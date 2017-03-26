@@ -5,6 +5,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <import resource="prod-profile.xml"/>
+    <import resource="discount-strategies.xml"/>
 
     <bean id="userService" class="com.epam.cinema.service.impl.UserServiceImpl">
         <constructor-arg index="0" ref="userRepository"/>
@@ -39,6 +40,5 @@
     <util:list id="events" value-type="com.epam.cinema.model.Event"/>
 
     <alias name="userService" alias="userServiceImpl"/>
-    <context:property-placeholder location="classpath*:auditorium.properties"/>
     <context:component-scan base-package="com.epam.cinema.repository.impl"/>
 </beans>
