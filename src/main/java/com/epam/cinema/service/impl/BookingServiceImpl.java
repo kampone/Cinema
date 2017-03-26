@@ -6,6 +6,8 @@ import com.epam.cinema.service.DiscountService;
 import com.epam.cinema.service.TicketService;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,17 +40,17 @@ public class BookingServiceImpl implements BookingService {
         Integer discount = discountService.getDiscount(user, event, dateTime, seats.size());
         BigDecimal basePrice = event.getBasePrice();
         for (Seat seat : seats) {
-            if (!seat.isVip()){
+            if (!seat.isVip()) {
                 price = price.add(basePrice);
             } else {
                 price = price.add(basePrice.multiply(new BigDecimal(2)));
             }
         }
-        if (event.getRating().equals(Rating.HIGH)){
+        if (event.getRating().equals(Rating.HIGH)) {
             price = price.multiply(new BigDecimal(1.2));
         }
-
-        return price.multiply(new BigDecimal(discount/ONE_HUNDRED_PERCENTS));
+        price = discount == BigDecimal.ZERO.intValue() ? price : price.multiply(new BigDecimal(discount / ONE_HUNDRED_PERCENTS));
+        return price.round(new MathContext(2, RoundingMode.CEILING));
     }
 
     @Override

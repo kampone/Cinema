@@ -24,6 +24,6 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Override
     public Auditorium getByName(String name) {
-        return auditoriums.stream().filter(name::equals).findFirst().get();
+        return auditoriums.stream().filter(auditorium -> auditorium.getName().equals(name)).findFirst().get();
     }
 }
