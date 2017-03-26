@@ -3,11 +3,13 @@ package com.epam.cinema.handler;
 import com.epam.cinema.model.Auditorium;
 import com.epam.cinema.model.Seat;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+@Configuration(value = "handler")
 @PropertySource("classpath:auditorium.properties")
 public class AuditoriumHandler {
 
@@ -15,7 +17,7 @@ public class AuditoriumHandler {
     private String starName;
 
     @Value("${auditorium.star.rows}")
-    private Integer rows;
+    private Integer rowsString;
 
     @Value("${auditorium.star.seats}")
     private Integer seats;
@@ -30,6 +32,7 @@ public class AuditoriumHandler {
     private Integer maxVipPlace;
 
     public Auditorium starAuditorium(){
+        Integer rows = Integer.valueOf(rowsString);
         Auditorium auditorium = new Auditorium();
         auditorium.setName(starName);
         ArrayList<Seat> seats = new ArrayList<>();

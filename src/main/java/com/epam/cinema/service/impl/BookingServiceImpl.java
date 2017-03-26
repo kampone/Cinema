@@ -16,6 +16,22 @@ public class BookingServiceImpl implements BookingService {
 
     private TicketService ticketService;
 
+    public DiscountService getDiscountService() {
+        return discountService;
+    }
+
+    public void setDiscountService(DiscountService discountService) {
+        this.discountService = discountService;
+    }
+
+    public TicketService getTicketService() {
+        return ticketService;
+    }
+
+    public void setTicketService(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
     @Override
     public BigDecimal getTicketsPrice(Event event, LocalDateTime dateTime, User user, List<Seat> seats) {
         BigDecimal price = BigDecimal.ZERO;

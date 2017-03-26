@@ -15,4 +15,9 @@ public class BookingRepositoryImpl implements BookingRepository {
     public void setAuditoriums(List<Auditorium> auditoriums) {
         this.auditoriums = auditoriums;
     }
+
+    @Override
+    public List<Auditorium> getAll() {
+        return getAuditoriums();
+    }
 }

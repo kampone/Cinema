@@ -65,6 +65,6 @@ public class Seat {
                 "row=" + row +
                 ", place=" + place +
                 ", isVip=" + isVip +
-                '}';
+                '}' + System.lineSeparator();
     }
 }

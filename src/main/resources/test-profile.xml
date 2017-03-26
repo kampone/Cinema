@@ -3,7 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd"
        profile="test">
+
+    <import resource="discount-strategies-fake.xml"/>
+
+    <!--Discount strategies-->
+    <util:list id="discountStrategies" value-type="com.epam.cinema.service.discount.DiscountStrategy">
+        <ref bean="fakeDiscountStrategy"/>
+    </util:list>
 
 </beans>

@@ -4,6 +4,7 @@ package com.epam.cinema.model;
 import java.math.BigDecimal;
 
 public class Event {
+    private Integer id;
     private String name;
     private BigDecimal basePrice;
     private Rating rating;
@@ -11,10 +12,19 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, BigDecimal basePrice, Rating rating) {
+    public Event(Integer id, String name, BigDecimal basePrice, Rating rating) {
+        this.id = id;
         this.name = name;
         this.basePrice = basePrice;
         this.rating = rating;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -48,6 +58,7 @@ public class Event {
 
         Event event = (Event) o;
 
+        if (id != null ? !id.equals(event.id) : event.id != null) return false;
         if (name != null ? !name.equals(event.name) : event.name != null) return false;
         if (basePrice != null ? !basePrice.equals(event.basePrice) : event.basePrice != null) return false;
         return rating == event.rating;
@@ -55,7 +66,8 @@ public class Event {
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (basePrice != null ? basePrice.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
         return result;
@@ -64,7 +76,8 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", basePrice=" + basePrice +
                 ", rating=" + rating +
                 '}';

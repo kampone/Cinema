@@ -12,8 +12,19 @@ public class DiscountServiceImpl implements DiscountService {
 
     private List<DiscountStrategy> strategies;
 
+    public List<DiscountStrategy> getStrategies() {
+        return strategies;
+    }
+
+    public void setStrategies(List<DiscountStrategy> strategies) {
+        this.strategies = strategies;
+    }
+
     @Override
     public Integer getDiscount(User user, Event event, LocalDateTime dateTime, Integer numberOfTickets) {
-        return strategies.stream().mapToInt(it -> it.getDiscount(user, event, dateTime, numberOfTickets)).max().getAsInt();
+        if (strategies!= null){
+            return strategies.stream().mapToInt(it -> it.getDiscount(user, event, dateTime, numberOfTickets)).max().getAsInt();
+        }
+        return 0;
     }
 }

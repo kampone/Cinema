@@ -3,11 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--Imports-->
     <import resource="prod-profile.xml"/>
-    <import resource="discount-strategies.xml"/>
+    <import resource="test-profile.xml"/>
+
 
     <!--Services-->
     <bean id="userService" class="com.epam.cinema.service.impl.UserServiceImpl">
@@ -23,6 +24,16 @@
             </list>
         </property>
     </bean>
+    <bean id="discountService" class="com.epam.cinema.service.impl.DiscountServiceImpl">
+        <property name="strategies" ref="discountStrategies"/>
+    </bean>
+    <bean id="ticketService" class="com.epam.cinema.service.impl.TicketServiceImpl">
+        <constructor-arg index="0" ref="ticketRepository"/>
+    </bean>
+    <bean id="bookingService" class="com.epam.cinema.service.impl.BookingServiceImpl">
+        <property name="discountService" ref="discountService"/>
+        <property name="ticketService" ref="ticketService"/>
+    </bean>
 
     <!--Repositories-->
     <bean id="userRepository" class="com.epam.cinema.repository.impl.UserRepositoryImpl"/>
@@ -37,12 +48,14 @@
     </bean>
 
     <!--Util-->
-    <bean id="handler" class="com.epam.cinema.handler.AuditoriumHandler"/>
     <bean id="starAuditorium" factory-bean="handler" factory-method="starAuditorium"/>
+
     <util:set id="registeredUsers" value-type="com.epam.cinema.model.User"/>
     <util:list id="events" value-type="com.epam.cinema.model.Event"/>
     <util:list id="tickets" value-type="com.epam.cinema.model.Ticket"/>
 
+
     <alias name="userService" alias="userServiceImpl"/>
     <context:component-scan base-package="com.epam.cinema.repository.impl"/>
+    <context:component-scan base-package="com.epam.cinema.handler"/>
 </beans>

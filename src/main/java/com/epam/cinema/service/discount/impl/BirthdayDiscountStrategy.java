@@ -14,6 +14,6 @@ public class BirthdayDiscountStrategy implements DiscountStrategy {
 
     @Override
     public Integer getDiscount(User user, Event event, LocalDateTime dateTime, Integer numberOfTickets) {
-        return ChronoUnit.DAYS.between(dateTime, user.getBirthDate()) < DAYS_BORDER ? DISCOUNT_SIZE : WITHOUT_DISCOUNT;
+        return Math.abs(ChronoUnit.DAYS.between(dateTime, user.getBirthDate())) < DAYS_BORDER ? DISCOUNT_SIZE : WITHOUT_DISCOUNT;
     }
 }

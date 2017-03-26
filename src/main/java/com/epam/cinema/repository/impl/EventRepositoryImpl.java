@@ -23,12 +23,12 @@ public class EventRepositoryImpl implements EventRepository{
 
     @Override
     public Event getById(Integer id) {
-        return events.stream().filter(id::equals).findFirst().get();
+        return events.stream().filter(event -> event.getId().equals(id)).findFirst().get();
     }
 
     @Override
     public Event getByName(String name) {
-        return events.stream().filter(name::equals).findFirst().get();
+        return events.stream().filter(event -> event.getName().equals(name)).findFirst().get();
     }
 
     @Override

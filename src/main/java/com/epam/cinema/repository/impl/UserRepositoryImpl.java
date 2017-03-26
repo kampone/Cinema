@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import java.util.Set;
 
 public class UserRepositoryImpl implements UserRepository {
+
     @Resource
     private Set<User> registeredUsers;
 
