@@ -11,6 +11,14 @@ public class UserRepositoryImpl implements UserRepository {
     @Resource
     private Set<User> registeredUsers;
 
+    public Set<User> getRegisteredUsers() {
+        return registeredUsers;
+    }
+
+    public void setRegisteredUsers(Set<User> registeredUsers) {
+        this.registeredUsers = registeredUsers;
+    }
+
     @Override
     public void save(User user) {
         registeredUsers.add(user);
@@ -23,12 +31,12 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getById(Integer id) {
-        return registeredUsers.stream().filter(id::equals).findFirst().get();
+        return registeredUsers.stream().filter(user -> user.getId().equals(id)).findFirst().get();
     }
 
     @Override
     public User getByEmail(String email) {
-        return registeredUsers.stream().filter(email::equals).findFirst().get();
+        return registeredUsers.stream().filter(user -> user.getEmail().equals(email)).findFirst().get();
     }
 
     @Override

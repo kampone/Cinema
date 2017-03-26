@@ -11,6 +11,14 @@ public class EventRepositoryImpl implements EventRepository{
     @Resource
     private List<Event> events;
 
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     @Override
     public void save(Event event) {
         events.add(event);
