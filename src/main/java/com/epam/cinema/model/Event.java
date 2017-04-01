@@ -4,7 +4,7 @@ package com.epam.cinema.model;
 import java.math.BigDecimal;
 
 public class Event {
-    private Integer id;
+    private Long id;
     private String name;
     private BigDecimal basePrice;
     private Rating rating;
@@ -12,18 +12,18 @@ public class Event {
     public Event() {
     }
 
-    public Event(Integer id, String name, BigDecimal basePrice, Rating rating) {
+    public Event(Long id, String name, BigDecimal basePrice, Rating rating) {
         this.id = id;
         this.name = name;
         this.basePrice = basePrice;
         this.rating = rating;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

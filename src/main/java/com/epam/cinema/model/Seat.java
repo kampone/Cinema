@@ -1,6 +1,7 @@
 package com.epam.cinema.model;
 
 public class Seat {
+    private Long id;
     private Integer row;
     private Integer place;
     private boolean isVip;
@@ -8,24 +9,24 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(Integer row, Integer place, boolean isVip) {
+    public Seat(Long id, Integer row, Integer place, boolean isVip) {
+        this.id = id;
         this.row = row;
         this.place = place;
         this.isVip = isVip;
     }
 
-    public boolean isVip() {
-        return isVip;
+    public Long getId() {
+        return id;
     }
 
-    public void setVip(boolean vip) {
-        isVip = vip;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getRow() {
         return row;
     }
-
 
     public void setRow(Integer row) {
         this.row = row;
@@ -39,6 +40,14 @@ public class Seat {
         this.place = place;
     }
 
+    public boolean isVip() {
+        return isVip;
+    }
+
+    public void setVip(boolean vip) {
+        isVip = vip;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,13 +56,15 @@ public class Seat {
         Seat seat = (Seat) o;
 
         if (isVip != seat.isVip) return false;
+        if (id != null ? !id.equals(seat.id) : seat.id != null) return false;
         if (row != null ? !row.equals(seat.row) : seat.row != null) return false;
         return place != null ? place.equals(seat.place) : seat.place == null;
     }
 
     @Override
     public int hashCode() {
-        int result = row != null ? row.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (row != null ? row.hashCode() : 0);
         result = 31 * result + (place != null ? place.hashCode() : 0);
         result = 31 * result + (isVip ? 1 : 0);
         return result;
@@ -62,9 +73,10 @@ public class Seat {
     @Override
     public String toString() {
         return "Seat{" +
-                "row=" + row +
+                "id=" + id +
+                ", row=" + row +
                 ", place=" + place +
                 ", isVip=" + isVip +
-                '}' + System.lineSeparator();
+                '}';
     }
 }

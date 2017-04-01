@@ -3,7 +3,7 @@ package com.epam.cinema.model;
 import java.time.LocalDateTime;
 
 public class Ticket {
-    private Integer id;
+    private Long id;
     private Event event;
     private LocalDateTime dateTime;
     private Seat seat;
@@ -13,7 +13,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Integer id, Event event, LocalDateTime dateTime, Seat seat, User user, boolean isBooked) {
+    public Ticket(Long id, Event event, LocalDateTime dateTime, Seat seat, User user, boolean isBooked) {
         this.id = id;
         this.event = event;
         this.dateTime = dateTime;
@@ -22,11 +22,11 @@ public class Ticket {
         this.isBooked = isBooked;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

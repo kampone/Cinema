@@ -7,11 +7,9 @@ import com.epam.cinema.service.BookingService;
 import com.epam.cinema.service.EventService;
 import com.epam.cinema.service.TicketService;
 import com.epam.cinema.service.impl.TicketServiceImpl;
-import org.apache.commons.logging.Log;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,8 +17,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private static Logger logger = Logger.getLogger(Main.class);
+
+
     public static void main(String[] args) {
-        Logger logger = Logger.getLogger(Main.class);
+
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         EventService eventService = context.getBean("eventService", EventService.class);
         TicketService ticketService = context.getBean("ticketService", TicketService.class);
