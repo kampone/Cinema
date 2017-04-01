@@ -13,6 +13,7 @@ import com.epam.cinema.repository.impl.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,9 +37,9 @@ public class RepositoryConfiguration {
     }
 
     @Bean
-    public BookingRepository bookingRepository(@Autowired List<Auditorium> auditoriums){
+    public BookingRepository bookingRepository(@Autowired JdbcTemplate jdbcTemplate){
         BookingRepositoryImpl repository = new BookingRepositoryImpl();
-        repository.setAuditoriums(auditoriums);
+        repository.setJdbcTemplate(jdbcTemplate);
         return repository;
     }
 

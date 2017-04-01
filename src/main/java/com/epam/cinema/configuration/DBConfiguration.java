@@ -15,7 +15,7 @@ import java.sql.SQLException;
 @Configuration
 public class DBConfiguration {
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         return builder.setType(EmbeddedDatabaseType.H2)
                 .setName("local")
@@ -37,7 +37,7 @@ public class DBConfiguration {
 
     @Bean
     @Scope("prototype")
-    public JdbcTemplate getJdbcTemplate(@Autowired DataSource dataSource){
+    public JdbcTemplate jdbcTemplate(@Autowired DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }

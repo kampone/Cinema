@@ -38,11 +38,11 @@ public class AuditoriumHandler {
         ArrayList<Seat> seats = new ArrayList<>();
         for (int row = 1; row <= rows ; row++) {
             for (int place = 1; place <= this.seats; place++) {
-                Seat seat = new Seat(row, place, false);
-                if (Objects.equals(seat.getRow(), vipRow) && place < maxVipPlace  && place > minVipPlace){
-                    seat.setVip(true);
-                }
-                seats.add(seat);
+//                Seat seat = new Seat(row, place, false);
+//                if (Objects.equals(seat.getRow(), vipRow) && place < maxVipPlace  && place > minVipPlace){
+//                    seat.setVip(true);
+//                }
+//                seats.add(seat);
             }
         }
         auditorium.setSeats(seats);

@@ -1,4 +1,4 @@
-CREATE SEQUENCE events_sequence START WITH 100;
+CREATE SEQUENCE user_sequence START WITH 100;
 
 CREATE TABLE IF NOT EXISTS RATING (
   id   INT PRIMARY KEY,
@@ -16,19 +16,19 @@ CREATE TABLE IF NOT EXISTS AUDITORIUMS (
   name VARCHAR(255)
 );
 CREATE TABLE IF NOT EXISTS SEATS (
-  id             INT PRIMARY KEY,
-  row            INT,
-  place          INT,
-  vip            BOOLEAN,
-  auditoriumm_id INT,
-  FOREIGN KEY (auditoriumm_id) REFERENCES AUDITORIUM (id)
+  id            INT PRIMARY KEY,
+  row           INT,
+  place         INT,
+  vip           BOOLEAN,
+  auditorium_id INT,
+  FOREIGN KEY (auditorium_id) REFERENCES AUDITORIUMS (id)
 );
 CREATE TABLE IF NOT EXISTS USERS (
   id       INT PRIMARY KEY,
   name     VARCHAR(255),
   email    VARCHAR(255),
   birthday DATE
-)
+);
 CREATE TABLE IF NOT EXISTS TICKETS (
   id       INT PRIMARY KEY,
   event_id INT,

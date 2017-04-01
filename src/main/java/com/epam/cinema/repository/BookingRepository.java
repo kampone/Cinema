@@ -10,4 +10,14 @@ public interface BookingRepository {
      * @return All auditoriums
      */
     List<Auditorium> getAll();
+
+    Auditorium findById(Long id);
+
+    Auditorium findByName(String name);
+
+    void save(Auditorium auditorium);
+
+    void remove(Auditorium auditorium);
+
+    void update(Auditorium auditorium);
 }
