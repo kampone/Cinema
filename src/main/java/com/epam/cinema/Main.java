@@ -1,13 +1,16 @@
 package com.epam.cinema;
 
+import com.epam.cinema.configuration.SpringConfiguration;
 import com.epam.cinema.model.*;
 import com.epam.cinema.repository.impl.TicketRepositoryImpl;
-import com.epam.cinema.service.AuditoriumService;
 import com.epam.cinema.service.BookingService;
 import com.epam.cinema.service.EventService;
 import com.epam.cinema.service.TicketService;
 import com.epam.cinema.service.impl.TicketServiceImpl;
+import org.apache.commons.logging.Log;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.math.BigDecimal;
@@ -17,7 +20,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+        Logger logger = Logger.getLogger(Main.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         EventService eventService = context.getBean("eventService", EventService.class);
         TicketService ticketService = context.getBean("ticketService", TicketService.class);
         BookingService bookingService = context.getBean("bookingService", BookingService.class);
@@ -43,8 +47,7 @@ public class Main {
             Ticket ticket = tickets.stream().filter(it -> it.getId().equals(ticketId)).findFirst().get();
             bookingService.bookTicket(ticket);
             System.out.println("Ticket is booked");
-            System.out.println("==============================================================");
-
+            logger.info("=====================================================================");
         }
     }
 

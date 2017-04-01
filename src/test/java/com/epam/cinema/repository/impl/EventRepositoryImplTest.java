@@ -17,11 +17,11 @@ import static org.junit.Assert.*;
 public class EventRepositoryImplTest {
 
     private EventRepositoryImpl repository = new EventRepositoryImpl();
+    private final Event event = new Event(1, "name", new BigDecimal(1), Rating.HIGH);
 
     @Test
     public void save() throws Exception {
         repository.setEvents(new ArrayList<>());
-        Event event = new Event(1, "name", new BigDecimal(1), Rating.HIGH);
 
         repository.save(event);
 
@@ -31,7 +31,6 @@ public class EventRepositoryImplTest {
 
     @Test
     public void remove() throws Exception {
-        Event event = new Event(1, "name", new BigDecimal(1), Rating.HIGH);
         ArrayList<Event> events = new ArrayList<>();
         events.add(event);
 
@@ -44,7 +43,6 @@ public class EventRepositoryImplTest {
 
     @Test
     public void getById() throws Exception {
-        Event event = new Event(1, "name", new BigDecimal(1), Rating.HIGH);
         ArrayList<Event> events = new ArrayList<>();
         events.add(event);
 
@@ -57,7 +55,6 @@ public class EventRepositoryImplTest {
 
     @Test
     public void getByName() throws Exception {
-        Event event = new Event(1, "name", new BigDecimal(1), Rating.HIGH);
         ArrayList<Event> events = new ArrayList<>();
         events.add(event);
 
@@ -70,7 +67,6 @@ public class EventRepositoryImplTest {
 
     @Test
     public void getAll() throws Exception {
-        Event event = new Event(1, "name", new BigDecimal(1), Rating.HIGH);
         ArrayList<Event> events = new ArrayList<>();
         events.add(event);
 
