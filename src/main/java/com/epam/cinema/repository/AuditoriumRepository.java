@@ -4,7 +4,7 @@ import com.epam.cinema.model.Auditorium;
 
 import java.util.List;
 
-public interface BookingRepository {
+public interface AuditoriumRepository {
     /**
      * Return all auditoriums
      * @return All auditoriums

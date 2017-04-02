@@ -1,23 +1,11 @@
 package com.epam.cinema.configuration;
 
-import com.epam.cinema.handler.AuditoriumHandler;
-import com.epam.cinema.model.Auditorium;
-import com.epam.cinema.repository.BookingRepository;
-import com.epam.cinema.repository.EventRepository;
-import com.epam.cinema.repository.TicketRepository;
-import com.epam.cinema.repository.UserRepository;
-import com.epam.cinema.repository.impl.BookingRepositoryImpl;
-import com.epam.cinema.repository.impl.EventRepositoryImpl;
-import com.epam.cinema.repository.impl.TicketRepositoryImpl;
-import com.epam.cinema.repository.impl.UserRepositoryImpl;
+import com.epam.cinema.repository.*;
+import com.epam.cinema.repository.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 @Configuration
 public class RepositoryConfiguration {
@@ -36,9 +24,13 @@ public class RepositoryConfiguration {
         return new TicketRepositoryImpl();
     }
 
+    @Bean SeatRepository seatRepository(){
+        return new SeatRepositoryImpl();
+    }
     @Bean
-    public BookingRepository bookingRepository(@Autowired JdbcTemplate jdbcTemplate){
-        BookingRepositoryImpl repository = new BookingRepositoryImpl();
+    public AuditoriumRepository auditoriumRepository(@Autowired JdbcTemplate jdbcTemplate, @Autowired SeatRepository seatRepository){
+        AuditoriumRepositoryImpl repository = new AuditoriumRepositoryImpl();
+        repository.setSeatRepository(seatRepository);
         repository.setJdbcTemplate(jdbcTemplate);
         return repository;
     }

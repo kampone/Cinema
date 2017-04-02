@@ -13,9 +13,5 @@ public interface SeatRepository {
 
     List<Seat> getByAuditoriumId(Long id);
 
-    void update(Seat seat);
-
-    void remove(Seat seat);
-
-    List<Seat> getAll();
+    void removeSeatsFromAuditorium(Long auditoriumId);
 }
