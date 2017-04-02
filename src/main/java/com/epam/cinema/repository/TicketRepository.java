@@ -10,4 +10,12 @@ public interface TicketRepository {
      * @return All tickets
      */
     List<Ticket> getAll();
+
+    List<Ticket> getTicketsForUser(Long userId);
+
+    List<Ticket> getTicketForEvent(Long eventId);
+
+    void bookTicketForUser(Long userId);
+
+    void unbookTicket(Ticket ticket);
 }

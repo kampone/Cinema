@@ -25,7 +25,7 @@ public interface UserRepository {
      * @param id User's Id
      * @return User with specified id
      */
-    User getById(Integer id);
+    User getById(Long id);
 
     /**
      * Find user by email. Return null if no user with such email

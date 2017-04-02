@@ -6,6 +6,7 @@ import com.epam.cinema.repository.AuditoriumRepository;
 import com.epam.cinema.repository.SeatRepository;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.incrementer.H2SequenceMaxValueIncrementer;
 
 import java.util.List;
 
@@ -14,13 +15,13 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
     private static final String GET_ALL_QUERY = "SELECT auditorium.id, auditorium.name FROM AUDITORIUMS auditorium";
     private static final String GET_BY_ID_QUERY = "SELECT auditorium.id, auditorium.name FROM AUDITORIUMS auditorium WHERE auditorium.id = ?";
     private static final String GET_BY_ID_NAME = "SELECT auditorium.id, auditorium.name FROM AUDITORIUMS auditorium WHERE auditorium.name = ?";
-    private static final String INSERT_AUDITORIUM = "INSERT INTO AUDITORIUMS (id, name) VALUES (user_sequence.nextval, ?)";
-    private static final String DELETE_SEATS = "DELETE FROM SEATS WHERE AUDITORIUM_ID = ?";
+    private static final String INSERT_AUDITORIUM = "INSERT INTO AUDITORIUMS (id, name) VALUES (?, ?)";
     private static final String DELETE_AUDITORIUM = "DELETE FROM AUDITORIUMS WHERE ID = ?";
     private static final String UPDATE_AUDITORIUM = "UPDATE AUDITORIUMS SET NAME = ? WHERE ID = ?";
 
     private JdbcTemplate jdbcTemplate;
     private SeatRepository seatRepository;
+    private H2SequenceMaxValueIncrementer auditoriumIncrementer;
 
     private final Logger log = Logger.getLogger(AuditoriumRepositoryImpl.class);
 
@@ -34,6 +35,10 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
 
     public void setSeatRepository(SeatRepository seatRepository) {
         this.seatRepository = seatRepository;
+    }
+
+    public void setAuditoriumIncrementer(H2SequenceMaxValueIncrementer auditoriumIncrementer) {
+        this.auditoriumIncrementer = auditoriumIncrementer;
     }
 
     @Override
@@ -71,13 +76,15 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
 
     @Override
     public void save(Auditorium auditorium) {
-        int update = jdbcTemplate.update(INSERT_AUDITORIUM, auditorium.getName());
-        log.info("FROM UPDATE: " + update);
+        long id = auditoriumIncrementer.nextLongValue();
+        jdbcTemplate.update(INSERT_AUDITORIUM, id, auditorium.getName());
+        auditorium.setId(id);
+        log.info("FROM SAVE: " + auditorium);
     }
 
     @Override
     public void remove(Auditorium auditorium) {
-        jdbcTemplate.update(DELETE_SEATS, auditorium.getId());
+        seatRepository.removeSeatsFromAuditorium(auditorium.getId());
         jdbcTemplate.update(DELETE_AUDITORIUM, auditorium.getId());
     }
 

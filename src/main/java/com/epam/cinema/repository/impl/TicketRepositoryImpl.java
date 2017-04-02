@@ -8,19 +8,19 @@ import java.util.List;
 
 public class TicketRepositoryImpl implements TicketRepository {
 
-    @Resource
-    private List<Ticket> tickets;
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
 
     @Override
     public List<Ticket> getAll() {
-        return tickets;
+        return null;
+    }
+
+    @Override
+    public List<Ticket> getTicketsForUser(Long userId) {
+        return null;
+    }
+
+    @Override
+    public List<Ticket> getTicketForEvent(Long eventId) {
+        return null;
     }
 }

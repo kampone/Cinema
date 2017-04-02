@@ -14,7 +14,7 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, Long id, LocalDate birthDate, List<Ticket> tickets) {
+    public User(Long id, String name, String email, LocalDate birthDate, List<Ticket> tickets) {
         this.name = name;
         this.email = email;
         this.id = id;
