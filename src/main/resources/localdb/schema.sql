@@ -43,4 +43,16 @@ CREATE TABLE IF NOT EXISTS TICKETS (
   FOREIGN KEY (event_id) REFERENCES EVENTS (id),
   FOREIGN KEY (seat_id) REFERENCES SEATS (id),
   FOREIGN KEY (user_id) REFERENCES USERS (id)
-)
+);
+
+CREATE TABLE IF NOT EXISTS COUNTERS (
+  event_name VARCHAR(255) PRIMARY KEY,
+  get_name_count INT,
+  book_ticket_count INT
+);
+
+CREATE TABLE IF NOT EXISTS DISCOUNT_COUNTERS (
+  user_id INT PRIMARY KEY,
+  birthday_strategy_count INT,
+  ten_tickets_strategy_count INT
+);

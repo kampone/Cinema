@@ -47,7 +47,7 @@ public class RepositoryConfiguration {
     @Bean SeatRepository seatRepository(@Autowired JdbcTemplate jdbcTemplate, @Autowired H2SequenceMaxValueIncrementer seatIncrementer){
         SeatRepositoryImpl seatRepository = new SeatRepositoryImpl();
         seatRepository.setJdbcTemplate(jdbcTemplate);
-        seatRepository.setSeatIncrementor(seatIncrementer);
+        seatRepository.setSeatIncrementer(seatIncrementer);
         return seatRepository;
     }
     @Bean
@@ -57,6 +57,20 @@ public class RepositoryConfiguration {
         repository.setJdbcTemplate(jdbcTemplate);
         repository.setAuditoriumIncrementer(auditoriumIncrementer);
         return repository;
+    }
+
+    @Bean
+    public CounterRepository counterRepository(@Autowired JdbcTemplate jdbcTemplate){
+        CounterRepositoryImpl counterRepository = new CounterRepositoryImpl();
+        counterRepository.setJdbcTemplate(jdbcTemplate);
+        return counterRepository;
+    }
+
+    @Bean
+    public DiscountCounterRepository discountCounterRepository(@Autowired JdbcTemplate jdbcTemplate){
+        DiscountCounterRepositoryImpl counterRepository = new DiscountCounterRepositoryImpl();
+        counterRepository.setJdbcTemplate(jdbcTemplate);
+        return counterRepository;
     }
 
 }

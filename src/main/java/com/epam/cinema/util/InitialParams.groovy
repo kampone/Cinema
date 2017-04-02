@@ -1,16 +1,13 @@
 package com.epam.cinema.util
 
-import com.epam.cinema.model.Auditorium
-import com.epam.cinema.model.Event
-import com.epam.cinema.model.Rating
-import com.epam.cinema.model.Seat
-import com.epam.cinema.model.User
+import com.epam.cinema.model.*
 import com.epam.cinema.repository.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import javax.annotation.PostConstruct
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Component
 class InitialParams {
@@ -174,6 +171,39 @@ class InitialParams {
         [red, green]*.each {
             auditoriumRepository.save it
         }
+        [
+                new Ticket(
+                        event: harryPotter,
+                        user: null,
+                        seat: red.seats[1],
+                        dateTime: LocalDateTime.now().plusDays(2),
+                        isBooked: false
+                ),
+                new Ticket(
+                        event: harryPotter,
+                        user: null,
+                        seat: red.seats[2],
+                        dateTime: LocalDateTime.now().plusDays(2),
+                        isBooked: false
+                ),
+                new Ticket(
+                        event: harryPotter,
+                        user: null,
+                        seat: red.seats[3],
+                        dateTime: LocalDateTime.now().plusDays(2),
+                        isBooked: false
+                ),
+                new Ticket(
+                        event: harryPotter,
+                        user: null,
+                        seat: red.seats[4],
+                        dateTime: LocalDateTime.now().plusDays(2),
+                        isBooked: false
+                )
+        ]*.each {
+            ticketRepository.save it
+        }
+
 
 
     }

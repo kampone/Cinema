@@ -43,6 +43,7 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
 
     @Override
     public List<Auditorium> getAll() {
+        log.info("Retrieving all auditoriums");
         List<Auditorium> auditoriums = jdbcTemplate.query(GET_ALL_QUERY, ((resultSet, i) ->
                 new Auditorium(
                         resultSet.getLong(1),
@@ -57,6 +58,8 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
 
     @Override
     public Auditorium findById(Long id) {
+        log.info("Retrieving auditorium by id");
+
         return jdbcTemplate.queryForObject(GET_BY_ID_QUERY, new Object[]{id}, ((resultSet, i) ->
                 new Auditorium(
                         resultSet.getLong(1),
@@ -68,6 +71,8 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
 
     @Override
     public Auditorium findByName(String name) {
+        log.info("Retrieving auditorium by name");
+
         return jdbcTemplate.queryForObject(GET_BY_ID_NAME, new Object[]{name}, ((resultSet, i) ->
                 new Auditorium(
                         resultSet.getLong(1),
@@ -79,6 +84,9 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
 
     @Override
     public void save(Auditorium auditorium) {
+
+        log.info("Save auditorium");
+
         long id = auditoriumIncrementer.nextLongValue();
         auditorium.setId(id);
         jdbcTemplate.update(INSERT_AUDITORIUM, id, auditorium.getName());
@@ -87,12 +95,16 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
 
     @Override
     public void remove(Auditorium auditorium) {
+        log.info("Removing  auditorium");
+
         seatRepository.removeSeatsFromAuditorium(auditorium.getId());
         jdbcTemplate.update(DELETE_AUDITORIUM, auditorium.getId());
     }
 
     @Override
     public void update(Auditorium auditorium) {
+        log.info("Updating auditorium");
+
         jdbcTemplate.update(UPDATE_AUDITORIUM, auditorium.getName(), auditorium.getId());
     }
 }

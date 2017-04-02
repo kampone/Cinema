@@ -2,6 +2,7 @@ package com.epam.cinema.repository.impl;
 
 import com.epam.cinema.model.Seat;
 import com.epam.cinema.repository.SeatRepository;
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.incrementer.H2SequenceMaxValueIncrementer;
 
@@ -16,10 +17,12 @@ public class SeatRepositoryImpl implements SeatRepository {
     private static final String DELETE_SEATS = "DELETE FROM SEATS WHERE AUDITORIUM_ID = ?";
 
     private JdbcTemplate jdbcTemplate;
-    private H2SequenceMaxValueIncrementer seatIncrementor;
+    private H2SequenceMaxValueIncrementer seatIncrementer;
 
-    public void setSeatIncrementor(H2SequenceMaxValueIncrementer seatIncrementor) {
-        this.seatIncrementor = seatIncrementor;
+    private final Logger log = Logger.getLogger(SeatRepositoryImpl.class);
+
+    public void setSeatIncrementer(H2SequenceMaxValueIncrementer seatIncrementer) {
+        this.seatIncrementer = seatIncrementer;
     }
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -28,13 +31,16 @@ public class SeatRepositoryImpl implements SeatRepository {
 
     @Override
     public void saveToAuditorium(Seat seat, Long auditoriumId) {
-        long id = seatIncrementor.nextLongValue();
+        log.info("Saving seat");
+        long id = seatIncrementer.nextLongValue();
         seat.setId(id);
         jdbcTemplate.update(INSERT_SEAT, id, seat.getRow(), seat.getPlace(), seat.isVip(), auditoriumId);
     }
 
     @Override
     public Seat getById(Long id) {
+        log.info("Retrieving seat by id");
+
         return jdbcTemplate.queryForObject(GET_BY_ID,
                 new Object[]{id},
                 ((resultSet, i) -> new Seat(
@@ -48,6 +54,8 @@ public class SeatRepositoryImpl implements SeatRepository {
 
     @Override
     public List<Seat> getByAuditoriumId(Long id) {
+        log.info("Retrieving seat by auditorium id");
+
         return jdbcTemplate.query(GET_BY_AUDITORIUM_ID,
                 new Object[]{id},
                 ((resultSet, i) -> new Seat(
@@ -61,6 +69,8 @@ public class SeatRepositoryImpl implements SeatRepository {
 
     @Override
     public void removeSeatsFromAuditorium(Long auditoriumId) {
+        log.info("Removing seat");
+
         jdbcTemplate.update(DELETE_SEATS, auditoriumId);
     }
 }
