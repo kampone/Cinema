@@ -3,6 +3,8 @@ package com.epam.cinema;
 import com.epam.cinema.configuration.SpringConfiguration;
 import com.epam.cinema.model.Auditorium;
 import com.epam.cinema.repository.AuditoriumRepository;
+import com.epam.cinema.repository.EventRepository;
+import com.epam.cinema.repository.UserRepository;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,12 +18,11 @@ public class Main {
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 
         AuditoriumRepository auditoriumRepository = context.getBean("auditoriumRepository", AuditoriumRepository.class);
+        UserRepository userRepository = context.getBean("userRepository", UserRepository.class);
+        EventRepository eventRepository = context.getBean("eventRepository", EventRepository.class);
 
-        Auditorium auditorium = new Auditorium();
-        auditorium.setName("blue");
-        auditoriumRepository.save(auditorium);
 
-        System.out.println("www");
+
     }
 
 }

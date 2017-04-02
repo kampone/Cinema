@@ -15,7 +15,9 @@ public interface TicketRepository {
 
     List<Ticket> getTicketForEvent(Long eventId);
 
-    void bookTicketForUser(Long userId);
+    void bookTicketForUser(Ticket ticket, Long userId);
 
-    void unbookTicket(Ticket ticket);
+    void declineBookingTicket(Ticket ticket);
+
+    void save(Ticket ticket);
 }

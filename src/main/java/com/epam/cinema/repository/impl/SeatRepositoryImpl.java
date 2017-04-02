@@ -22,6 +22,10 @@ public class SeatRepositoryImpl implements SeatRepository {
         this.seatIncrementor = seatIncrementor;
     }
 
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public void saveToAuditorium(Seat seat, Long auditoriumId) {
         long id = seatIncrementor.nextLongValue();

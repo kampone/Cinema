@@ -43,13 +43,16 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
 
     @Override
     public List<Auditorium> getAll() {
-        return jdbcTemplate.query(GET_ALL_QUERY, ((resultSet, i) ->
+        List<Auditorium> auditoriums = jdbcTemplate.query(GET_ALL_QUERY, ((resultSet, i) ->
                 new Auditorium(
                         resultSet.getLong(1),
                         resultSet.getString(2),
                         seatRepository.getByAuditoriumId(resultSet.getLong(1))
                 ))
         );
+
+        auditoriums.forEach(auditorium -> auditorium.setSeats(seatRepository.getByAuditoriumId(auditorium.getId())));
+        return auditoriums;
     }
 
     @Override
@@ -77,9 +80,9 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
     @Override
     public void save(Auditorium auditorium) {
         long id = auditoriumIncrementer.nextLongValue();
-        jdbcTemplate.update(INSERT_AUDITORIUM, id, auditorium.getName());
         auditorium.setId(id);
-        log.info("FROM SAVE: " + auditorium);
+        jdbcTemplate.update(INSERT_AUDITORIUM, id, auditorium.getName());
+        auditorium.getSeats().forEach(seat -> seatRepository.saveToAuditorium(seat, auditorium.getId()));
     }
 
     @Override

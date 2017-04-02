@@ -25,7 +25,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event getById(Integer id) {
+    public Event getById(Long id) {
         return repository.getById(id);
     }
 

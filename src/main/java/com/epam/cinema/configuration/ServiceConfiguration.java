@@ -27,9 +27,8 @@ public class ServiceConfiguration {
     }
 
     @Bean
-    public AuditoriumService auditoriumService(@Autowired List<Auditorium> auditoriums){
+    public AuditoriumService auditoriumService(){
         AuditoriumServiceImpl auditoriumService = new AuditoriumServiceImpl();
-        auditoriumService.setAuditoriums(auditoriums);
         return auditoriumService;
     }
 

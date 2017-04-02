@@ -11,22 +11,44 @@ import org.springframework.jdbc.support.incrementer.H2SequenceMaxValueIncremente
 @Configuration
 public class RepositoryConfiguration {
     @Bean
-    public UserRepository userRepository(){
-        return new UserRepositoryImpl();
+    public UserRepository userRepository(@Autowired JdbcTemplate jdbcTemplate, @Autowired H2SequenceMaxValueIncrementer userIncrementer){
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
+        userRepository.setJdbcTemplate(jdbcTemplate);
+        userRepository.setUserIncrementer(userIncrementer);
+        return userRepository;
     }
 
     @Bean
-    public EventRepository eventRepository(){
-        return new EventRepositoryImpl();
+    public EventRepository eventRepository(@Autowired JdbcTemplate jdbcTemplate, @Autowired H2SequenceMaxValueIncrementer eventIncrementer){
+        EventRepositoryImpl eventRepository = new EventRepositoryImpl();
+        eventRepository.setEventIncrementer(eventIncrementer);
+        eventRepository.setJdbcTemplate(jdbcTemplate);
+        return eventRepository;
     }
 
     @Bean
-    public TicketRepository ticketRepository(){
-        return new TicketRepositoryImpl();
+    public TicketRepository ticketRepository(
+            @Autowired JdbcTemplate jdbcTemplate,
+            @Autowired H2SequenceMaxValueIncrementer ticketIncrementer,
+            @Autowired UserRepository userRepository,
+            @Autowired EventRepository eventRepository,
+            @Autowired SeatRepository seatRepository){
+
+        TicketRepositoryImpl ticketRepository = new TicketRepositoryImpl();
+        ticketRepository.setJdbcTemplate(jdbcTemplate);
+        ticketRepository.setTicketIncrementer(ticketIncrementer);
+        ticketRepository.setUserRepository(userRepository);
+        ticketRepository.setEventRepository(eventRepository);
+        ticketRepository.setSeatRepository(seatRepository);
+
+        return ticketRepository;
     }
 
-    @Bean SeatRepository seatRepository(){
-        return new SeatRepositoryImpl();
+    @Bean SeatRepository seatRepository(@Autowired JdbcTemplate jdbcTemplate, @Autowired H2SequenceMaxValueIncrementer seatIncrementer){
+        SeatRepositoryImpl seatRepository = new SeatRepositoryImpl();
+        seatRepository.setJdbcTemplate(jdbcTemplate);
+        seatRepository.setSeatIncrementor(seatIncrementer);
+        return seatRepository;
     }
     @Bean
     public AuditoriumRepository auditoriumRepository(@Autowired JdbcTemplate jdbcTemplate, @Autowired SeatRepository seatRepository, @Autowired H2SequenceMaxValueIncrementer auditoriumIncrementer){

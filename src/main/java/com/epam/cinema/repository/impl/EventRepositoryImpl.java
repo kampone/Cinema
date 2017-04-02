@@ -14,6 +14,7 @@ public class EventRepositoryImpl implements EventRepository{
     private static final String GET_BY_ID = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID FROM EVENTS event WHERE event.id = ?";
     private static final String GET_BY_NAME = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID FROM EVENTS event WHERE event.NAME = ?";
     private static final String GET_ALL = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID FROM EVENTS event";
+    public static final String DELETE_EVENT = "DELETE FROM EVENTS WHERE ID = ?";
     private JdbcTemplate jdbcTemplate;
     private H2SequenceMaxValueIncrementer eventIncrementer;
 
@@ -28,16 +29,16 @@ public class EventRepositoryImpl implements EventRepository{
     @Override
     public void save(Event event) {
         long id = eventIncrementer.nextLongValue();
-        jdbcTemplate.update(INSERT_EVENT, id, event.getName(), event.getBasePrice(), event.getRating().ordinal());
+        jdbcTemplate.update(INSERT_EVENT, id, event.getName(), event.getBasePrice(), event.getRating().ordinal()+1);
     }
 
     @Override
     public void remove(Event event) {
-        jdbcTemplate.update("DELETE FROM EVENTS WHERE ID = ?", event.getId());
+        jdbcTemplate.update(DELETE_EVENT, event.getId());
     }
 
     @Override
-    public Event getById(Integer id) {
+    public Event getById(Long id) {
         return jdbcTemplate.queryForObject(GET_BY_ID, new Object[]{id},
                 (resultSet, i) -> new Event(resultSet.getLong(1),
                         resultSet.getString(2),

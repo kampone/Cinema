@@ -29,7 +29,7 @@ public interface EventService {
      * @param id event's Id
      * @return event with specified id
      */
-    Event getById(Integer id);
+    Event getById(Long id);
 
     /**
      * Find event by name. Return null if no event with such name

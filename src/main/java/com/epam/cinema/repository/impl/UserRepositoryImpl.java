@@ -22,7 +22,6 @@ public class UserRepositoryImpl implements UserRepository {
     private static final String GET_ALL = "SELECT user.ID, user.NAME, user.EMAIL, user.BIRTHDAY FROM USERS user";
     private JdbcTemplate jdbcTemplate;
     private H2SequenceMaxValueIncrementer userIncrementer;
-    private TicketRepository ticketRepository;
 
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -31,10 +30,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     public void setUserIncrementer(H2SequenceMaxValueIncrementer userIncrementer) {
         this.userIncrementer = userIncrementer;
-    }
-
-    public void setTicketRepository(TicketRepository ticketRepository) {
-        this.ticketRepository = ticketRepository;
     }
 
     @Override
@@ -58,7 +53,6 @@ public class UserRepositoryImpl implements UserRepository {
                         resultSet.getDate(4).toLocalDate(),
                         null
                 )));
-        user.setTickets(ticketRepository.getTicketsForUser(id));
         return user;
     }
 
@@ -72,7 +66,6 @@ public class UserRepositoryImpl implements UserRepository {
                         resultSet.getDate(4).toLocalDate(),
                         null
                 )));
-        user.setTickets(ticketRepository.getTicketsForUser(user.getId()));
         return user;
     }
 
@@ -86,7 +79,6 @@ public class UserRepositoryImpl implements UserRepository {
                         resultSet.getDate(4).toLocalDate(),
                         null
                 )));
-        users.forEach(it -> it.setTickets(ticketRepository.getTicketsForUser(it.getId())));
         return new HashSet<>(users);
     }
 }
