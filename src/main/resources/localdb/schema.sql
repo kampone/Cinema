@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS TICKETS (
 
 CREATE TABLE IF NOT EXISTS COUNTERS (
   event_name VARCHAR(255) PRIMARY KEY,
-  get_name_count INT,
+  name_invocation_count INT,
   book_ticket_count INT
 );
 

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class MoreThanTenTicketsDiscountStrategy implements DiscountStrategy {
     private static final int TICKETS_BORDER = 10;
-    public static final int DISCOUNT_SIZE = 15;
+    public static final Integer DISCOUNT_SIZE = 15;
     private static final int WITHOUT_DISCOUNT = 0;
 
     @Override

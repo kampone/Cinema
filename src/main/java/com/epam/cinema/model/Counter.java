@@ -3,7 +3,7 @@ package com.epam.cinema.model;
 
 public class Counter {
     private String eventName;
-    private Long getNameCount;
+    private Long nameInvocationCount;
     private Long bookTicketCount;
 
     public Counter() {
@@ -11,7 +11,7 @@ public class Counter {
 
     public Counter(String eventName, Long getNameCount, Long bookTicketCount) {
         this.eventName = eventName;
-        this.getNameCount = getNameCount;
+        this.nameInvocationCount = getNameCount;
         this.bookTicketCount = bookTicketCount;
     }
 
@@ -23,12 +23,12 @@ public class Counter {
         this.eventName = eventName;
     }
 
-    public Long getGetNameCount() {
-        return getNameCount;
+    public Long getNameInvocationCount() {
+        return nameInvocationCount;
     }
 
-    public void setGetNameCount(Long getNameCount) {
-        this.getNameCount = getNameCount;
+    public void setNameInvocationCount(Long nameInvocationCount) {
+        this.nameInvocationCount = nameInvocationCount;
     }
 
     public Long getBookTicketCount() {
@@ -47,7 +47,7 @@ public class Counter {
         Counter counter = (Counter) o;
 
         if (eventName != null ? !eventName.equals(counter.eventName) : counter.eventName != null) return false;
-        if (getNameCount != null ? !getNameCount.equals(counter.getNameCount) : counter.getNameCount != null)
+        if (nameInvocationCount != null ? !nameInvocationCount.equals(counter.nameInvocationCount) : counter.nameInvocationCount != null)
             return false;
         return bookTicketCount != null ? bookTicketCount.equals(counter.bookTicketCount) : counter.bookTicketCount == null;
     }
@@ -55,7 +55,7 @@ public class Counter {
     @Override
     public int hashCode() {
         int result = eventName != null ? eventName.hashCode() : 0;
-        result = 31 * result + (getNameCount != null ? getNameCount.hashCode() : 0);
+        result = 31 * result + (nameInvocationCount != null ? nameInvocationCount.hashCode() : 0);
         result = 31 * result + (bookTicketCount != null ? bookTicketCount.hashCode() : 0);
         return result;
     }
@@ -64,7 +64,7 @@ public class Counter {
     public String toString() {
         return "Counter{" +
                 "eventName='" + eventName + '\'' +
-                ", getNameCount=" + getNameCount +
+                ", nameInvocationCount=" + nameInvocationCount +
                 ", bookTicketCount=" + bookTicketCount +
                 '}';
     }

@@ -20,20 +20,21 @@ public class CounterAspect {
 
     @Before("@annotation(com.epam.cinema.aspect.CountEventName) && args(name)")
     public void countGetEventName(String name){
+        log.info("In CounterAspect");
 
         Counter counter = counterRepository.getCounterByEventName(name);
         if (counter != null){
-            counter.setGetNameCount(counter.getGetNameCount() + 1);
+            counter.setNameInvocationCount(counter.getNameInvocationCount() + 1);
             counterRepository.update(counter);
         } else {
             counter = new Counter(name, 1L, 0L);
             counterRepository.save(counter);
         }
-        log.info(counterRepository.getAllCounters());
     }
 
     @Before("@annotation(com.epam.cinema.aspect.CountBookingTickets) && args(ticket, userId)")
     public void countBookingTickets(Ticket ticket, Long userId){
+        log.info("In CounterAspect");
 
         String eventName = ticket.getEvent().getName();
 
@@ -45,7 +46,6 @@ public class CounterAspect {
             counter = new Counter(eventName, 0L, 1L);
             counterRepository.save(counter);
         }
-        log.info(counterRepository.getAllCounters());
     }
 
 }

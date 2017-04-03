@@ -41,11 +41,11 @@ public class CounterRepositoryImpl implements CounterRepository {
 
     @Override
     public void update(Counter counter) {
-        jdbcTemplate.update(UPDATE_COUNTER, counter.getGetNameCount(), counter.getBookTicketCount(), counter.getEventName());
+        jdbcTemplate.update(UPDATE_COUNTER, counter.getNameInvocationCount(), counter.getBookTicketCount(), counter.getEventName());
     }
 
     @Override
     public void save(Counter counter) {
-        jdbcTemplate.update(INSERT_COUNTER, counter.getEventName(), counter.getGetNameCount(), counter.getBookTicketCount());
+        jdbcTemplate.update(INSERT_COUNTER, counter.getEventName(), counter.getNameInvocationCount(), counter.getBookTicketCount());
     }
 }

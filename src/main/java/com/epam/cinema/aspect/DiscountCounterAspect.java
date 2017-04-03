@@ -23,14 +23,15 @@ public class DiscountCounterAspect {
 
     @AfterReturning(pointcut = "@annotation(com.epam.cinema.aspect.CountDiscountForUser) && args(user, event, dateTime, numberOfTickets)", returning = "result")
     public void countBookingTickets(User user, Event event, LocalDateTime dateTime, Integer numberOfTickets, Object result) {
+        log.info("In DiscountCounterAspect");
 
         DiscountCounter counter = discountCounterRepository.getCounterByUserId(user.getId());
         if (counter != null) {
-            if (result.equals(MoreThanTenTicketsDiscountStrategy.DISCOUNT_SIZE)) {
+            if (MoreThanTenTicketsDiscountStrategy.DISCOUNT_SIZE.equals(result)) {
                 counter.setTenTicketsStrategyCount(counter.getTenTicketsStrategyCount() + 1);
                 discountCounterRepository.update(counter);
             }
-            if (result.equals(BirthdayDiscountStrategy.DISCOUNT_SIZE)) {
+            if (BirthdayDiscountStrategy.DISCOUNT_SIZE.equals(result)) {
                 counter.setBirthdayStrategyCount(counter.getBirthdayStrategyCount() + 1);
                 discountCounterRepository.update(counter);
             }
@@ -44,6 +45,5 @@ public class DiscountCounterAspect {
             }
             discountCounterRepository.save(counter);
         }
-        log.info(discountCounterRepository.getAllCounters());
     }
 }

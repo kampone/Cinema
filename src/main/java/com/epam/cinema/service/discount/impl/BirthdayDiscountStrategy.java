@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 
 public class BirthdayDiscountStrategy implements DiscountStrategy {
     private static final int DAYS_BORDER = 5;
-    public static final int DISCOUNT_SIZE = 10;
+    public static final Integer DISCOUNT_SIZE = 10;
     private static final int WITHOUT_DISCOUNT = 0;
 
     @Override
