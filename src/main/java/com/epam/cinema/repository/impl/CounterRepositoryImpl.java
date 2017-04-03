@@ -10,10 +10,10 @@ import java.util.List;
 
 public class CounterRepositoryImpl implements CounterRepository {
 
-    private static final String GET_BY_EVENT_NAME = "SELECT event_name, get_name_count, book_ticket_count FROM COUNTERS WHERE event_name = ?";
-    private static final String GET_ALL = "SELECT event_name, get_name_count, book_ticket_count FROM COUNTERS";
-    private static final String UPDATE_COUNTER = "UPDATE COUNTERS SET get_name_count = ?, book_ticket_count = ? WHERE event_name = ?";
-    private static final String INSERT_COUNTER = "INSERT INTO COUNTERS(event_name, get_name_count, book_ticket_count) VALUES (?, ?, ?)";
+    private static final String GET_BY_EVENT_NAME = "SELECT event_name, name_invocation_count, book_ticket_count FROM COUNTERS WHERE event_name = ?";
+    private static final String GET_ALL = "SELECT event_name, name_invocation_count, book_ticket_count FROM COUNTERS";
+    private static final String UPDATE_COUNTER = "UPDATE COUNTERS SET name_invocation_count = ?, book_ticket_count = ? WHERE event_name = ?";
+    private static final String INSERT_COUNTER = "INSERT INTO COUNTERS(event_name, name_invocation_count, book_ticket_count) VALUES (?, ?, ?)";
 
     private JdbcTemplate jdbcTemplate;
 
