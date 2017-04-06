@@ -51,6 +51,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User getById(Long id) {
         log.info("Retrieving user by id");
 
+
         try {
             return jdbcTemplate.queryForObject(GET_BY_ID, new Object[]{id},
                     ((resultSet, i) -> new User(
