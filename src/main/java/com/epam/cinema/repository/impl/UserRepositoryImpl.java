@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@CountEventName
 public class UserRepositoryImpl implements UserRepository {
 
     private static final String INSERT_USER = "INSERT INTO USERS (id, name, email, birthday) VALUES (?, ?, ?, ?)";
