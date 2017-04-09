@@ -18,6 +18,7 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
     <properties>
         <spring.version>4.3.7.RELEASE</spring.version>

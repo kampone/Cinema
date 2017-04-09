@@ -1,7 +1,5 @@
 package com.epam.cinema.configuration;
 
-import com.epam.cinema.model.Auditorium;
-import com.epam.cinema.model.Event;
 import com.epam.cinema.repository.EventRepository;
 import com.epam.cinema.repository.TicketRepository;
 import com.epam.cinema.repository.UserRepository;
