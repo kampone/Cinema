@@ -12,3 +12,9 @@ buildNumber.properties
 .idea/
 Cinema.iml
 /cinema-jmp.iml
+
+/gradlew
+/gradlew.bat
+/gradle/
+/build/
+/.gradle/

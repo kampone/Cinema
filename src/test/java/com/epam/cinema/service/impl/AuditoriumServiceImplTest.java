@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 
 public class AuditoriumServiceImplTest {
+
     @Test
     public void getAll() throws Exception {
     }
