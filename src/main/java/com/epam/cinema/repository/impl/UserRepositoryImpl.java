@@ -1,6 +1,5 @@
 package com.epam.cinema.repository.impl;
 
-import com.epam.cinema.aspect.CountEventName;
 import com.epam.cinema.model.User;
 import com.epam.cinema.repository.UserRepository;
 import org.apache.log4j.Logger;
