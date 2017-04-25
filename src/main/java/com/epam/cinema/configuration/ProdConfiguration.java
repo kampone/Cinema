@@ -5,7 +5,6 @@ import com.epam.cinema.service.discount.impl.BirthdayDiscountStrategy;
 import com.epam.cinema.service.discount.impl.MoreThanTenTicketsDiscountStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 @Configuration
 public class ProdConfiguration {

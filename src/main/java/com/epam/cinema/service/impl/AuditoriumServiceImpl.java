@@ -2,7 +2,6 @@ package com.epam.cinema.service.impl;
 
 import com.epam.cinema.model.Auditorium;
 import com.epam.cinema.repository.AuditoriumRepository;
-import com.epam.cinema.repository.SeatRepository;
 import com.epam.cinema.service.AuditoriumService;
 
 import java.util.List;

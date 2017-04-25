@@ -44,7 +44,8 @@ public class RepositoryConfiguration {
         return ticketRepository;
     }
 
-    @Bean SeatRepository seatRepository(@Autowired JdbcTemplate jdbcTemplate, @Autowired H2SequenceMaxValueIncrementer seatIncrementer){
+    @Bean
+    SeatRepository seatRepository(@Autowired JdbcTemplate jdbcTemplate, @Autowired H2SequenceMaxValueIncrementer seatIncrementer){
         SeatRepositoryImpl seatRepository = new SeatRepositoryImpl();
         seatRepository.setJdbcTemplate(jdbcTemplate);
         seatRepository.setSeatIncrementer(seatIncrementer);

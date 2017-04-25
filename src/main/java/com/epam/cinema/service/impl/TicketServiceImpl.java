@@ -7,7 +7,6 @@ import com.epam.cinema.repository.TicketRepository;
 import com.epam.cinema.service.TicketService;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;

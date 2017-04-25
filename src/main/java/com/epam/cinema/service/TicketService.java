@@ -3,7 +3,6 @@ package com.epam.cinema.service;
 import com.epam.cinema.model.Event;
 import com.epam.cinema.model.Ticket;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
