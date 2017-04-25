@@ -38,4 +38,5 @@ public interface TicketService {
      */
     List<Ticket> getFreeTicketsForEventAndDate(Event event, LocalDateTime date);
 
+    void bookTicketWithId(Long ticketId);
 }
