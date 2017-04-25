@@ -31,6 +31,9 @@ public interface BookingService {
      */
     void bookTicket(Ticket ticket);
 
+
+    void bookTicket(Long ticketId);
+
     /**
      * Get all purchased tickets for event for specific date and Time
      * @param event specific event

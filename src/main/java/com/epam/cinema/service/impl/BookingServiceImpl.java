@@ -59,6 +59,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public void bookTicket(Long ticketId) {
+        ticketService.bookTicketWithId(ticketId);
+    }
+
+    @Override
     public List<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime) {
         return ticketService.getPurchasedTicketsForEventAndDate(event, dateTime);
     }

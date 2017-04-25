@@ -54,4 +54,14 @@ public class TicketServiceImpl implements TicketService {
                 .filter(ticket -> !ticket.isBooked())
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void bookTicketWithId(Long ticketId) {
+        ticketRepository.bookTicketForUser(ticketRepository.getAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), 100L);
+    }
+
+    @Override
+    public void unbookTicketWithId(Long ticketId) {
+        ticketRepository.unbookTicketForUser(ticketRepository.getAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), 100L);
+    }
 }

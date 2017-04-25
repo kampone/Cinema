@@ -20,4 +20,6 @@ public interface TicketRepository {
     void declineBookingTicket(Ticket ticket);
 
     void save(Ticket ticket);
+
+    void unbookTicketForUser(Ticket ticket, Long userId);
 }
