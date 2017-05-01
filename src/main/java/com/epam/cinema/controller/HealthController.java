@@ -1,9 +1,10 @@
 package com.epam.cinema.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/test")
+@Controller("/test")
 public class HealthController {
 
     public HealthController() {
@@ -12,6 +13,6 @@ public class HealthController {
 
     @RequestMapping("/")
     public String test(){
-        return "Hello from webapp";
+        return "hello";
     }
 }
