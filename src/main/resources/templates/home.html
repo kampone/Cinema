@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Spring Security Example</title>
-</head>
-<body>
-<h1>Welcome!</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Cinema</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/cinema/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/cinema/css/shop-homepage.css" rel="stylesheet"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<th:block th:include="fragments/navigation :: body"/>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <img th:src="${event.pictureLink}" style="width:400px;height:240px" alt="picture"/>
+
+
+        </div>
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+<th:block th:include="fragments/footer :: body"/>
+
+<!-- jQuery -->
+<script src="/cinema/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/cinema/js/bootstrap.min.js"></script>
+
 </body>
+
 </html>

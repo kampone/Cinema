@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/cinema/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/cinema/css/shop-homepage.css" rel="stylesheet"/>
+
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+</head>
+<body>
+<th:block th:include="fragments/navigation :: body"/>
+<div class="container">
+    <div th:switch="${user.getTickets().size()}">
+        <p th:case="0">There is no booked tickets</p>
+    </div>
+    <ul class="list-group">
+        <li th:each="ticket : ${user.getTickets()}" class="list-group-item">
+            <h3>
+                <div style="font-size: 14; font: 'Bernard MT Condensed'"
+                     th:text="${ticket.getEvent().getName()} + '  '"></div>
+            </h3>
+            <h4>
+                <div style="font-size: 14; font: 'Bernard MT Condensed'"
+                     th:text="#{tickets.place} + ': ' + ${ticket.getSeat().getPlace()} + ' ' +  #{tickets.row} + ': ' +  ${ticket.getSeat().getRow()} + ' ' + #{tickets.data} + ': ' + ${#temporals.format(ticket.getDateTime(), 'dd MMM yyyy')}"></div>
+            </h4>
+            <div>
+
+                <p class="text-right">
+                    <a th:href="'/jmp/unbook/' + ${ticket.getId()}">
+                        <button type="button" class="btn btn-warning" th:text="#{tickets.unbook}"></button>
+                </a>
+                <button type="button" class="btn btn-danger" th:text="#{tickets.buy}"></button>
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>
+<th:block th:include="fragments/footer :: body"/>
+</body>
+</html>

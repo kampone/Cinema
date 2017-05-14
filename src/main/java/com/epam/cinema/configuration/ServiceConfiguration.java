@@ -15,8 +15,8 @@ import java.util.List;
 @Configuration
 public class ServiceConfiguration {
     @Bean
-    public UserService userService(@Autowired UserRepository repository){
-        return new UserServiceImpl(repository);
+    public UserService userService(@Autowired UserRepository repository, @Autowired TicketService ticketService){
+        return new UserServiceImpl(repository, ticketService);
     }
 
     @Bean

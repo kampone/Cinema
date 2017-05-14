@@ -9,10 +9,12 @@ CREATE TABLE IF NOT EXISTS RATING (
   name VARCHAR(255)
 );
 CREATE TABLE IF NOT EXISTS EVENTS (
-  id         INT PRIMARY KEY,
-  name       VARCHAR(255),
-  base_price DECIMAL(5, 2),
-  rating_id  INT,
+  id           INT PRIMARY KEY,
+  name         VARCHAR(255),
+  base_price   DECIMAL(5, 2),
+  rating_id    INT,
+  description  VARCHAR(255),
+  picture_link VARCHAR(255),
   FOREIGN KEY (rating_id) REFERENCES RATING (id)
 );
 CREATE TABLE IF NOT EXISTS AUDITORIUMS (
@@ -29,10 +31,13 @@ CREATE TABLE IF NOT EXISTS SEATS (
 );
 CREATE TABLE IF NOT EXISTS USERS (
   id       INT PRIMARY KEY,
-  name     VARCHAR(255),
+  username     VARCHAR(255),
+  password    VARCHAR(255),
   email    VARCHAR(255),
+  enabled boolean,
   birthday DATE
 );
+
 CREATE TABLE IF NOT EXISTS TICKETS (
   id       INT PRIMARY KEY,
   event_id INT,
@@ -56,3 +61,9 @@ CREATE TABLE IF NOT EXISTS DISCOUNT_COUNTERS (
   birthday_strategy_count INT,
   ten_tickets_strategy_count INT
 );
+
+
+drop table if exists authorities;
+create table authorities(username  varchar(255),authority  varchar(255), UNIQUE(username,authority));
+insert into authorities(username,authority) values('user','admin');
+insert into authorities(username,authority) values('john','superadmin');

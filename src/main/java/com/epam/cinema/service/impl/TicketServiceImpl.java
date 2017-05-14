@@ -61,7 +61,17 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
+    public void bookTicketWithIdForUser(Long ticketId, Long userId) {
+        ticketRepository.bookTicketForUser(ticketRepository.getAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), userId);
+    }
+
+    @Override
     public void unbookTicketWithId(Long ticketId) {
         ticketRepository.unbookTicketForUser(ticketRepository.getAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), 100L);
+    }
+
+    @Override
+    public List<Ticket> getTicketsForUser(Long id) {
+        return ticketRepository.getTicketsForUser(id);
     }
 }

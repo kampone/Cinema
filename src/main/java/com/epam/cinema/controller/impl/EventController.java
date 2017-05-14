@@ -1,7 +1,43 @@
 package com.epam.cinema.controller.impl;
 
-/**
- * Created by Uladzislau_Kaminski on 5/1/2017.
- */
+import com.epam.cinema.model.Event;
+import com.epam.cinema.service.EventService;
+import com.epam.cinema.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Controller
 public class EventController {
+    @Autowired
+    private EventService eventService;
+    @Autowired
+    private UserService userService;
+
+
+    @RequestMapping("/")
+    public String getAllEvents(Model model, HttpSession session){
+        String username = ((User) ((SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getPrincipal()).getUsername();
+        Long id = userService.getAll().stream().filter(user -> user.getName().equals(username)).findFirst().get().getId();
+        session.setAttribute("userId", id);
+        List<Event> events = eventService.getAll();
+        model.addAttribute("events", events);
+        return "index";
+    }
+
+    @RequestMapping("/events/{eventId}")
+    public String getAllEvents(@PathVariable Long eventId, Model model){
+        Event event = eventService.getById(eventId);
+        model.addAttribute("event", event);
+
+        return "event";
+    }
 }

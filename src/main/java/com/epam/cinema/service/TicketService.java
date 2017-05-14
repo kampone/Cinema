@@ -40,5 +40,9 @@ public interface TicketService {
 
     void bookTicketWithId(Long ticketId);
 
+    void bookTicketWithIdForUser(Long ticketId, Long userId);
+
     void unbookTicketWithId(Long id);
+
+    List<Ticket> getTicketsForUser(Long id);
 }

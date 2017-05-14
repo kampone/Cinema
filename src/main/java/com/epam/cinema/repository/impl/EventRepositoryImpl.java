@@ -12,10 +12,10 @@ import java.util.List;
 
 public class EventRepositoryImpl implements EventRepository {
 
-    private static final String INSERT_EVENT = "INSERT INTO EVENTS(ID, NAME, BASE_PRICE, RATING_ID) VALUES (?, ? ,? ,?)";
-    private static final String GET_BY_ID = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID FROM EVENTS event WHERE event.id = ?";
-    private static final String GET_BY_NAME = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID FROM EVENTS event WHERE event.NAME = ?";
-    private static final String GET_ALL = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID FROM EVENTS event";
+    private static final String INSERT_EVENT = "INSERT INTO EVENTS(ID, NAME, BASE_PRICE, RATING_ID, DESCRIPTION, PICTURE_LINK) VALUES (?, ? ,? ,?, ?, ?)";
+    private static final String GET_BY_ID = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, DESCRIPTION, PICTURE_LINK FROM EVENTS event WHERE event.id = ?";
+    private static final String GET_BY_NAME = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, DESCRIPTION, PICTURE_LINK FROM EVENTS event WHERE event.NAME = ?";
+    private static final String GET_ALL = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, DESCRIPTION, PICTURE_LINK FROM EVENTS event";
     private static final String DELETE_EVENT = "DELETE FROM EVENTS WHERE ID = ?";
     private JdbcTemplate jdbcTemplate;
     private H2SequenceMaxValueIncrementer eventIncrementer;
@@ -36,7 +36,7 @@ public class EventRepositoryImpl implements EventRepository {
         log.info("Saving event");
         long id = eventIncrementer.nextLongValue();
         event.setId(id);
-        jdbcTemplate.update(INSERT_EVENT, id, event.getName(), event.getBasePrice(), event.getRating().ordinal() + 1);
+        jdbcTemplate.update(INSERT_EVENT, id, event.getName(), event.getBasePrice(), event.getRating().ordinal() + 1, event.getDescription(), event.getPictureLink());
     }
 
     @Override
@@ -54,7 +54,9 @@ public class EventRepositoryImpl implements EventRepository {
                 (resultSet, i) -> new Event(resultSet.getLong(1),
                         resultSet.getString(2),
                         resultSet.getBigDecimal(3),
-                        Rating.values()[resultSet.getInt(4)])
+                        Rating.values()[resultSet.getInt(4)],
+                        resultSet.getString(5),
+                        resultSet.getString(6))
         );
     }
 
@@ -67,7 +69,9 @@ public class EventRepositoryImpl implements EventRepository {
                 (resultSet, i) -> new Event(resultSet.getLong(1),
                         resultSet.getString(2),
                         resultSet.getBigDecimal(3),
-                        Rating.values()[resultSet.getInt(4)])
+                        Rating.values()[resultSet.getInt(4)],
+                        resultSet.getString(5),
+                        resultSet.getString(6))
         );
     }
 
@@ -79,7 +83,9 @@ public class EventRepositoryImpl implements EventRepository {
                 (resultSet, i) -> new Event(resultSet.getLong(1),
                         resultSet.getString(2),
                         resultSet.getBigDecimal(3),
-                        Rating.values()[resultSet.getInt(4)])
+                        Rating.values()[resultSet.getInt(4)],
+                        resultSet.getString(5),
+                        resultSet.getString(6))
         );
     }
 }

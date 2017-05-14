@@ -1,6 +1,8 @@
 package com.epam.cinema.model;
 
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,6 +12,8 @@ public class User {
     private String email;
     private LocalDate birthDate;
     private List<Ticket> tickets;
+    private String password;
+    private Boolean enabled;
 
     public User() {
     }
@@ -95,5 +99,13 @@ public class User {
                 ", birthDate=" + birthDate +
                 ", tickets=" + tickets +
                 '}';
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

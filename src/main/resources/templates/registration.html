@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Registration</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/cinema/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/cinema/css/shop-homepage.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/registrate}" class="form-horizontal" role="form">
+        <h2>Registration Form</h2>
+        <div class="form-group">
+            <label for="username" class="col-sm-3 control-label">Username</label>
+            <div class="col-sm-9">
+                <input type="text" name="username" id="username" placeholder="Full Name" class="form-control"/>
+                <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-9">
+                <input type="email" id="email" name="email" placeholder="Email" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Password</label>
+            <div class="col-sm-9">
+                <input type="password" name="password" id="password" placeholder="Password" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="birthDate" class="col-sm-3 control-label">Date of Birth</label>
+            <div class="col-sm-9">
+                <input type="date" name="birthDate" id="birthDate" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <input type="submit" class="btn btn-primary btn-block">Register</input>
+            </div>
+        </div>
+    </form> <!-- /form -->
+</div> <!-- ./container -->
+</body>
+</html>

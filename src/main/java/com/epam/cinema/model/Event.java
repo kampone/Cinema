@@ -8,15 +8,19 @@ public class Event {
     private String name;
     private BigDecimal basePrice;
     private Rating rating;
+    private String description;
+    private String pictureLink;
 
     public Event() {
     }
 
-    public Event(Long id, String name, BigDecimal basePrice, Rating rating) {
+    public Event(Long id, String name, BigDecimal basePrice, Rating rating, String description, String pictureLink) {
         this.id = id;
         this.name = name;
         this.basePrice = basePrice;
         this.rating = rating;
+        this.description = description;
+        this.pictureLink = pictureLink;
     }
 
     public Long getId() {
@@ -51,6 +55,22 @@ public class Event {
         this.rating = rating;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPictureLink() {
+        return pictureLink;
+    }
+
+    public void setPictureLink(String pictureLink) {
+        this.pictureLink = pictureLink;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,7 +81,9 @@ public class Event {
         if (id != null ? !id.equals(event.id) : event.id != null) return false;
         if (name != null ? !name.equals(event.name) : event.name != null) return false;
         if (basePrice != null ? !basePrice.equals(event.basePrice) : event.basePrice != null) return false;
-        return rating == event.rating;
+        if (rating != event.rating) return false;
+        if (description != null ? !description.equals(event.description) : event.description != null) return false;
+        return pictureLink != null ? pictureLink.equals(event.pictureLink) : event.pictureLink == null;
     }
 
     @Override
@@ -70,6 +92,8 @@ public class Event {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (basePrice != null ? basePrice.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (pictureLink != null ? pictureLink.hashCode() : 0);
         return result;
     }
 
@@ -80,6 +104,8 @@ public class Event {
                 ", name='" + name + '\'' +
                 ", basePrice=" + basePrice +
                 ", rating=" + rating +
+                ", description='" + description + '\'' +
+                ", pictureLink='" + pictureLink + '\'' +
                 '}';
     }
 }

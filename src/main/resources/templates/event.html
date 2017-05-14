@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Cinema</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/cinema/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/cinema/css/shop-homepage.css" rel="stylesheet"/>
+    <link href="/cinema/css/mystyle.css" rel="stylesheet"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body><!-- jQuery -->
+<div th:with="userId=${session.get('userId')}"/>
+<script src="/cinema/js/jquery.js"></script>
+<script src="/cinema/js/cinema-hole.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    rows = [[${rows}]];
+    seats = [[${places}]];
+    /*]]>*/
+</script>
+<th:block th:include="fragments/navigation :: body"/>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <img th:src="${event.pictureLink}" style="width:600px;height:400px" alt="picture"/>
+        </div>
+
+        <div class="col-md-9">
+            <h4 th:text="${event.description}"/>
+        </div>
+
+    </div>
+    <div th:text="${userId}"/>
+    <div class='cinemaHall zal1'></div>
+    <div th:each="ticket : ${tickets}">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var isBooked = [[${ticket.isBooked()}]];
+            var isVip = [[${ticket.seat.isVip()}]];
+            var row = [[${ticket.seat.getRow()}]];
+            var place = [[${ticket.seat.getPlace()}]];
+            var ticketId = [[${ticket.getId()}]];
+            var userId = [[${session.get('userId')}]]
+
+            drawSeat(row, place, isVip, isBooked, ticketId, userId);
+
+            /*]]>*/
+        </script>
+    </div>
+</div>
+
+
+<!-- /.container -->
+<th:block th:include="fragments/footer :: body"/>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/cinema/js/bootstrap.min.js"></script>
+</body>
+
+</html>

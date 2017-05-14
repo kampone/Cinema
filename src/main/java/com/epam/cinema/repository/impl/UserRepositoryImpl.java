@@ -14,11 +14,11 @@ import java.util.Set;
 
 public class UserRepositoryImpl implements UserRepository {
 
-    private static final String INSERT_USER = "INSERT INTO USERS (id, name, email, birthday) VALUES (?, ?, ?, ?)";
-    private static final String GET_BY_ID = "SELECT user.ID, user.NAME, user.EMAIL, user.BIRTHDAY FROM USERS user WHERE user.ID = ?";
-    private static final String GET_BY_NAME = "SELECT user.ID, user.NAME, user.EMAIL, user.BIRTHDAY FROM USERS user WHERE user.EMAIL = ?";
-    private static final String GET_ALL = "SELECT user.ID, user.NAME, user.EMAIL, user.BIRTHDAY FROM USERS user";
-    private static final String DELETE_USER = "DELETE FROM USERS WHERE ID = ?";
+    private static final String INSERT_USER = "INSERT INTO USERS (id, USERNAME, email, birthday, password, enabled) VALUES (?, ?, ?, ?, ?, true)";
+    private static final String GET_BY_ID = "SELECT user.ID, user.USERNAME, user.EMAIL, user.BIRTHDAY FROM USERS user WHERE user.ID = ?";
+    private static final String GET_BY_NAME = "SELECT user.ID, user.USERNAME, user.EMAIL, user.BIRTHDAY FROM USERS user WHERE user.EMAIL = ?";
+    private static final String GET_ALL = "SELECT user.ID, user.USERNAME, user.EMAIL, user.BIRTHDAY FROM USERS user";
+    private static final String DELETE_USER = "DELETE FROM USERNAME WHERE ID = ?";
     private JdbcTemplate jdbcTemplate;
     private H2SequenceMaxValueIncrementer userIncrementer;
 
@@ -36,7 +36,7 @@ public class UserRepositoryImpl implements UserRepository {
     public void save(User user) {
         log.info("Saving user");
         long id = userIncrementer.nextLongValue();
-        jdbcTemplate.update(INSERT_USER, id, user.getName(), user.getEmail(), Date.valueOf(user.getBirthDate()));
+        jdbcTemplate.update(INSERT_USER, id, user.getName(), user.getEmail(), Date.valueOf(user.getBirthDate()), user.getPassword());
     }
 
     @Override
