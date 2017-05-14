@@ -19,6 +19,8 @@ public interface EventRepository {
      */
     void remove(Event event);
 
+    void remove(Long eventId);
+
     /**
      * Find event by id. Return null if no event with such id
      *

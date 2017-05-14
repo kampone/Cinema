@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
-
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -25,32 +23,11 @@
     <![endif]-->
 
 </head>
-
 <body>
-<th:block th:include="fragments/navigation :: body"/>
-
-<!-- Page Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <img th:src="${event.pictureLink}" style="width:400px;height:240px" alt="picture"/>
-
-
-        </div>
-
+    <div class="container">
+        <h1>There is an error</h1>
+        <h2>Sorry...</h2>
+        <a href="/jmp/"><button type="button" class="btn btn-danger">Try again</button></a>
     </div>
-
-</div>
-<!-- /.container -->
-
-<th:block th:include="fragments/footer :: body"/>
-
-<!-- jQuery -->
-<script src="/cinema/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/cinema/js/bootstrap.min.js"></script>
-
 </body>
-
 </html>

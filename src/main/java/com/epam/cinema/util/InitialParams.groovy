@@ -78,7 +78,7 @@ class InitialParams {
                 basePrice: 10,
                 rating: Rating.MID,
                 description: 'Harry Potter is a British-American film series based on the Harry Potter novels by author J. K. Rowling. ',
-                pictureLink: 'http://az616578.vo.msecnd.net/files/2016/06/25/6360247867084148431991996925_hp.jpg'
+                pictureLink: 'http://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2013/09/12/101029496--sites-default-files-images-101029496-3176173-1748009911-hp.jp-1.jpg'
         )
 
         Event titanic = new Event(
@@ -87,6 +87,21 @@ class InitialParams {
                 rating: Rating.HIGH,
                 description: "Titanic is a 1997 American epic romance-disaster film directed, written, co-produced, and co-edited by James Cameron.",
                 pictureLink: "http://static.bbc.co.uk/history/img/ic/640/images/resources/histories/titanic.jpg"
+        )
+
+        Event toyStory = new Event(
+                name: "Toy Story",
+                basePrice: 9,
+                rating: Rating.HIGH,
+                description: "Toy Story is a 1995 American computer-animated buddy comedy adventure film produced by Pixar Animation Studios and released by Walt Disney Pictures.",
+                pictureLink: "http://www.wetpaint.com/wp-content/uploads/2015/11/toy-story-20th-anniversary.jpg"
+        )
+        Event starWars = new Event(
+                name: "Star Wars",
+                basePrice: 12,
+                rating: Rating.MID,
+                description: "Star Wars is an American epic space opera franchise, centered on a film series created by George Lucas. It depicts the adventures of various characters \"a long time ago in a galaxy far, far away\".",
+                pictureLink: "http://a.dilcdn.com/bl/wp-content/uploads/sites/6/2015/10/tfa_poster_wide_header-1536x864-959818851016.jpg"
         )
 
 
@@ -141,36 +156,54 @@ class InitialParams {
                         new Seat(row: 1, place: 3, isVip: true),
                         new Seat(row: 1, place: 4, isVip: true),
                         new Seat(row: 1, place: 5, isVip: true),
+                        new Seat(row: 1, place: 6, isVip: true),
+                        new Seat(row: 1, place: 7, isVip: true),
+                        new Seat(row: 1, place: 8, isVip: true),
 
                         new Seat(row: 2, place: 1, isVip: false),
                         new Seat(row: 2, place: 2, isVip: false),
                         new Seat(row: 2, place: 3, isVip: false),
                         new Seat(row: 2, place: 4, isVip: false),
                         new Seat(row: 2, place: 5, isVip: false),
+                        new Seat(row: 2, place: 6, isVip: false),
+                        new Seat(row: 2, place: 7, isVip: false),
+                        new Seat(row: 2, place: 8, isVip: false),
 
                         new Seat(row: 3, place: 1, isVip: false),
                         new Seat(row: 3, place: 2, isVip: false),
                         new Seat(row: 3, place: 3, isVip: false),
                         new Seat(row: 3, place: 4, isVip: false),
                         new Seat(row: 3, place: 5, isVip: false),
+                        new Seat(row: 3, place: 6, isVip: false),
+                        new Seat(row: 3, place: 7, isVip: false),
+                        new Seat(row: 3, place: 8, isVip: false),
 
                         new Seat(row: 4, place: 1, isVip: false),
                         new Seat(row: 4, place: 2, isVip: false),
                         new Seat(row: 4, place: 3, isVip: false),
                         new Seat(row: 4, place: 4, isVip: false),
                         new Seat(row: 4, place: 5, isVip: false),
+                        new Seat(row: 4, place: 6, isVip: false),
+                        new Seat(row: 4, place: 7, isVip: false),
+                        new Seat(row: 4, place: 8, isVip: false),
 
                         new Seat(row: 5, place: 1, isVip: false),
                         new Seat(row: 5, place: 2, isVip: false),
                         new Seat(row: 5, place: 3, isVip: false),
                         new Seat(row: 5, place: 4, isVip: false),
                         new Seat(row: 5, place: 5, isVip: false),
+                        new Seat(row: 5, place: 6, isVip: false),
+                        new Seat(row: 5, place: 7, isVip: false),
+                        new Seat(row: 5, place: 8, isVip: false),
 
                         new Seat(row: 6, place: 1, isVip: false),
                         new Seat(row: 6, place: 2, isVip: false),
                         new Seat(row: 6, place: 3, isVip: false),
                         new Seat(row: 6, place: 4, isVip: false),
-                        new Seat(row: 6, place: 5, isVip: false)
+                        new Seat(row: 6, place: 5, isVip: false),
+                        new Seat(row: 6, place: 6, isVip: false),
+                        new Seat(row: 6, place: 7, isVip: false),
+                        new Seat(row: 6, place: 8, isVip: false)
                 ]
         )
 
@@ -179,7 +212,7 @@ class InitialParams {
             userRepository.save it
         }
 
-        [harryPotter, titanic]*.each {
+        [harryPotter, titanic, toyStory, starWars]*.each {
             eventRepository.save it
         }
 
@@ -188,10 +221,12 @@ class InitialParams {
         }
         [green]*.each {
             createTicketsForAuditoriumAndEvent(it, harryPotter, LocalDateTime.of(2017, Month.AUGUST, 28, 12,30));
+            createTicketsForAuditoriumAndEvent(it, starWars, LocalDateTime.of(2017, Month.AUGUST, 26, 12,30));
         }
 
         [red]*.each {
-            createTicketsForAuditoriumAndEvent(it, titanic, LocalDateTime.of(2017, Month.AUGUST, 28, 12,30));
+            createTicketsForAuditoriumAndEvent(it, titanic, LocalDateTime.of(2017, Month.AUGUST, 29, 12,30));
+            createTicketsForAuditoriumAndEvent(it, toyStory, LocalDateTime.of(2017, Month.AUGUST, 27, 12,30));
         }
 
 

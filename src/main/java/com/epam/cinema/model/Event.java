@@ -10,17 +10,27 @@ public class Event {
     private Rating rating;
     private String description;
     private String pictureLink;
+    private String deletedDate;
 
     public Event() {
     }
 
-    public Event(Long id, String name, BigDecimal basePrice, Rating rating, String description, String pictureLink) {
+    public Event(Long id, String name, BigDecimal basePrice, Rating rating, String description, String pictureLink, String deletedDate) {
         this.id = id;
         this.name = name;
         this.basePrice = basePrice;
         this.rating = rating;
         this.description = description;
         this.pictureLink = pictureLink;
+        this.deletedDate = deletedDate;
+    }
+
+    public String getDeletedDate() {
+        return deletedDate;
+    }
+
+    public void setDeletedDate(String deletedDate) {
+        this.deletedDate = deletedDate;
     }
 
     public Long getId() {

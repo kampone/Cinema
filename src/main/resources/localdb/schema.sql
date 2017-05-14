@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS EVENTS (
   rating_id    INT,
   description  VARCHAR(255),
   picture_link VARCHAR(255),
+  deleted_date DATE,
   FOREIGN KEY (rating_id) REFERENCES RATING (id)
 );
 CREATE TABLE IF NOT EXISTS AUDITORIUMS (

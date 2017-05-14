@@ -22,4 +22,6 @@ public interface TicketRepository {
     void save(Ticket ticket);
 
     void unbookTicketForUser(Ticket ticket, Long userId);
+
+    void buyTicket(Long ticketId);
 }

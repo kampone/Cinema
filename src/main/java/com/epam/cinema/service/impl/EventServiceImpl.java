@@ -25,6 +25,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public void remove(Long eventId) {
+        repository.remove(eventId);
+    }
+
+    @Override
     public Event getById(Long id) {
         return repository.getById(id);
     }

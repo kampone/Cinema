@@ -8,8 +8,7 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -27,7 +26,9 @@ public class EventController {
     public String getAllEvents(Model model, HttpSession session){
         String username = ((User) ((SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getPrincipal()).getUsername();
         Long id = userService.getAll().stream().filter(user -> user.getName().equals(username)).findFirst().get().getId();
+        boolean admin = userService.isAdmin(username);
         session.setAttribute("userId", id);
+        session.setAttribute("isAdmin", admin);
         List<Event> events = eventService.getAll();
         model.addAttribute("events", events);
         return "index";
@@ -39,5 +40,23 @@ public class EventController {
         model.addAttribute("event", event);
 
         return "event";
+    }
+
+    @GetMapping("/addevent")
+    public String addEventForm(){
+        return "addevent";
+    }
+
+    @PostMapping("/events")
+    public String addEvent(Event event, Model model){
+        model.addAttribute("event", event);
+        eventService.save(event);
+        return "redirect:/";
+    }
+
+    @GetMapping("/events/delete/{id}")
+    public String deleteEvent(@PathVariable Long id){
+        eventService.remove(id);
+        return "redirect:/";
     }
 }

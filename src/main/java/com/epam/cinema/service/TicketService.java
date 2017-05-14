@@ -44,5 +44,7 @@ public interface TicketService {
 
     void unbookTicketWithId(Long id);
 
+    void buyTicket(Long ticketId);
+
     List<Ticket> getTicketsForUser(Long id);
 }

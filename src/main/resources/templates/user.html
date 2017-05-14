@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
     <!-- Bootstrap Core CSS -->
     <link href="/cinema/css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -18,7 +17,7 @@
 <th:block th:include="fragments/navigation :: body"/>
 <div class="container">
     <div th:switch="${user.getTickets().size()}">
-        <p th:case="0">There is no booked tickets</p>
+        <p th:case="0" th:text="#{notickets}"></p>
     </div>
     <ul class="list-group">
         <li th:each="ticket : ${user.getTickets()}" class="list-group-item">
@@ -35,8 +34,10 @@
                 <p class="text-right">
                     <a th:href="'/jmp/unbook/' + ${ticket.getId()}">
                         <button type="button" class="btn btn-warning" th:text="#{tickets.unbook}"></button>
-                </a>
-                <button type="button" class="btn btn-danger" th:text="#{tickets.buy}"></button>
+                    </a>
+                    <a th:href="'/jmp/tickets/' + ${ticket.getId()}">
+                        <button type="button" class="btn btn-danger" th:text="#{tickets.buy}"></button>
+                    </a>
                 </p>
             </div>
         </li>

@@ -20,6 +20,7 @@ public class TicketRepositoryImpl implements TicketRepository {
     private static final String GET_BY_EVENT_ID = "SELECT id, event_id, datetime, seat_id, user_id, booked FROM TICKETS WHERE event_id = ?";
     private static final String BOOK_TICKET = "UPDATE TICKETS SET user_id = ?, booked = TRUE WHERE ID = ?";
     private static final String UNBOOK_TICKET = "UPDATE TICKETS SET user_id = ?, booked = FALSE WHERE ID = ?";
+    private static final String BUY_TICKET = "UPDATE TICKETS SET user_id = NULL WHERE ID = ?";
     private static final String DECLINE_TICKET = "UPDATE TICKETS SET user_id = NULL, booked = FALSE WHERE ID = ?";
     private static final String INSERT_TICKET = "INSERT INTO TICKETS(ID, EVENT_ID, DATETIME, SEAT_ID, USER_ID, BOOKED) VALUES (?,?,?,?,?,?)";
     private JdbcTemplate jdbcTemplate;
@@ -106,6 +107,11 @@ public class TicketRepositoryImpl implements TicketRepository {
         log.info("Unbook ticket for user");
 
         jdbcTemplate.update(UNBOOK_TICKET, userId, ticket.getId());
+    }
+
+    @Override
+    public void buyTicket(Long ticketId) {
+        jdbcTemplate.update(BUY_TICKET, ticketId);
     }
 
     @Override

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -37,34 +37,38 @@
                 <div class="col-sm-4 col-lg-4 col-md-4" th:each="event : ${events}">
                     <div class="thumbnail">
                         <img th:src="${event.pictureLink}" alt="picture"/>
-                        <div class="caption">
-                            <h4 class="pull-right" th:text="'$' + ${event.basePrice}"></h4>
-                            <h4><a th:href="'events/' + ${event.id} + '/tickets'" th:text="${event.name}"/>
-                            </h4>
-                            <p th:text="${event.description}"/>
-                        </div>
-                        <div class="ratings" th:switch="${event.rating.toString()}">
-                            <p th:case='HIGH'>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </p>
-                            <p th:case='MID'>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                            <p th:case='LOW'>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
+                        <div th:with="isAdmin=${session.get('isAdmin')}">
+                            <div  align="right"><a th:if="${isAdmin}" data-method="delete"
+                                                   th:href="'events/delete/' + ${event.getId()}">x</a></div>
+                            <div class="caption">
+                                <h4 class="pull-right" th:text="'$' + ${event.basePrice}"></h4>
+                                <h4><a th:href="'events/' + ${event.id} + '/tickets'" th:text="${event.name}"/>
+                                </h4>
+                                <p th:text="${event.description}"/>
+                            </div>
+                            <div class="ratings" th:switch="${event.rating.toString()}">
+                                <p th:case='HIGH'>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                                <p th:case='MID'>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </p>
+                                <p th:case='LOW'>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

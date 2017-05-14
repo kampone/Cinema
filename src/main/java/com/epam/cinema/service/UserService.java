@@ -44,4 +44,6 @@ public interface UserService {
      * @return all users
      */
     Set<User> getAll();
+
+    boolean isAdmin(String username);
 }

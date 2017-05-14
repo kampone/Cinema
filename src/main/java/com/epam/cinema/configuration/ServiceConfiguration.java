@@ -1,5 +1,6 @@
 package com.epam.cinema.configuration;
 
+import com.epam.cinema.repository.AuthorityRepository;
 import com.epam.cinema.repository.EventRepository;
 import com.epam.cinema.repository.TicketRepository;
 import com.epam.cinema.repository.UserRepository;
@@ -15,8 +16,8 @@ import java.util.List;
 @Configuration
 public class ServiceConfiguration {
     @Bean
-    public UserService userService(@Autowired UserRepository repository, @Autowired TicketService ticketService){
-        return new UserServiceImpl(repository, ticketService);
+    public UserService userService(@Autowired UserRepository repository, @Autowired TicketService ticketService, @Autowired AuthorityRepository authorityRepository){
+        return new UserServiceImpl(repository, ticketService, authorityRepository);
     }
 
     @Bean

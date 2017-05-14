@@ -24,6 +24,13 @@ public interface EventService {
     void remove(Event event);
 
     /**
+     * Remove event
+     *
+     * @param eventId eventId should be deleted
+     */
+    void remove(Long eventId);
+
+    /**
      * Find event by id. Return null if no event with such id
      *
      * @param id event's Id

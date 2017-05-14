@@ -74,4 +74,11 @@ public class RepositoryConfiguration {
         return counterRepository;
     }
 
+    @Bean
+    AuthorityRepository authorityRepository(@Autowired JdbcTemplate jdbcTemplate){
+        AuthorityRepositoryImpl authorityRepository = new AuthorityRepositoryImpl();
+        authorityRepository.setJdbcTemplate(jdbcTemplate);
+        return authorityRepository;
+    }
+
 }

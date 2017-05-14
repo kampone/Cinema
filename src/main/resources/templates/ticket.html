@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+
+<head>
+    <meta charset="UTF-8"/>
+    <!-- Bootstrap Core CSS -->
+    <link href="/cinema/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/cinema/css/shop-homepage.css" rel="stylesheet"/>
+
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+</head>
+<body>
+<th:block th:include="fragments/navigation :: body"/>
+<div class="container">
+    <h1><p th:text="${ticket.getEvent().getName()}"></p></h1>
+    <h3><p th:text="${#temporals.format(ticket.getDateTime(), 'dd MMM yyyy')}"></p></h3>
+    <h5><div th:text="#{tickets.place} + ': ' + ${ticket.getSeat().getPlace()} + ' ' +  #{tickets.row} + ': ' +  ${ticket.getSeat().getRow()} + ' '"></div></h5>
+    <h4>
+        <div th:text="#{tickets.totalprice} + ': '"></div>
+    </h4>
+    <h4><p th:text="'$' + ${totalPrice}"></p></h4>
+    <a th:href="'/jmp/tickets/' + ${ticket.getId() + '/buy'}">
+        <button type="button" class="btn btn-danger" th:text="#{tickets.buy}"></button>
+    </a>
+</div>
+<th:block th:include="fragments/footer :: body"/>
+</body>
+</html>

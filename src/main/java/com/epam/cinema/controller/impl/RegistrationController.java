@@ -24,16 +24,8 @@ public class RegistrationController {
 
 //TODO(convert birthdate)
     @RequestMapping("/registrate")
-    public String registrate(@RequestParam String username, @RequestParam String password,
-                             @RequestParam String email, @RequestParam String birthDate){
-        User user = new User();
-
-        user.setName(username);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setBirthDate(LocalDate.now());
+    public String registrate(User user){
         userService.save(user);
-        System.out.println(user);
-        return "registration";
+        return "redirect:/";
     }
 }

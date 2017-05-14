@@ -9,14 +9,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.incrementer.H2SequenceMaxValueIncrementer;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EventRepositoryImpl implements EventRepository {
 
     private static final String INSERT_EVENT = "INSERT INTO EVENTS(ID, NAME, BASE_PRICE, RATING_ID, DESCRIPTION, PICTURE_LINK) VALUES (?, ? ,? ,?, ?, ?)";
-    private static final String GET_BY_ID = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, DESCRIPTION, PICTURE_LINK FROM EVENTS event WHERE event.id = ?";
-    private static final String GET_BY_NAME = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, DESCRIPTION, PICTURE_LINK FROM EVENTS event WHERE event.NAME = ?";
-    private static final String GET_ALL = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, DESCRIPTION, PICTURE_LINK FROM EVENTS event";
-    private static final String DELETE_EVENT = "DELETE FROM EVENTS WHERE ID = ?";
+    private static final String GET_BY_ID = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, DESCRIPTION, PICTURE_LINK, event.DELETED_DATE FROM EVENTS event WHERE event.id = ?";
+    private static final String GET_BY_NAME = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, DESCRIPTION, PICTURE_LINK, event.DELETED_DATE FROM EVENTS event WHERE event.NAME = ?";
+    private static final String GET_ALL = "SELECT event.ID, event.NAME, event.BASE_PRICE, event.RATING_ID, event.DESCRIPTION, event.PICTURE_LINK, event.DELETED_DATE FROM EVENTS event";
+    private static final String DELETE_EVENT = "UPDATE EVENTS SET deleted_date = CURRENT_TIMESTAMP() WHERE ID = ?";
     private JdbcTemplate jdbcTemplate;
     private H2SequenceMaxValueIncrementer eventIncrementer;
 
@@ -36,7 +37,7 @@ public class EventRepositoryImpl implements EventRepository {
         log.info("Saving event");
         long id = eventIncrementer.nextLongValue();
         event.setId(id);
-        jdbcTemplate.update(INSERT_EVENT, id, event.getName(), event.getBasePrice(), event.getRating().ordinal() + 1, event.getDescription(), event.getPictureLink());
+        jdbcTemplate.update(INSERT_EVENT, id, event.getName(), event.getBasePrice(), event.getRating().ordinal(), event.getDescription(), event.getPictureLink());
     }
 
     @Override
@@ -44,6 +45,13 @@ public class EventRepositoryImpl implements EventRepository {
         log.info("Removing event");
 
         jdbcTemplate.update(DELETE_EVENT, event.getId());
+    }
+
+    @Override
+    public void remove(Long eventId) {
+        log.info("Removing event");
+
+        jdbcTemplate.update(DELETE_EVENT, eventId);
     }
 
     @Override
@@ -56,7 +64,8 @@ public class EventRepositoryImpl implements EventRepository {
                         resultSet.getBigDecimal(3),
                         Rating.values()[resultSet.getInt(4)],
                         resultSet.getString(5),
-                        resultSet.getString(6))
+                        resultSet.getString(6),
+                        resultSet.getString(7))
         );
     }
 
@@ -71,7 +80,8 @@ public class EventRepositoryImpl implements EventRepository {
                         resultSet.getBigDecimal(3),
                         Rating.values()[resultSet.getInt(4)],
                         resultSet.getString(5),
-                        resultSet.getString(6))
+                        resultSet.getString(6),
+                        resultSet.getString(7))
         );
     }
 
@@ -85,7 +95,8 @@ public class EventRepositoryImpl implements EventRepository {
                         resultSet.getBigDecimal(3),
                         Rating.values()[resultSet.getInt(4)],
                         resultSet.getString(5),
-                        resultSet.getString(6))
-        );
+                        resultSet.getString(6),
+                        resultSet.getString(7))
+        ).stream().filter(it -> it.getDeletedDate() == null).collect(Collectors.toList());
     }
 }
