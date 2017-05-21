@@ -7,5 +7,4 @@ public interface AuthorityRepository {
     void assignUser(String username);
 
     String getAuthority(String username);
-
 }

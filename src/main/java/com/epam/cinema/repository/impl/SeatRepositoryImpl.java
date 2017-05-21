@@ -30,16 +30,16 @@ public class SeatRepositoryImpl implements SeatRepository {
     }
 
     @Override
-    public void saveToAuditorium(Seat seat, Long auditoriumId) {
-        log.info("Saving seat");
+    public void saveSeatToAuditorium(Seat seat, Long auditoriumId) {
+        log.debug("Saving seat o auditorium with id " + auditoriumId);
         long id = seatIncrementer.nextLongValue();
         seat.setId(id);
         jdbcTemplate.update(INSERT_SEAT, id, seat.getRow(), seat.getPlace(), seat.isVip(), auditoriumId);
     }
 
     @Override
-    public Seat getById(Long id) {
-        log.info("Retrieving seat by id");
+    public Seat getSeatById(Long id) {
+        log.debug("Retrieving seat by id");
 
         return jdbcTemplate.queryForObject(GET_BY_ID,
                 new Object[]{id},
@@ -53,8 +53,8 @@ public class SeatRepositoryImpl implements SeatRepository {
     }
 
     @Override
-    public List<Seat> getByAuditoriumId(Long id) {
-        log.info("Retrieving seat by auditorium id");
+    public List<Seat> getSeatsByAuditoriumId(Long id) {
+        log.debug("Retrieving seat by auditorium id+ " + id);
 
         return jdbcTemplate.query(GET_BY_AUDITORIUM_ID,
                 new Object[]{id},
@@ -69,7 +69,7 @@ public class SeatRepositoryImpl implements SeatRepository {
 
     @Override
     public void removeSeatsFromAuditorium(Long auditoriumId) {
-        log.info("Removing seat");
+        log.debug("Removing seat : " + auditoriumId);
 
         jdbcTemplate.update(DELETE_SEATS, auditoriumId);
     }

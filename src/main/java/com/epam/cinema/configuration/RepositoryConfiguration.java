@@ -80,5 +80,4 @@ public class RepositoryConfiguration {
         authorityRepository.setJdbcTemplate(jdbcTemplate);
         return authorityRepository;
     }
-
 }

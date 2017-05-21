@@ -1,9 +1,6 @@
 package com.epam.cinema.configuration;
 
-import com.epam.cinema.repository.AuthorityRepository;
-import com.epam.cinema.repository.EventRepository;
-import com.epam.cinema.repository.TicketRepository;
-import com.epam.cinema.repository.UserRepository;
+import com.epam.cinema.repository.*;
 import com.epam.cinema.service.*;
 import com.epam.cinema.service.discount.DiscountStrategy;
 import com.epam.cinema.service.impl.*;
@@ -26,8 +23,9 @@ public class ServiceConfiguration {
     }
 
     @Bean
-    public AuditoriumService auditoriumService(){
+    public AuditoriumService auditoriumService(@Autowired AuditoriumRepository auditoriumRepository){
         AuditoriumServiceImpl auditoriumService = new AuditoriumServiceImpl();
+        auditoriumService.setAuditoriumRepository(auditoriumRepository);
         return auditoriumService;
     }
 

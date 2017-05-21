@@ -22,7 +22,6 @@ public class RegistrationController {
         return "registration";
     }
 
-//TODO(convert birthdate)
     @RequestMapping("/registrate")
     public String registrate(User user){
         userService.save(user);

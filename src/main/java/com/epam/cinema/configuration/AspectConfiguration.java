@@ -13,7 +13,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Configuration
 @EnableAspectJAutoProxy
 public class AspectConfiguration {
-
     @Bean
     public CounterAspect counterAspect(@Autowired CounterRepository counterRepository){
         CounterAspect counterAspect = new CounterAspect();

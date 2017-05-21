@@ -63,6 +63,12 @@ CREATE TABLE IF NOT EXISTS DISCOUNT_COUNTERS (
   ten_tickets_strategy_count INT
 );
 
+CREATE TABLE IF NOT EXISTS USER_TICKET (
+  user_id INT ,
+  ticket_id INT DEFAULT 0
+);
+
+
 
 drop table if exists authorities;
 create table authorities(username  varchar(255),authority  varchar(255), UNIQUE(username,authority));

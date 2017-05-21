@@ -32,7 +32,7 @@ public interface BookingService {
     void bookTicket(Ticket ticket);
 
 
-    void bookTicket(Long ticketId);
+    void bookTicketWithId(Long ticketId);
 
     /**
      * Get all purchased tickets for event for specific date and Time

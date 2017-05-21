@@ -33,7 +33,7 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public void save(Event event) {
+    public void saveEvent(Event event) {
         log.info("Saving event");
         long id = eventIncrementer.nextLongValue();
         event.setId(id);
@@ -41,22 +41,22 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public void remove(Event event) {
+    public void removeEvent(Event event) {
         log.info("Removing event");
 
         jdbcTemplate.update(DELETE_EVENT, event.getId());
     }
 
     @Override
-    public void remove(Long eventId) {
+    public void removeEventWithId(Long eventId) {
         log.info("Removing event");
 
         jdbcTemplate.update(DELETE_EVENT, eventId);
     }
 
     @Override
-    public Event getById(Long id) {
-        log.info("Retrieving event by id");
+    public Event getEventById(Long id) {
+        log.debug("Retrieving event by id: " + id);
 
         return jdbcTemplate.queryForObject(GET_BY_ID, new Object[]{id},
                 (resultSet, i) -> new Event(resultSet.getLong(1),
@@ -71,8 +71,8 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     @CountEventName
-    public Event getByName(String name) {
-        log.info("Retrieving event by name");
+    public Event getEventByName(String name) {
+        log.debug("Retrieving event by name: " + name);
 
         return jdbcTemplate.queryForObject(GET_BY_NAME, new Object[]{name},
                 (resultSet, i) -> new Event(resultSet.getLong(1),
@@ -86,8 +86,8 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public List<Event> getAll() {
-        log.info("Retrieving all events");
+    public List<Event> getAllEvents() {
+        log.debug("Retrieving all events");
 
         return jdbcTemplate.query(GET_ALL,
                 (resultSet, i) -> new Event(resultSet.getLong(1),

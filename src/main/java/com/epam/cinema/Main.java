@@ -31,13 +31,13 @@ public class Main {
         DiscountService discountService = context.getBean("discountService", DiscountService.class);
 
 
-        Event event = eventRepository.getByName("Harry Potter");
-        eventRepository.getByName("Harry Potter");
-        eventRepository.getByName("Harry Potter");
-        eventRepository.getByName("Harry Potter");
-        eventRepository.getByName("Harry Potter");
-        User user = userRepository.getByEmail("Dzmitry@gmail.com");
-        List<Ticket> tickets = ticketRepository.getAll();
+        Event event = eventRepository.getEventByName("Harry Potter");
+        eventRepository.getEventByName("Harry Potter");
+        eventRepository.getEventByName("Harry Potter");
+        eventRepository.getEventByName("Harry Potter");
+        eventRepository.getEventByName("Harry Potter");
+        User user = userRepository.getUserByEmail("Dzmitry@gmail.com");
+        List<Ticket> tickets = ticketRepository.getTicketAll();
         discountService.getDiscount(user, event, LocalDateTime.now().plusDays(2),12);
         discountService.getDiscount(user, event, LocalDateTime.now().plusDays(2),1);
 

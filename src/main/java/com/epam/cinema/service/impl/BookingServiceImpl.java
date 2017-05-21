@@ -59,7 +59,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void bookTicket(Long ticketId) {
+    public void bookTicketWithId(Long ticketId) {
         ticketService.bookTicketWithId(ticketId);
     }
 

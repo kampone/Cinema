@@ -209,15 +209,15 @@ class InitialParams {
 
 
         [user1, user2, user3, user4, user5]*.each {
-            userRepository.save it
+            userRepository.saveUser it
         }
 
         [harryPotter, titanic, toyStory, starWars]*.each {
-            eventRepository.save it
+            eventRepository.saveEvent it
         }
 
         [red, green]*.each {
-            auditoriumRepository.save it
+            auditoriumRepository.saveAuditorium it
         }
         [green]*.each {
             createTicketsForAuditoriumAndEvent(it, harryPotter, LocalDateTime.of(2017, Month.AUGUST, 28, 12,30));
@@ -234,7 +234,7 @@ class InitialParams {
 
     def createTicketsForAuditoriumAndEvent(Auditorium auditorium, Event event, LocalDateTime dateTime){
         auditorium.seats.each {
-            ticketRepository.save(new Ticket(
+            ticketRepository.saveTicket(new Ticket(
                     event: event,
                     user: null,
                     seat: it,

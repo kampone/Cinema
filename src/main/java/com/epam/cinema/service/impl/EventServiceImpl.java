@@ -16,32 +16,32 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void save(Event event) {
-        repository.save(event);
+        repository.saveEvent(event);
     }
 
     @Override
     public void remove(Event event) {
-        repository.remove(event);
+        repository.removeEvent(event);
     }
 
     @Override
     public void remove(Long eventId) {
-        repository.remove(eventId);
+        repository.removeEventWithId(eventId);
     }
 
     @Override
     public Event getById(Long id) {
-        return repository.getById(id);
+        return repository.getEventById(id);
     }
 
     @Override
     public Event getByName(String name) {
-        return repository.getByName(name);
+        return repository.getEventByName(name);
     }
 
     @Override
     public List<Event> getAll() {
-        return repository.getAll();
+        return repository.getAllEvents();
     }
 
 }

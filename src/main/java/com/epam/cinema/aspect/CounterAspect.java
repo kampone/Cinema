@@ -9,9 +9,7 @@ import org.aspectj.lang.annotation.Before;
 
 @Aspect
 public class CounterAspect {
-
     private final Logger log = Logger.getLogger(CounterAspect.class);
-
     private CounterRepository counterRepository;
 
     public void setCounterRepository(CounterRepository counterRepository) {
@@ -25,10 +23,10 @@ public class CounterAspect {
         Counter counter = counterRepository.getCounterByEventName(name);
         if (counter != null){
             counter.setNameInvocationCount(counter.getNameInvocationCount() + 1);
-            counterRepository.update(counter);
+            counterRepository.updateCounter(counter);
         } else {
             counter = new Counter(name, 1L, 0L);
-            counterRepository.save(counter);
+            counterRepository.saveCounter(counter);
         }
     }
 
@@ -41,11 +39,10 @@ public class CounterAspect {
         Counter counter = counterRepository.getCounterByEventName(eventName);
         if (counter != null){
             counter.setBookTicketCount(counter.getBookTicketCount() + 1);
-            counterRepository.update(counter);
+            counterRepository.updateCounter(counter);
         } else {
             counter = new Counter(eventName, 0L, 1L);
-            counterRepository.save(counter);
+            counterRepository.saveCounter(counter);
         }
     }
-
 }

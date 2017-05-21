@@ -3,7 +3,6 @@ package com.epam.cinema.service.impl;
 import com.epam.cinema.model.User;
 import com.epam.cinema.repository.AuthorityRepository;
 import com.epam.cinema.repository.UserRepository;
-import com.epam.cinema.service.AuditoriumService;
 import com.epam.cinema.service.TicketService;
 import com.epam.cinema.service.UserService;
 
@@ -22,30 +21,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        userRepository.save(user);
+        userRepository.saveUser(user);
         authorityRepository.assignUser(user.getName());
     }
 
     @Override
     public void remove(User user) {
-        userRepository.remove(user);
+        userRepository.removeUser(user);
     }
 
     @Override
     public User getById(Long id) {
-        User user = userRepository.getById(id);
+        User user = userRepository.getUserById(id);
         user.setTickets(ticketService.getTicketsForUser(id));
         return user;
     }
 
     @Override
     public User getByEmail(String email) {
-        return userRepository.getByEmail(email);
+        return userRepository.getUserByEmail(email);
     }
 
     @Override
     public Set<User> getAll() {
-        return userRepository.getAll();
+        return userRepository.getAllUser();
     }
 
     @Override

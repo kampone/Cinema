@@ -25,15 +25,15 @@ public class DiscountCounterAspect {
     public void countBookingTickets(User user, Event event, LocalDateTime dateTime, Integer numberOfTickets, Object result) {
         log.info("In DiscountCounterAspect");
 
-        DiscountCounter counter = discountCounterRepository.getCounterByUserId(user.getId());
+        DiscountCounter counter = discountCounterRepository.getDiscountCounterByUserId(user.getId());
         if (counter != null) {
             if (MoreThanTenTicketsDiscountStrategy.DISCOUNT_SIZE.equals(result)) {
                 counter.setTenTicketsStrategyCount(counter.getTenTicketsStrategyCount() + 1);
-                discountCounterRepository.update(counter);
+                discountCounterRepository.updateDiscountCounter(counter);
             }
             if (BirthdayDiscountStrategy.DISCOUNT_SIZE.equals(result)) {
                 counter.setBirthdayStrategyCount(counter.getBirthdayStrategyCount() + 1);
-                discountCounterRepository.update(counter);
+                discountCounterRepository.updateDiscountCounter(counter);
             }
         } else {
             if (result.equals(MoreThanTenTicketsDiscountStrategy.DISCOUNT_SIZE)) {
@@ -43,7 +43,7 @@ public class DiscountCounterAspect {
             } else {
                 counter =  new DiscountCounter(user.getId(), 0L, 0L);
             }
-            discountCounterRepository.save(counter);
+            discountCounterRepository.saveDiscountCounter(counter);
         }
     }
 }

@@ -42,68 +42,68 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
     }
 
     @Override
-    public List<Auditorium> getAll() {
-        log.info("Retrieving all auditoriums");
+    public List<Auditorium> getAllAuditoriums() {
+        log.debug("Retrieving all auditoriums");
         List<Auditorium> auditoriums = jdbcTemplate.query(GET_ALL_QUERY, ((resultSet, i) ->
                 new Auditorium(
                         resultSet.getLong(1),
                         resultSet.getString(2),
-                        seatRepository.getByAuditoriumId(resultSet.getLong(1))
+                        seatRepository.getSeatsByAuditoriumId(resultSet.getLong(1))
                 ))
         );
 
-        auditoriums.forEach(auditorium -> auditorium.setSeats(seatRepository.getByAuditoriumId(auditorium.getId())));
+        auditoriums.forEach(auditorium -> auditorium.setSeats(seatRepository.getSeatsByAuditoriumId(auditorium.getId())));
         return auditoriums;
     }
 
     @Override
-    public Auditorium findById(Long id) {
-        log.info("Retrieving auditorium by id");
+    public Auditorium findAuditoriumById(Long id) {
+        log.debug("Retrieving auditorium by id: " + id);
 
         return jdbcTemplate.queryForObject(GET_BY_ID_QUERY, new Object[]{id}, ((resultSet, i) ->
                 new Auditorium(
                         resultSet.getLong(1),
                         resultSet.getString(2),
-                        seatRepository.getByAuditoriumId(resultSet.getLong(1))
+                        seatRepository.getSeatsByAuditoriumId(resultSet.getLong(1))
                 ))
         );
     }
 
     @Override
-    public Auditorium findByName(String name) {
-        log.info("Retrieving auditorium by name");
+    public Auditorium findAuditoriumByName(String name) {
+        log.debug("Retrieving auditorium by name: " + name);
 
         return jdbcTemplate.queryForObject(GET_BY_ID_NAME, new Object[]{name}, ((resultSet, i) ->
                 new Auditorium(
                         resultSet.getLong(1),
                         resultSet.getString(2),
-                        seatRepository.getByAuditoriumId(resultSet.getLong(1))
+                        seatRepository.getSeatsByAuditoriumId(resultSet.getLong(1))
                 ))
         );
     }
 
     @Override
-    public void save(Auditorium auditorium) {
+    public void saveAuditorium(Auditorium auditorium) {
 
-        log.info("Save auditorium");
+        log.debug("Save auditorium: " + auditorium.getName());
 
         long id = auditoriumIncrementer.nextLongValue();
         auditorium.setId(id);
         jdbcTemplate.update(INSERT_AUDITORIUM, id, auditorium.getName());
-        auditorium.getSeats().forEach(seat -> seatRepository.saveToAuditorium(seat, auditorium.getId()));
+        auditorium.getSeats().forEach(seat -> seatRepository.saveSeatToAuditorium(seat, auditorium.getId()));
     }
 
     @Override
-    public void remove(Auditorium auditorium) {
-        log.info("Removing  auditorium");
+    public void removeAuditorium(Auditorium auditorium) {
+        log.debug("Removing  auditorium: " + auditorium.getId());
 
         seatRepository.removeSeatsFromAuditorium(auditorium.getId());
         jdbcTemplate.update(DELETE_AUDITORIUM, auditorium.getId());
     }
 
     @Override
-    public void update(Auditorium auditorium) {
-        log.info("Updating auditorium");
+    public void updateAuditorium(Auditorium auditorium) {
+        log.debug("Updating auditorium wirh id: " + auditorium.getId());
 
         jdbcTemplate.update(UPDATE_AUDITORIUM, auditorium.getName(), auditorium.getId());
     }

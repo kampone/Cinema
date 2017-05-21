@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface SeatRepository {
 
-    void saveToAuditorium(Seat seat, Long auditoriumId);
+    void saveSeatToAuditorium(Seat seat, Long auditoriumId);
 
-    Seat getById(Long id);
+    Seat getSeatById(Long id);
 
-    List<Seat> getByAuditoriumId(Long id);
+    List<Seat> getSeatsByAuditoriumId(Long id);
 
     void removeSeatsFromAuditorium(Long auditoriumId);
 }

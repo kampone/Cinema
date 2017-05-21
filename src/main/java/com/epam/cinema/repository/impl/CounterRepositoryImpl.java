@@ -40,12 +40,12 @@ public class CounterRepositoryImpl implements CounterRepository {
     }
 
     @Override
-    public void update(Counter counter) {
+    public void updateCounter(Counter counter) {
         jdbcTemplate.update(UPDATE_COUNTER, counter.getNameInvocationCount(), counter.getBookTicketCount(), counter.getEventName());
     }
 
     @Override
-    public void save(Counter counter) {
+    public void saveCounter(Counter counter) {
         jdbcTemplate.update(INSERT_COUNTER, counter.getEventName(), counter.getNameInvocationCount(), counter.getBookTicketCount());
     }
 }

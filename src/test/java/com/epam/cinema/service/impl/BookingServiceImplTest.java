@@ -44,10 +44,10 @@ public class BookingServiceImplTest {
 //    }
 //
 //    @Test
-//    public void bookTicket() throws Exception {
+//    public void bookTicketWithId() throws Exception {
 //        Ticket ticket = new Ticket(null, null, null, null, null, false);
 //
-//        bookingService.bookTicket(ticket);
+//        bookingService.bookTicketWithId(ticket);
 //
 //        assertTrue(ticket.isBooked());
 //

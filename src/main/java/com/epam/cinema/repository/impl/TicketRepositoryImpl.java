@@ -53,42 +53,42 @@ public class TicketRepositoryImpl implements TicketRepository {
     }
 
     @Override
-    public List<Ticket> getAll() {
-        log.info("Retrieving all tickets");
+    public List<Ticket> getTicketAll() {
+        log.debug("Retrieving all tickets");
         return jdbcTemplate.query(GET_ALL, (resultSet, i) -> new Ticket(
                 resultSet.getLong(1),
-                eventRepository.getById(resultSet.getLong(2)),
+                eventRepository.getEventById(resultSet.getLong(2)),
                 resultSet.getTimestamp(3).toLocalDateTime(),
-                seatRepository.getById(resultSet.getLong(4)),
-                userRepository.getById(resultSet.getLong(5)),
+                seatRepository.getSeatById(resultSet.getLong(4)),
+                userRepository.getUserById(resultSet.getLong(5)),
                 resultSet.getBoolean(6)
         ));
     }
 
     @Override
     public List<Ticket> getTicketsForUser(Long userId) {
-        log.info("Retrieving all tickets for user");
+        log.debug("Retrieving all tickets for user : " + userId);
 
         return jdbcTemplate.query(GET_BY_USER_ID, new Object[]{userId}, (resultSet, i) -> new Ticket(
                 resultSet.getLong(1),
-                eventRepository.getById(resultSet.getLong(2)),
+                eventRepository.getEventById(resultSet.getLong(2)),
                 resultSet.getTimestamp(3).toLocalDateTime(),
-                seatRepository.getById(resultSet.getLong(4)),
-                userRepository.getById(resultSet.getLong(5)),
+                seatRepository.getSeatById(resultSet.getLong(4)),
+                userRepository.getUserById(resultSet.getLong(5)),
                 resultSet.getBoolean(6)
         ));
     }
 
     @Override
     public List<Ticket> getTicketForEvent(Long eventId) {
-        log.info("Retrieving all tickets for event");
+        log.debug("Retrieving all tickets for event : " + eventId);
 
         return jdbcTemplate.query(GET_BY_EVENT_ID, new Object[]{eventId}, (resultSet, i) -> new Ticket(
                 resultSet.getLong(1),
-                eventRepository.getById(resultSet.getLong(2)),
+                eventRepository.getEventById(resultSet.getLong(2)),
                 resultSet.getTimestamp(3).toLocalDateTime(),
-                seatRepository.getById(resultSet.getLong(4)),
-                userRepository.getById(resultSet.getLong(5)),
+                seatRepository.getSeatById(resultSet.getLong(4)),
+                userRepository.getUserById(resultSet.getLong(5)),
                 resultSet.getBoolean(6)
         ));
     }
@@ -96,7 +96,7 @@ public class TicketRepositoryImpl implements TicketRepository {
     @Override
     @CountBookingTickets
     public void bookTicketForUser(Ticket ticket, Long userId) {
-        log.info("Book ticket for user");
+        log.debug("Book ticket for user: " + userId);
 
         jdbcTemplate.update(BOOK_TICKET, userId, ticket.getId());
     }
@@ -104,7 +104,7 @@ public class TicketRepositoryImpl implements TicketRepository {
     @Override
     @CountBookingTickets
     public void unbookTicketForUser(Ticket ticket, Long userId) {
-        log.info("Unbook ticket for user");
+        log.debug("Unbook ticket for user " + userId );
 
         jdbcTemplate.update(UNBOOK_TICKET, userId, ticket.getId());
     }
@@ -116,14 +116,14 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public void declineBookingTicket(Ticket ticket) {
-        log.info("Decline ticket booking");
+        log.debug("Decline ticket booking" + ticket.getId());
 
         jdbcTemplate.update(DECLINE_TICKET, ticket.getId());
     }
 
     @Override
-    public void save(Ticket ticket) {
-        log.info("Save ticket");
+    public void saveTicket(Ticket ticket) {
+        log.debug("Save ticket : " + ticket.getId());
 
         long id = ticketIncrementer.nextLongValue();
         ticket.setId(id);

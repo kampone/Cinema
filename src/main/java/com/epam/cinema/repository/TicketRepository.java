@@ -9,7 +9,7 @@ public interface TicketRepository {
      * Return all tickets
      * @return All tickets
      */
-    List<Ticket> getAll();
+    List<Ticket> getTicketAll();
 
     List<Ticket> getTicketsForUser(Long userId);
 
@@ -19,7 +19,7 @@ public interface TicketRepository {
 
     void declineBookingTicket(Ticket ticket);
 
-    void save(Ticket ticket);
+    void saveTicket(Ticket ticket);
 
     void unbookTicketForUser(Ticket ticket, Long userId);
 

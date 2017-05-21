@@ -32,10 +32,8 @@ public class SpringConfiguration {
     public EmbeddedServletContainerFactory servletContainer() {
 
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-        if (tomcatAjpEnabled)
-        {
+        if (tomcatAjpEnabled) {
             Connector ajpConnector = new Connector("AJP/1.3");
-            ajpConnector.setProtocol("AJP/1.3");
             ajpConnector.setPort(ajpPort);
             ajpConnector.setSecure(false);
             ajpConnector.setAllowTrace(false);
@@ -56,12 +54,10 @@ public class SpringConfiguration {
     }
 
     @Bean
-    public TemplateEngine templateEngine(){
+    public TemplateEngine templateEngine() {
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.addDialect(new Java8TimeDialect());
         templateEngine.addDialect(new SpringSecurityDialect());
         return templateEngine;
     }
-
-
 }

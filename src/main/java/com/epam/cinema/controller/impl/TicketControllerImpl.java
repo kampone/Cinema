@@ -1,6 +1,5 @@
 package com.epam.cinema.controller.impl;
 
-import com.epam.cinema.controller.TicketController;
 import com.epam.cinema.model.Event;
 import com.epam.cinema.model.Seat;
 import com.epam.cinema.model.Ticket;
@@ -9,19 +8,15 @@ import com.epam.cinema.service.EventService;
 import com.epam.cinema.service.TicketService;
 import com.epam.cinema.util.SeatComparator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -76,10 +71,4 @@ public class TicketControllerImpl {
         ticketService.buyTicket(id);
         return "redirect:/";
     }
-
-
-
-
-
-
 }

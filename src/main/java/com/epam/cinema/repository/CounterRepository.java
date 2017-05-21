@@ -10,7 +10,7 @@ public interface CounterRepository {
 
     List<Counter> getAllCounters();
 
-    void update(Counter counter);
+    void updateCounter(Counter counter);
 
-    void save(Counter counter);
+    void saveCounter(Counter counter);
 }

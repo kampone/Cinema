@@ -6,11 +6,11 @@ import com.epam.cinema.model.DiscountCounter;
 import java.util.List;
 
 public interface DiscountCounterRepository {
-    DiscountCounter getCounterByUserId(Long userId);
+    DiscountCounter getDiscountCounterByUserId(Long userId);
 
-    List<DiscountCounter> getAllCounters();
+    List<DiscountCounter> getAllDiscountCounters();
 
-    void update(DiscountCounter counter);
+    void updateDiscountCounter(DiscountCounter counter);
 
-    void save(DiscountCounter counter);
+    void saveDiscountCounter(DiscountCounter counter);
 }

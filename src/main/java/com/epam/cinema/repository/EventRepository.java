@@ -10,16 +10,16 @@ public interface EventRepository {
      *
      * @param event entity should be persisted
      */
-    void save(Event event);
+    void saveEvent(Event event);
 
     /**
      * Remove event
      *
      * @param event entity should be deleted
      */
-    void remove(Event event);
+    void removeEvent(Event event);
 
-    void remove(Long eventId);
+    void removeEventWithId(Long eventId);
 
     /**
      * Find event by id. Return null if no event with such id
@@ -27,7 +27,7 @@ public interface EventRepository {
      * @param id event's Id
      * @return event with specified id
      */
-    Event getById(Long id);
+    Event getEventById(Long id);
 
     /**
      * Find event by name. Return null if no event with such name
@@ -35,12 +35,12 @@ public interface EventRepository {
      * @param name event's name
      * @return event with specified name
      */
-    Event getByName(String name);
+    Event getEventByName(String name);
 
     /**
      * Find all persisted events
      *
      * @return all users
      */
-    List<Event> getAll();
+    List<Event> getAllEvents();
 }

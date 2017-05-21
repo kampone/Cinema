@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 public class BirthdayDiscountStrategy implements DiscountStrategy {
+    //TODO: check why int
     private static final int DAYS_BORDER = 5;
     public static final Integer DISCOUNT_SIZE = 10;
     private static final int WITHOUT_DISCOUNT = 0;

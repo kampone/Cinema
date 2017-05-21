@@ -10,14 +10,14 @@ public interface UserRepository {
      *
      * @param user entity should be persisted
      */
-    void save(User user);
+    void saveUser(User user);
 
     /**
      * Remove user
      *
      * @param user entity should be deleted
      */
-    void remove(User user);
+    void removeUser(User user);
 
     /**
      * Find user by id. Return null if no user with such id
@@ -25,7 +25,7 @@ public interface UserRepository {
      * @param id User's Id
      * @return User with specified id
      */
-    User getById(Long id);
+    User getUserById(Long id);
 
     /**
      * Find user by email. Return null if no user with such email
@@ -33,12 +33,12 @@ public interface UserRepository {
      * @param email User's email
      * @return User with specified email
      */
-    User getByEmail(String email);
+    User getUserByEmail(String email);
 
     /**
      * Find all persisted users
      *
      * @return all users
      */
-    Set<User> getAll();
+    Set<User> getAllUser();
 }

@@ -24,14 +24,14 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getTicketsForEvent(Event event) {
-        return ticketRepository.getAll().stream()
+        return ticketRepository.getTicketAll().stream()
                 .filter(ticket -> ticket.getEvent().equals(event))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Ticket> getTicketsForEventAndDate(Event event, LocalDateTime date) {
-        return ticketRepository.getAll().stream()
+        return ticketRepository.getTicketAll().stream()
                 .filter(ticket -> ticket.getEvent().equals(event))
                 .filter(ticket -> Math.abs(ChronoUnit.MINUTES.between(ticket.getDateTime(), date)) < 1)
                 .collect(Collectors.toList());
@@ -39,7 +39,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getPurchasedTicketsForEventAndDate(Event event, LocalDateTime date) {
-        return ticketRepository.getAll().stream()
+        return ticketRepository.getTicketAll().stream()
                 .filter(ticket -> ticket.getEvent().equals(event))
                 .filter(ticket -> Math.abs(ChronoUnit.MINUTES.between(ticket.getDateTime(), date)) < 1)
                 .filter(Ticket::isBooked)
@@ -48,7 +48,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getFreeTicketsForEventAndDate(Event event, LocalDateTime date) {
-        return ticketRepository.getAll().stream()
+        return ticketRepository.getTicketAll().stream()
                 .filter(ticket -> ticket.getEvent().equals(event))
                 .filter(ticket -> Math.abs(ChronoUnit.MINUTES.between(ticket.getDateTime(), date)) < 1)
                 .filter(ticket -> !ticket.isBooked())
@@ -57,17 +57,17 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void bookTicketWithId(Long ticketId) {
-        ticketRepository.bookTicketForUser(ticketRepository.getAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), 100L);
+        ticketRepository.bookTicketForUser(ticketRepository.getTicketAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), 100L);
     }
 
     @Override
     public void bookTicketWithIdForUser(Long ticketId, Long userId) {
-        ticketRepository.bookTicketForUser(ticketRepository.getAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), userId);
+        ticketRepository.bookTicketForUser(ticketRepository.getTicketAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), userId);
     }
 
     @Override
     public void unbookTicketWithId(Long ticketId) {
-        ticketRepository.unbookTicketForUser(ticketRepository.getAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), 100L);
+        ticketRepository.unbookTicketForUser(ticketRepository.getTicketAll().stream().filter(it ->ticketId.equals(it.getId())).findFirst().get(), 100L);
     }
     @Override
     public void buyTicket(Long ticketId){

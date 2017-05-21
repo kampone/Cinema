@@ -1,11 +1,6 @@
 package com.epam.cinema.model;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;

@@ -13,6 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/cinema/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/united/bootstrap.min.css"/>
 
     <!-- Custom CSS -->
     <link href="/cinema/css/shop-homepage.css" rel="stylesheet"/>
@@ -29,7 +30,7 @@
 
 <body><!-- jQuery -->
 <div th:with="userId=${session.get('userId')}"/>
-<script src="/cinema/js/jquery.js"></script>
+
 <script src="/cinema/js/cinema-hole.js"></script>
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -53,18 +54,22 @@
     </div>
     <div th:text="${userId}"/>
     <div class='cinemaHall zal1'></div>
+    <h2>
+        <div class='baseprice'></div>
+    </h2>
     <div th:each="ticket : ${tickets}">
         <script th:inline="javascript">
             /*<![CDATA[*/
 
             var isBooked = [[${ticket.isBooked()}]];
+            var eventId = [[${event.getId()}]];
             var isVip = [[${ticket.seat.isVip()}]];
             var row = [[${ticket.seat.getRow()}]];
             var place = [[${ticket.seat.getPlace()}]];
             var ticketId = [[${ticket.getId()}]];
             var userId = [[${session.get('userId')}]]
 
-            drawSeat(row, place, isVip, isBooked, ticketId, userId);
+            drawSeat(row, place, isVip, isBooked, ticketId, userId, eventId);
 
             /*]]>*/
         </script>
@@ -77,6 +82,7 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="/cinema/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

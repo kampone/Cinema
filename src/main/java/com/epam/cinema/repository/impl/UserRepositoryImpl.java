@@ -33,22 +33,22 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void save(User user) {
-        log.info("Saving user");
+    public void saveUser(User user) {
+        log.debug("Saving user:" + user.getName());
         long id = userIncrementer.nextLongValue();
         jdbcTemplate.update(INSERT_USER, id, user.getName(), user.getEmail(), Date.valueOf(user.getBirthDate()), user.getPassword());
     }
 
     @Override
-    public void remove(User user) {
-        log.info("Removing user");
+    public void removeUser(User user) {
+        log.debug("Removing user : " + user.getId());
 
         jdbcTemplate.update(DELETE_USER, user.getId());
     }
 
     @Override
-    public User getById(Long id) {
-        log.info("Retrieving user by id");
+    public User getUserById(Long id) {
+        log.debug("Retrieving user by id: " + id);
 
 
         try {
@@ -66,8 +66,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getByEmail(String email) {
-        log.info("Retrieving user by email");
+    public User getUserByEmail(String email) {
+        log.debug("Retrieving user by email:" + email);
         try {
 
 
@@ -85,8 +85,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Set<User> getAll() {
-        log.info("Retrieving all users");
+    public Set<User> getAllUser() {
+        log.debug("Retrieving all users");
 
         List<User> users = jdbcTemplate.query(GET_ALL,
                 ((resultSet, i) -> new User(

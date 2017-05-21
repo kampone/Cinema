@@ -22,7 +22,7 @@ public class DiscountCounterRepositoryImpl implements DiscountCounterRepository 
     }
 
     @Override
-    public DiscountCounter getCounterByUserId(Long userId) {
+    public DiscountCounter getDiscountCounterByUserId(Long userId) {
         try {
             return jdbcTemplate.queryForObject(GET_BY_USER_ID, new Object[]{userId}, (resultSet, i) ->
                     new DiscountCounter(resultSet.getLong(1), resultSet.getLong(2), resultSet.getLong(3))
@@ -33,19 +33,19 @@ public class DiscountCounterRepositoryImpl implements DiscountCounterRepository 
     }
 
     @Override
-    public List<DiscountCounter> getAllCounters() {
+    public List<DiscountCounter> getAllDiscountCounters() {
         return jdbcTemplate.query(GET_ALL, (resultSet, i) ->
                 new DiscountCounter(resultSet.getLong(1), resultSet.getLong(2), resultSet.getLong(3))
         );
     }
 
     @Override
-    public void update(DiscountCounter counter) {
+    public void updateDiscountCounter(DiscountCounter counter) {
         jdbcTemplate.update(UPDATE_COUNTER, counter.getBirthdayStrategyCount(), counter.getTenTicketsStrategyCount(), counter.getUserId());
     }
 
     @Override
-    public void save(DiscountCounter counter) {
+    public void saveDiscountCounter(DiscountCounter counter) {
         jdbcTemplate.update(INSERT_COUNTER, counter.getUserId(), counter.getBirthdayStrategyCount(), counter.getTenTicketsStrategyCount());
     }
 }

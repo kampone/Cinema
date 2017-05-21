@@ -9,15 +9,15 @@ public interface AuditoriumRepository {
      * Return all auditoriums
      * @return All auditoriums
      */
-    List<Auditorium> getAll();
+    List<Auditorium> getAllAuditoriums();
 
-    Auditorium findById(Long id);
+    Auditorium findAuditoriumById(Long id);
 
-    Auditorium findByName(String name);
+    Auditorium findAuditoriumByName(String name);
 
-    void save(Auditorium auditorium);
+    void saveAuditorium(Auditorium auditorium);
 
-    void remove(Auditorium auditorium);
+    void removeAuditorium(Auditorium auditorium);
 
-    void update(Auditorium auditorium);
+    void updateAuditorium(Auditorium auditorium);
 }

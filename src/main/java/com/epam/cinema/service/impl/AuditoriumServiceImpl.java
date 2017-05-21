@@ -16,11 +16,11 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Override
     public List<Auditorium> getAll() {
-        return auditoriumRepository.getAll();
+        return auditoriumRepository.getAllAuditoriums();
     }
 
     @Override
     public Auditorium getByName(String name) {
-        return auditoriumRepository.findByName(name);
+        return auditoriumRepository.findAuditoriumByName(name);
     }
 }
