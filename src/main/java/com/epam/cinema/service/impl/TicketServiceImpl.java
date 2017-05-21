@@ -4,6 +4,7 @@ package com.epam.cinema.service.impl;
 import com.epam.cinema.model.Event;
 import com.epam.cinema.model.Ticket;
 import com.epam.cinema.repository.TicketRepository;
+import com.epam.cinema.repository.UserTicketsRepository;
 import com.epam.cinema.service.TicketService;
 
 import java.time.LocalDateTime;
@@ -13,9 +14,11 @@ import java.util.stream.Collectors;
 
 public class TicketServiceImpl implements TicketService {
     private TicketRepository ticketRepository;
+    private UserTicketsRepository userTicketsRepository;
 
-    public TicketServiceImpl(TicketRepository ticketRepository) {
+    public TicketServiceImpl(TicketRepository ticketRepository, UserTicketsRepository userTicketsRepository) {
         this.ticketRepository = ticketRepository;
+        this.userTicketsRepository = userTicketsRepository;
     }
 
     public TicketRepository getTicketRepository() {
@@ -71,7 +74,9 @@ public class TicketServiceImpl implements TicketService {
     }
     @Override
     public void buyTicket(Long ticketId){
+        Ticket ticket = ticketRepository.getTicketAll().stream().filter(t -> t.getId().equals(ticketId)).findFirst().get();
         ticketRepository.buyTicket(ticketId);
+        userTicketsRepository.addUserTicket(ticket.getUser().getId(), ticket.getId());
     }
 
     @Override

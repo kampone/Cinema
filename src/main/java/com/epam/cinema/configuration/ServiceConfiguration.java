@@ -37,16 +37,17 @@ public class ServiceConfiguration {
     }
 
     @Bean
-    public TicketService ticketService(@Autowired TicketRepository repository){
-        TicketServiceImpl ticketService = new TicketServiceImpl(repository);
+    public TicketService ticketService(@Autowired TicketRepository repository, @Autowired UserTicketsRepository userTicketsRepository){
+        TicketServiceImpl ticketService = new TicketServiceImpl(repository, userTicketsRepository);
         return ticketService;
     }
 
     @Bean
-    public BookingService bookingService(@Autowired DiscountService discountService, @Autowired TicketService ticketService){
+    public BookingService bookingService(@Autowired DiscountService discountService, @Autowired TicketService ticketService, @Autowired UserTicketsRepository userTicketsRepository){
         BookingServiceImpl bookingService = new BookingServiceImpl();
         bookingService.setDiscountService(discountService);
         bookingService.setTicketService(ticketService);
+        bookingService.setUserTicketsRepository(userTicketsRepository);
         return bookingService;
     }
 }

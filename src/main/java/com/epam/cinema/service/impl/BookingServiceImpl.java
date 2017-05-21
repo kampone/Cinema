@@ -1,6 +1,7 @@
 package com.epam.cinema.service.impl;
 
 import com.epam.cinema.model.*;
+import com.epam.cinema.repository.UserTicketsRepository;
 import com.epam.cinema.service.BookingService;
 import com.epam.cinema.service.DiscountService;
 import com.epam.cinema.service.TicketService;
@@ -18,6 +19,8 @@ public class BookingServiceImpl implements BookingService {
 
     private TicketService ticketService;
 
+    private UserTicketsRepository userTicketsRepository;
+
     public DiscountService getDiscountService() {
         return discountService;
     }
@@ -34,10 +37,14 @@ public class BookingServiceImpl implements BookingService {
         this.ticketService = ticketService;
     }
 
+    public void setUserTicketsRepository(UserTicketsRepository userTicketsRepository) {
+        this.userTicketsRepository = userTicketsRepository;
+    }
+
     @Override
     public BigDecimal getTicketsPrice(Event event, LocalDateTime dateTime, User user, List<Seat> seats) {
         BigDecimal price = BigDecimal.ZERO;
-        Integer discount = discountService.getDiscount(user, event, dateTime, seats.size());
+        Integer discount = discountService.getDiscount(user, event, dateTime, userTicketsRepository.getUserTicketsIds().size());
         BigDecimal basePrice = event.getBasePrice();
         for (Seat seat : seats) {
             if (!seat.isVip()) {
