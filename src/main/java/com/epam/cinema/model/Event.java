@@ -1,15 +1,30 @@
 package com.epam.cinema.model;
 
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "EVENTS")
+@Access(AccessType.FIELD)
+@SequenceGenerator(name = "event_sequence", initialValue = 100, allocationSize = 100)
 public class Event {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_sequence")
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "base_price")
     private BigDecimal basePrice;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "rating_id")
     private Rating rating;
+    @Column(name = "description")
     private String description;
+    @Column(name = "picture_link")
     private String pictureLink;
+    @Column(name = "deleted_date")
     private String deletedDate;
 
     public Event() {

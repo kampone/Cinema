@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import javax.annotation.PostConstruct
+import javax.persistence.EntityManager
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.Month
 
 @Component
 class InitialParams {
+    @Autowired
+    EntityManager entityManager
 
     @Autowired
     UserRepository userRepository
@@ -30,6 +33,7 @@ class InitialParams {
 
 
     @PostConstruct
+
     void createFakeUsers() {
 
         User user1 = new User(
@@ -207,8 +211,9 @@ class InitialParams {
                 ]
         )
 
+        entityManager.persist(user1)
 
-        [user1, user2, user3, user4, user5]*.each {
+        [user2, user3, user4, user5]*.each {
             userRepository.saveUser it
         }
 

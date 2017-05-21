@@ -7,8 +7,8 @@ import com.epam.cinema.service.discount.DiscountStrategy;
 import java.time.LocalDateTime;
 
 public class MoreThanTenTicketsDiscountStrategy implements DiscountStrategy {
-    private static final int TICKETS_BORDER = 10;
-    public static final Integer DISCOUNT_SIZE = 15;
+    private static final int TICKETS_BORDER = 2;
+    public static final Integer DISCOUNT_SIZE = 50;
     private static final int WITHOUT_DISCOUNT = 0;
 
     @Override

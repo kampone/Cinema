@@ -7,8 +7,8 @@ import java.util.List;
 
 
 public class UserTicketsRepositoryImpl implements UserTicketsRepository {
-    private static final String INSERT_USER_TICKET = "INSERT INTO USER_TICKET (userId, ticketId) VALUES (?, ?)";
-    private static final String GET_TICKETS_ID = "SELECT ticketId FROM USER_TICKET user WHERE userId = ?";
+    private static final String INSERT_USER_TICKET = "INSERT INTO USER_TICKET (user_id, ticket_id) VALUES (?, ?)";
+    private static final String GET_TICKETS_ID = "SELECT ticket_id FROM USER_TICKET user WHERE user_id = ?";
 
     private JdbcTemplate jdbcTemplate;
 

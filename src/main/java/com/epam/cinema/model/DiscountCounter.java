@@ -1,9 +1,17 @@
 package com.epam.cinema.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "DISCOUNT_COUNTERS")
+@Access(AccessType.FIELD)
 public class DiscountCounter {
+    @Id
+    @Column(name = "user_id")
     private Long userId;
+    @Column(name = "birthday_strategy_count")
     private Long birthdayStrategyCount;
+    @Column(name = "ten_tickets_strategy_count")
     private Long tenTicketsStrategyCount;
 
     public DiscountCounter() {

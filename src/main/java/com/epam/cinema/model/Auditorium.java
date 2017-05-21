@@ -1,10 +1,20 @@
 package com.epam.cinema.model;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "AUDITORIUMS")
+@Access(AccessType.FIELD)
+@SequenceGenerator(name = "seat_sequence", initialValue = 100, allocationSize = 100)
 public class Auditorium {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seat_sequence")
     private Long id;
+    @Column(name = "name")
     private String name;
+    @OneToMany(mappedBy = "auditorium")
     private List<Seat> seats;
 
     public Auditorium() {

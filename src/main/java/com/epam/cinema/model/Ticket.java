@@ -1,13 +1,28 @@
 package com.epam.cinema.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
+@Entity
+@Table(name = "TICKETS")
+@Access(AccessType.FIELD)
+@SequenceGenerator(name = "ticket_sequence", initialValue = 100, allocationSize = 100)
 public class Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_sequence")
+    @Column(name = "id")
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "event_id")
     private Event event;
+    @Column(name = "datetime")
     private LocalDateTime dateTime;
+    @OneToOne
     private Seat seat;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "booked")
     private boolean isBooked;
 
     public Ticket() {

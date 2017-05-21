@@ -1,10 +1,15 @@
 package com.epam.cinema.model;
 
 
-import java.util.List;
-
+import javax.persistence.*;
+@Entity
+@Table(name = "USER_TICKET")
+@Access(AccessType.FIELD)
 public class UserTickets {
+    @Column(name = "user_id")
     private Long userId;
-    private List<Long> ticketIds;
+    @Id
+    @Column(name = "ticket_id")
+    private Long ticketId;
 
 }

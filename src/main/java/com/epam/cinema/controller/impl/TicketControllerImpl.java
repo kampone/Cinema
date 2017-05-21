@@ -68,7 +68,8 @@ public class TicketControllerImpl {
     @RequestMapping(value = "tickets/{id}/buy", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('admin')")
     public String buyTicket(@PathVariable Long id, Model model, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
         ticketService.buyTicket(id);
-        return "redirect:/";
+        return "redirect:/users/" + userId;
     }
 }

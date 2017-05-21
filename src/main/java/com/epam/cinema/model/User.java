@@ -3,17 +3,31 @@ package com.epam.cinema.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Table(name = "USERS")
+@Access(AccessType.FIELD)
+@SequenceGenerator(name = "user_sequence", initialValue = 100, allocationSize = 100)
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @Column(name = "id")
     private Long id;
+    @Column(name = "username")
     private String name;
+    @Column(name = "email")
     private String email;
+    @Column(name = "birthday")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
+    @OneToMany
     private List<Ticket> tickets;
+    @Column(name = "password")
     private String password;
+    @Column(name = "enabled")
     private Boolean enabled;
 
     public User() {

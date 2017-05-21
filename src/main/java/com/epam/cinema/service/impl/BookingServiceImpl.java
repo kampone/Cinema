@@ -44,7 +44,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public BigDecimal getTicketsPrice(Event event, LocalDateTime dateTime, User user, List<Seat> seats) {
         BigDecimal price = BigDecimal.ZERO;
-        Integer discount = discountService.getDiscount(user, event, dateTime, userTicketsRepository.getUserTicketsIds().size());
+        Integer discount = discountService.getDiscount(user, event, dateTime, userTicketsRepository.getUserTicketsIds(user.getId()).size());
         BigDecimal basePrice = event.getBasePrice();
         for (Seat seat : seats) {
             if (!seat.isVip()) {
@@ -56,7 +56,7 @@ public class BookingServiceImpl implements BookingService {
         if (event.getRating().equals(Rating.HIGH)) {
             price = price.multiply(new BigDecimal(1.2));
         }
-        price = discount == BigDecimal.ZERO.intValue() ? price : price.multiply(new BigDecimal(discount / ONE_HUNDRED_PERCENTS));
+        price = discount == BigDecimal.ZERO.intValue() ? price : price.multiply(new BigDecimal((double) discount / ONE_HUNDRED_PERCENTS));
         return price.round(new MathContext(2, RoundingMode.CEILING));
     }
 
