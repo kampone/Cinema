@@ -3,15 +3,16 @@ package com.epam.cinema.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "EVENTS")
 @Access(AccessType.FIELD)
 @SequenceGenerator(name = "event_sequence", initialValue = 100, allocationSize = 100)
 @NamedQueries({
-        @NamedQuery(name = "findAllEvents", query = "select e from Event e"),
-        @NamedQuery(name = "findEventWithId", query = "select e from Event e where e.id = :id"),
-        @NamedQuery(name = "findAllEventWithName", query = "select e from Event e where e.name = :name")
+        @NamedQuery(name = "findAllEvents", query = "select e from Event e where e.deletedDate = null"),
+        @NamedQuery(name = "findEventWithId", query = "select e from Event e where e.id = :id and e.deletedDate = null"),
+        @NamedQuery(name = "findAllEventWithName", query = "select e from Event e where e.name = :name and e.deletedDate = null")
 })
 public class Event {
     @Id
@@ -30,12 +31,12 @@ public class Event {
     @Column(name = "picture_link")
     private String pictureLink;
     @Column(name = "deleted_date")
-    private String deletedDate;
+    private Timestamp deletedDate;
 
     public Event() {
     }
 
-    public Event(Long id, String name, BigDecimal basePrice, Rating rating, String description, String pictureLink, String deletedDate) {
+    public Event(Long id, String name, BigDecimal basePrice, Rating rating, String description, String pictureLink, Timestamp deletedDate) {
         this.id = id;
         this.name = name;
         this.basePrice = basePrice;
@@ -45,11 +46,11 @@ public class Event {
         this.deletedDate = deletedDate;
     }
 
-    public String getDeletedDate() {
+    public Timestamp getDeletedDate() {
         return deletedDate;
     }
 
-    public void setDeletedDate(String deletedDate) {
+    public void setDeletedDate(Timestamp deletedDate) {
         this.deletedDate = deletedDate;
     }
 

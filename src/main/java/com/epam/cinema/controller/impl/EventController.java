@@ -65,7 +65,7 @@ public class EventController {
     public String addEvent(Event event, Model model) {
         model.addAttribute("event", event);
         eventService.save(event);
-        initialParams.createTicketsForAuditoriumAndEvent(auditoriumService.getByName("red"), event, LocalDateTime.of(2017, Month.AUGUST, 26, 12, 30));
+        initialParams.createTicketsForAuditoriumAndEvent(auditoriumService.getByName("green"), event, LocalDateTime.of(2017, Month.AUGUST, 26, 12, 30));
         return "redirect:/";
     }
 

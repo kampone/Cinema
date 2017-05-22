@@ -42,7 +42,7 @@ public interface TicketService {
 
     void bookTicketWithIdForUser(Long ticketId, Long userId);
 
-    void unbookTicketWithId(Long id);
+    void unbookTicketWithId(Long ticketId, Long userId);
 
     void buyTicket(Long ticketId);
 

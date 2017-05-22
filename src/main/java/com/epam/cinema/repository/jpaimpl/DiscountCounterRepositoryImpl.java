@@ -19,7 +19,7 @@ public class DiscountCounterRepositoryImpl implements DiscountCounterRepository 
     private EntityManager entityManager;
     @Override
     public DiscountCounter getDiscountCounterByUserId(Long userId) {
-        return null;
+        return entityManager.find(DiscountCounter.class, userId);
     }
 
     @Override

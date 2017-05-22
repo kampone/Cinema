@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Repository
@@ -25,13 +27,13 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public void removeEvent(Event event) {
-        entityManager.remove(event);
+        event.setDeletedDate(Timestamp.from(Instant.now()));
     }
 
     @Override
     public void removeEventWithId(Long eventId) {
         Event event = entityManager.find(Event.class, eventId);
-        entityManager.remove(event);
+        removeEvent(event);
     }
 
     @Override

@@ -65,7 +65,7 @@ public class EventRepositoryImpl implements EventRepository {
                         Rating.values()[resultSet.getInt(4)],
                         resultSet.getString(5),
                         resultSet.getString(6),
-                        resultSet.getString(7))
+                        resultSet.getTimestamp(7))
         );
     }
 
@@ -81,7 +81,7 @@ public class EventRepositoryImpl implements EventRepository {
                         Rating.values()[resultSet.getInt(4)],
                         resultSet.getString(5),
                         resultSet.getString(6),
-                        resultSet.getString(7))
+                        resultSet.getTimestamp(7))
         );
     }
 
@@ -96,7 +96,7 @@ public class EventRepositoryImpl implements EventRepository {
                         Rating.values()[resultSet.getInt(4)],
                         resultSet.getString(5),
                         resultSet.getString(6),
-                        resultSet.getString(7))
+                        resultSet.getTimestamp(7))
         ).stream().filter(it -> it.getDeletedDate() == null).collect(Collectors.toList());
     }
 }

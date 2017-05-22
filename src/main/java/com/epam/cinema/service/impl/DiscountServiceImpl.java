@@ -1,6 +1,5 @@
 package com.epam.cinema.service.impl;
 
-import com.epam.cinema.aspect.CountDiscountForUser;
 import com.epam.cinema.model.Event;
 import com.epam.cinema.model.User;
 import com.epam.cinema.service.DiscountService;
@@ -22,7 +21,6 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    @CountDiscountForUser
     public Integer getDiscount(User user, Event event, LocalDateTime dateTime, Integer numberOfTickets) {
         if (strategies!= null){
             return strategies.stream().mapToInt(it -> it.getDiscount(user, event, dateTime, numberOfTickets)).max().getAsInt();
