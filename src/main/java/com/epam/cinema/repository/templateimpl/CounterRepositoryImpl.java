@@ -1,12 +1,10 @@
-package com.epam.cinema.repository.impl;
+package com.epam.cinema.repository.templateimpl;
 
 
 import com.epam.cinema.model.Counter;
 import com.epam.cinema.repository.CounterRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.util.List;
 
 public class CounterRepositoryImpl implements CounterRepository {
 
@@ -30,13 +28,6 @@ public class CounterRepositoryImpl implements CounterRepository {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
-    }
-
-    @Override
-    public List<Counter> getAllCounters() {
-        return jdbcTemplate.query(GET_ALL, (resultSet, i) ->
-                new Counter(resultSet.getString(1), resultSet.getLong(2), resultSet.getLong(3))
-        );
     }
 
     @Override

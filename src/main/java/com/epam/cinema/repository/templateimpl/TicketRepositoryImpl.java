@@ -1,4 +1,4 @@
-package com.epam.cinema.repository.impl;
+package com.epam.cinema.repository.templateimpl;
 
 import com.epam.cinema.aspect.CountBookingTickets;
 import com.epam.cinema.model.Ticket;
@@ -53,7 +53,7 @@ public class TicketRepositoryImpl implements TicketRepository {
     }
 
     @Override
-    public List<Ticket> getTicketAll() {
+    public List<Ticket> getAllTickets() {
         log.debug("Retrieving all tickets");
         return jdbcTemplate.query(GET_ALL, (resultSet, i) -> new Ticket(
                 resultSet.getLong(1),
@@ -70,20 +70,6 @@ public class TicketRepositoryImpl implements TicketRepository {
         log.debug("Retrieving all tickets for user : " + userId);
 
         return jdbcTemplate.query(GET_BY_USER_ID, new Object[]{userId}, (resultSet, i) -> new Ticket(
-                resultSet.getLong(1),
-                eventRepository.getEventById(resultSet.getLong(2)),
-                resultSet.getTimestamp(3).toLocalDateTime(),
-                seatRepository.getSeatById(resultSet.getLong(4)),
-                userRepository.getUserById(resultSet.getLong(5)),
-                resultSet.getBoolean(6)
-        ));
-    }
-
-    @Override
-    public List<Ticket> getTicketForEvent(Long eventId) {
-        log.debug("Retrieving all tickets for event : " + eventId);
-
-        return jdbcTemplate.query(GET_BY_EVENT_ID, new Object[]{eventId}, (resultSet, i) -> new Ticket(
                 resultSet.getLong(1),
                 eventRepository.getEventById(resultSet.getLong(2)),
                 resultSet.getTimestamp(3).toLocalDateTime(),
@@ -112,13 +98,6 @@ public class TicketRepositoryImpl implements TicketRepository {
     @Override
     public void buyTicket(Long ticketId) {
         jdbcTemplate.update(BUY_TICKET, ticketId);
-    }
-
-    @Override
-    public void declineBookingTicket(Ticket ticket) {
-        log.debug("Decline ticket booking" + ticket.getId());
-
-        jdbcTemplate.update(DECLINE_TICKET, ticket.getId());
     }
 
     @Override

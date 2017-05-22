@@ -1,7 +1,7 @@
 package com.epam.cinema.configuration;
 
 import com.epam.cinema.repository.*;
-import com.epam.cinema.repository.impl.*;
+import com.epam.cinema.repository.templateimpl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

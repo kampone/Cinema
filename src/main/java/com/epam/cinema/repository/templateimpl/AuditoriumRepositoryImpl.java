@@ -1,4 +1,4 @@
-package com.epam.cinema.repository.impl;
+package com.epam.cinema.repository.templateimpl;
 
 
 import com.epam.cinema.model.Auditorium;
@@ -57,19 +57,6 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
     }
 
     @Override
-    public Auditorium findAuditoriumById(Long id) {
-        log.debug("Retrieving auditorium by id: " + id);
-
-        return jdbcTemplate.queryForObject(GET_BY_ID_QUERY, new Object[]{id}, ((resultSet, i) ->
-                new Auditorium(
-                        resultSet.getLong(1),
-                        resultSet.getString(2),
-                        seatRepository.getSeatsByAuditoriumId(resultSet.getLong(1))
-                ))
-        );
-    }
-
-    @Override
     public Auditorium findAuditoriumByName(String name) {
         log.debug("Retrieving auditorium by name: " + name);
 
@@ -91,20 +78,5 @@ public class AuditoriumRepositoryImpl implements AuditoriumRepository {
         auditorium.setId(id);
         jdbcTemplate.update(INSERT_AUDITORIUM, id, auditorium.getName());
         auditorium.getSeats().forEach(seat -> seatRepository.saveSeatToAuditorium(seat, auditorium.getId()));
-    }
-
-    @Override
-    public void removeAuditorium(Auditorium auditorium) {
-        log.debug("Removing  auditorium: " + auditorium.getId());
-
-        seatRepository.removeSeatsFromAuditorium(auditorium.getId());
-        jdbcTemplate.update(DELETE_AUDITORIUM, auditorium.getId());
-    }
-
-    @Override
-    public void updateAuditorium(Auditorium auditorium) {
-        log.debug("Updating auditorium wirh id: " + auditorium.getId());
-
-        jdbcTemplate.update(UPDATE_AUDITORIUM, auditorium.getName(), auditorium.getId());
     }
 }

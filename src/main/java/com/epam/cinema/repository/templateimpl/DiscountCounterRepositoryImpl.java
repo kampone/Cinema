@@ -1,11 +1,9 @@
-package com.epam.cinema.repository.impl;
+package com.epam.cinema.repository.templateimpl;
 
 import com.epam.cinema.model.DiscountCounter;
 import com.epam.cinema.repository.DiscountCounterRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.util.List;
 
 
 public class DiscountCounterRepositoryImpl implements DiscountCounterRepository {
@@ -30,13 +28,6 @@ public class DiscountCounterRepositoryImpl implements DiscountCounterRepository 
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
-    }
-
-    @Override
-    public List<DiscountCounter> getAllDiscountCounters() {
-        return jdbcTemplate.query(GET_ALL, (resultSet, i) ->
-                new DiscountCounter(resultSet.getLong(1), resultSet.getLong(2), resultSet.getLong(3))
-        );
     }
 
     @Override

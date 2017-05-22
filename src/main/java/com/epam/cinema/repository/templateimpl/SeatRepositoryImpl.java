@@ -1,4 +1,4 @@
-package com.epam.cinema.repository.impl;
+package com.epam.cinema.repository.templateimpl;
 
 import com.epam.cinema.model.Seat;
 import com.epam.cinema.repository.SeatRepository;
@@ -47,7 +47,8 @@ public class SeatRepositoryImpl implements SeatRepository {
                         resultSet.getLong(1),
                         resultSet.getInt(2),
                         resultSet.getInt(3),
-                        resultSet.getBoolean(4)
+                        resultSet.getBoolean(4),
+                        null
                 ))
         );
     }
@@ -62,7 +63,8 @@ public class SeatRepositoryImpl implements SeatRepository {
                         resultSet.getLong(1),
                         resultSet.getInt(2),
                         resultSet.getInt(3),
-                        resultSet.getBoolean(4)
+                        resultSet.getBoolean(4),
+                        null
                 ))
         );
     }

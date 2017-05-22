@@ -1,9 +1,6 @@
 package com.epam.cinema.controller.impl;
 
-import com.epam.cinema.model.Auditorium;
 import com.epam.cinema.model.Event;
-import com.epam.cinema.model.Ticket;
-import com.epam.cinema.repository.TicketRepository;
 import com.epam.cinema.service.AuditoriumService;
 import com.epam.cinema.service.EventService;
 import com.epam.cinema.service.UserService;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -30,7 +28,7 @@ public class EventController {
     private UserService userService;
 
     @Autowired
-    private TicketRepository ticketRepository;
+    private EntityManager entityManager;
 
     @Autowired
     private AuditoriumService auditoriumService;

@@ -1,4 +1,4 @@
-package com.epam.cinema.repository.impl;
+package com.epam.cinema.repository.templateimpl;
 
 import com.epam.cinema.model.User;
 import com.epam.cinema.repository.UserRepository;

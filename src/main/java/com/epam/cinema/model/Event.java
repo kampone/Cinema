@@ -8,6 +8,11 @@ import java.math.BigDecimal;
 @Table(name = "EVENTS")
 @Access(AccessType.FIELD)
 @SequenceGenerator(name = "event_sequence", initialValue = 100, allocationSize = 100)
+@NamedQueries({
+        @NamedQuery(name = "findAllEvents", query = "select e from Event e"),
+        @NamedQuery(name = "findEventWithId", query = "select e from Event e where e.id = :id"),
+        @NamedQuery(name = "findAllEventWithName", query = "select e from Event e where e.name = :name")
+})
 public class Event {
     @Id
     @Column(name = "id")

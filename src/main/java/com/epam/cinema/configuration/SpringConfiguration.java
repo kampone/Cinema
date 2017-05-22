@@ -17,7 +17,7 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.epam.cinema.configuration", "com.epam.cinema.util", "com.epam.cinema.controller"})
+@ComponentScan({"com.epam.cinema.configuration", "com.epam.cinema.util", "com.epam.cinema.controller", "com.epam.cinema.repository.jpaimpl"})
 public class SpringConfiguration {
     @Value("${tomcat.ajp.port}")
     int ajpPort;

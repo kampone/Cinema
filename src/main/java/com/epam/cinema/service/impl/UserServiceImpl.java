@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getById(Long id) {
         User user = userRepository.getUserById(id);
-        user.setTickets(ticketService.getTicketsForUser(id));
         return user;
     }
 

@@ -37,7 +37,7 @@ public class Main {
         eventRepository.getEventByName("Harry Potter");
         eventRepository.getEventByName("Harry Potter");
         User user = userRepository.getUserByEmail("Dzmitry@gmail.com");
-        List<Ticket> tickets = ticketRepository.getTicketAll();
+        List<Ticket> tickets = ticketRepository.getAllTickets();
         discountService.getDiscount(user, event, LocalDateTime.now().plusDays(2),12);
         discountService.getDiscount(user, event, LocalDateTime.now().plusDays(2),1);
 

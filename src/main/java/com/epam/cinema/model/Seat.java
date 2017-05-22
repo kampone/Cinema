@@ -24,11 +24,12 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(Long id, Integer row, Integer place, boolean isVip) {
+    public Seat(Long id, Integer row, Integer place, boolean isVip, Auditorium auditorium) {
         this.id = id;
         this.row = row;
         this.place = place;
         this.isVip = isVip;
+        this.auditorium = auditorium;
     }
 
     public Auditorium getAuditorium() {

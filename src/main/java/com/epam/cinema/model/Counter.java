@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "DISCOUNT_COUNTERS")
 @Access(AccessType.FIELD)
+@NamedQueries({
+        @NamedQuery(name = "findCounterByEventName", query = "select c from Counter c where c.eventName = :eventName")
+})
 public class Counter {
     @Id
     @Column(name = "event_name")

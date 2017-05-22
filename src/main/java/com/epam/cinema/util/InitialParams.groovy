@@ -112,104 +112,109 @@ class InitialParams {
 
         Auditorium green = new Auditorium(
                 name: "green",
-                seats: [
-                        new Seat(row: 1, place: 1, isVip: true),
-                        new Seat(row: 1, place: 2, isVip: true),
-                        new Seat(row: 1, place: 3, isVip: true),
-                        new Seat(row: 1, place: 4, isVip: true),
-                        new Seat(row: 1, place: 5, isVip: true),
-
-                        new Seat(row: 2, place: 1, isVip: true),
-                        new Seat(row: 2, place: 2, isVip: true),
-                        new Seat(row: 2, place: 3, isVip: true),
-                        new Seat(row: 2, place: 4, isVip: true),
-                        new Seat(row: 2, place: 5, isVip: true),
-
-                        new Seat(row: 3, place: 1, isVip: false),
-                        new Seat(row: 3, place: 2, isVip: false),
-                        new Seat(row: 3, place: 3, isVip: false),
-                        new Seat(row: 3, place: 4, isVip: false),
-                        new Seat(row: 3, place: 5, isVip: false),
-
-                        new Seat(row: 4, place: 1, isVip: false),
-                        new Seat(row: 4, place: 2, isVip: false),
-                        new Seat(row: 4, place: 3, isVip: false),
-                        new Seat(row: 4, place: 4, isVip: false),
-                        new Seat(row: 4, place: 5, isVip: false),
-
-                        new Seat(row: 5, place: 1, isVip: false),
-                        new Seat(row: 5, place: 2, isVip: false),
-                        new Seat(row: 5, place: 3, isVip: false),
-                        new Seat(row: 5, place: 4, isVip: false),
-                        new Seat(row: 5, place: 5, isVip: false),
-
-                        new Seat(row: 6, place: 1, isVip: false),
-                        new Seat(row: 6, place: 2, isVip: false),
-                        new Seat(row: 6, place: 3, isVip: false),
-                        new Seat(row: 6, place: 4, isVip: false),
-                        new Seat(row: 6, place: 5, isVip: false)
-                ]
         )
 
+        def seats = [
+                new Seat(row: 1, place: 1, isVip: true),
+                new Seat(row: 1, place: 2, isVip: true),
+                new Seat(row: 1, place: 3, isVip: true),
+                new Seat(row: 1, place: 4, isVip: true),
+                new Seat(row: 1, place: 5, isVip: true),
+
+                new Seat(row: 2, place: 1, isVip: true),
+                new Seat(row: 2, place: 2, isVip: true),
+                new Seat(row: 2, place: 3, isVip: true),
+                new Seat(row: 2, place: 4, isVip: true),
+                new Seat(row: 2, place: 5, isVip: true),
+
+                new Seat(row: 3, place: 1, isVip: false),
+                new Seat(row: 3, place: 2, isVip: false),
+                new Seat(row: 3, place: 3, isVip: false),
+                new Seat(row: 3, place: 4, isVip: false),
+                new Seat(row: 3, place: 5, isVip: false),
+
+                new Seat(row: 4, place: 1, isVip: false),
+                new Seat(row: 4, place: 2, isVip: false),
+                new Seat(row: 4, place: 3, isVip: false),
+                new Seat(row: 4, place: 4, isVip: false),
+                new Seat(row: 4, place: 5, isVip: false),
+
+                new Seat(row: 5, place: 1, isVip: false),
+                new Seat(row: 5, place: 2, isVip: false),
+                new Seat(row: 5, place: 3, isVip: false),
+                new Seat(row: 5, place: 4, isVip: false),
+                new Seat(row: 5, place: 5, isVip: false),
+
+                new Seat(row: 6, place: 1, isVip: false),
+                new Seat(row: 6, place: 2, isVip: false),
+                new Seat(row: 6, place: 3, isVip: false),
+                new Seat(row: 6, place: 4, isVip: false),
+                new Seat(row: 6, place: 5, isVip: false)
+        ]
+        seats.each {
+            it.auditorium = green
+        }
 
         Auditorium red = new Auditorium(
                 name: "red",
-                seats: [
-                        new Seat(row: 1, place: 1, isVip: true),
-                        new Seat(row: 1, place: 2, isVip: true),
-                        new Seat(row: 1, place: 3, isVip: true),
-                        new Seat(row: 1, place: 4, isVip: true),
-                        new Seat(row: 1, place: 5, isVip: true),
-                        new Seat(row: 1, place: 6, isVip: true),
-                        new Seat(row: 1, place: 7, isVip: true),
-                        new Seat(row: 1, place: 8, isVip: true),
 
-                        new Seat(row: 2, place: 1, isVip: false),
-                        new Seat(row: 2, place: 2, isVip: false),
-                        new Seat(row: 2, place: 3, isVip: false),
-                        new Seat(row: 2, place: 4, isVip: false),
-                        new Seat(row: 2, place: 5, isVip: false),
-                        new Seat(row: 2, place: 6, isVip: false),
-                        new Seat(row: 2, place: 7, isVip: false),
-                        new Seat(row: 2, place: 8, isVip: false),
-
-                        new Seat(row: 3, place: 1, isVip: false),
-                        new Seat(row: 3, place: 2, isVip: false),
-                        new Seat(row: 3, place: 3, isVip: false),
-                        new Seat(row: 3, place: 4, isVip: false),
-                        new Seat(row: 3, place: 5, isVip: false),
-                        new Seat(row: 3, place: 6, isVip: false),
-                        new Seat(row: 3, place: 7, isVip: false),
-                        new Seat(row: 3, place: 8, isVip: false),
-
-                        new Seat(row: 4, place: 1, isVip: false),
-                        new Seat(row: 4, place: 2, isVip: false),
-                        new Seat(row: 4, place: 3, isVip: false),
-                        new Seat(row: 4, place: 4, isVip: false),
-                        new Seat(row: 4, place: 5, isVip: false),
-                        new Seat(row: 4, place: 6, isVip: false),
-                        new Seat(row: 4, place: 7, isVip: false),
-                        new Seat(row: 4, place: 8, isVip: false),
-
-                        new Seat(row: 5, place: 1, isVip: false),
-                        new Seat(row: 5, place: 2, isVip: false),
-                        new Seat(row: 5, place: 3, isVip: false),
-                        new Seat(row: 5, place: 4, isVip: false),
-                        new Seat(row: 5, place: 5, isVip: false),
-                        new Seat(row: 5, place: 6, isVip: false),
-                        new Seat(row: 5, place: 7, isVip: false),
-                        new Seat(row: 5, place: 8, isVip: false),
-
-                        new Seat(row: 6, place: 1, isVip: false),
-                        new Seat(row: 6, place: 2, isVip: false),
-                        new Seat(row: 6, place: 3, isVip: false),
-                        new Seat(row: 6, place: 4, isVip: false),
-                        new Seat(row: 6, place: 5, isVip: false),
-                        new Seat(row: 6, place: 6, isVip: false),
-                        new Seat(row: 6, place: 7, isVip: false),
-                        new Seat(row: 6, place: 8, isVip: false)
-                ]
         )
+
+        red.seats = [
+                new Seat(row: 1, place: 1, isVip: true, auditorium: red),
+                new Seat(row: 1, place: 2, isVip: true, auditorium: red),
+                new Seat(row: 1, place: 3, isVip: true, auditorium: red),
+                new Seat(row: 1, place: 4, isVip: true, auditorium: red),
+                new Seat(row: 1, place: 5, isVip: true, auditorium: red),
+                new Seat(row: 1, place: 6, isVip: true, auditorium: red),
+                new Seat(row: 1, place: 7, isVip: true, auditorium: red),
+                new Seat(row: 1, place: 8, isVip: true, auditorium: red),
+
+                new Seat(row: 2, place: 1, isVip: false, auditorium: red),
+                new Seat(row: 2, place: 2, isVip: false, auditorium: red),
+                new Seat(row: 2, place: 3, isVip: false, auditorium: red),
+                new Seat(row: 2, place: 4, isVip: false, auditorium: red),
+                new Seat(row: 2, place: 5, isVip: false, auditorium: red),
+                new Seat(row: 2, place: 6, isVip: false, auditorium: red),
+                new Seat(row: 2, place: 7, isVip: false, auditorium: red),
+                new Seat(row: 2, place: 8, isVip: false, auditorium: red),
+
+                new Seat(row: 3, place: 1, isVip: false, auditorium: red),
+                new Seat(row: 3, place: 2, isVip: false, auditorium: red),
+                new Seat(row: 3, place: 3, isVip: false, auditorium: red),
+                new Seat(row: 3, place: 4, isVip: false, auditorium: red),
+                new Seat(row: 3, place: 5, isVip: false, auditorium: red),
+                new Seat(row: 3, place: 6, isVip: false, auditorium: red),
+                new Seat(row: 3, place: 7, isVip: false, auditorium: red),
+                new Seat(row: 3, place: 8, isVip: false, auditorium: red),
+
+                new Seat(row: 4, place: 1, isVip: false, auditorium: red),
+                new Seat(row: 4, place: 2, isVip: false, auditorium: red),
+                new Seat(row: 4, place: 3, isVip: false, auditorium: red),
+                new Seat(row: 4, place: 4, isVip: false, auditorium: red),
+                new Seat(row: 4, place: 5, isVip: false, auditorium: red),
+                new Seat(row: 4, place: 6, isVip: false, auditorium: red),
+                new Seat(row: 4, place: 7, isVip: false, auditorium: red),
+                new Seat(row: 4, place: 8, isVip: false, auditorium: red),
+
+                new Seat(row: 5, place: 1, isVip: false, auditorium: red),
+                new Seat(row: 5, place: 2, isVip: false, auditorium: red),
+                new Seat(row: 5, place: 3, isVip: false, auditorium: red),
+                new Seat(row: 5, place: 4, isVip: false, auditorium: red),
+                new Seat(row: 5, place: 5, isVip: false, auditorium: red),
+                new Seat(row: 5, place: 6, isVip: false, auditorium: red),
+                new Seat(row: 5, place: 7, isVip: false, auditorium: red),
+                new Seat(row: 5, place: 8, isVip: false, auditorium: red),
+
+                new Seat(row: 6, place: 1, isVip: false, auditorium: red),
+                new Seat(row: 6, place: 2, isVip: false, auditorium: red),
+                new Seat(row: 6, place: 3, isVip: false, auditorium: red),
+                new Seat(row: 6, place: 4, isVip: false, auditorium: red),
+                new Seat(row: 6, place: 5, isVip: false, auditorium: red),
+                new Seat(row: 6, place: 6, isVip: false, auditorium: red),
+                new Seat(row: 6, place: 7, isVip: false, auditorium: red),
+                new Seat(row: 6, place: 8, isVip: false, auditorium: red)
+        ]
 
         entityManager.persist(user1)
 

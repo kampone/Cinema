@@ -1,4 +1,4 @@
-package com.epam.cinema.repository.impl;
+package com.epam.cinema.repository.templateimpl;
 
 import com.epam.cinema.repository.UserTicketsRepository;
 import org.springframework.jdbc.core.JdbcTemplate;

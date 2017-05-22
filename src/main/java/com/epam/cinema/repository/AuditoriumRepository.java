@@ -11,13 +11,7 @@ public interface AuditoriumRepository {
      */
     List<Auditorium> getAllAuditoriums();
 
-    Auditorium findAuditoriumById(Long id);
-
     Auditorium findAuditoriumByName(String name);
 
     void saveAuditorium(Auditorium auditorium);
-
-    void removeAuditorium(Auditorium auditorium);
-
-    void updateAuditorium(Auditorium auditorium);
 }

@@ -18,7 +18,7 @@ public class Ticket {
     private LocalDateTime dateTime;
     @OneToOne
     private Seat seat;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

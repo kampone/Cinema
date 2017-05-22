@@ -11,6 +11,9 @@ import java.util.List;
 @Table(name = "USERS")
 @Access(AccessType.FIELD)
 @SequenceGenerator(name = "user_sequence", initialValue = 100, allocationSize = 100)
+@NamedQueries({
+        @NamedQuery(name = "findAllUsers", query = "select u from User u")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
@@ -23,7 +26,7 @@ public class User {
     @Column(name = "birthday")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Ticket> tickets;
     @Column(name = "password")
     private String password;
