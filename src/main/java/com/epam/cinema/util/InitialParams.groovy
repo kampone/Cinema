@@ -1,7 +1,11 @@
 package com.epam.cinema.util
 
 import com.epam.cinema.model.*
-import com.epam.cinema.repository.*
+import com.epam.cinema.repository.AuditoriumRepository
+import com.epam.cinema.repository.EventRepository
+import com.epam.cinema.repository.TicketRepository
+import com.epam.cinema.repository.UserRepository
+import net.sourceforge.cobertura.CoverageIgnore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -12,6 +16,7 @@ import java.time.LocalDateTime
 import java.time.Month
 
 @Component
+@CoverageIgnore
 class InitialParams {
     @Autowired
     EntityManager entityManager
@@ -28,12 +33,7 @@ class InitialParams {
     @Autowired
     AuditoriumRepository auditoriumRepository
 
-    @Autowired
-    SeatRepository seatRepository
-
-
     @PostConstruct
-
     void createFakeUsers() {
 
         User user1 = new User(
@@ -115,52 +115,49 @@ class InitialParams {
         )
 
         def seats = [
-                new Seat(row: 1, place: 1, isVip: true),
-                new Seat(row: 1, place: 2, isVip: true),
-                new Seat(row: 1, place: 3, isVip: true),
-                new Seat(row: 1, place: 4, isVip: true),
-                new Seat(row: 1, place: 5, isVip: true),
+                new Seat(row: 1, place: 1, isVip: true, auditorium: green),
+                new Seat(row: 1, place: 2, isVip: true, auditorium: green),
+                new Seat(row: 1, place: 3, isVip: true, auditorium: green),
+                new Seat(row: 1, place: 4, isVip: true, auditorium: green),
+                new Seat(row: 1, place: 5, isVip: true, auditorium: green),
 
-                new Seat(row: 2, place: 1, isVip: true),
-                new Seat(row: 2, place: 2, isVip: true),
-                new Seat(row: 2, place: 3, isVip: true),
-                new Seat(row: 2, place: 4, isVip: true),
-                new Seat(row: 2, place: 5, isVip: true),
+                new Seat(row: 2, place: 1, isVip: true, auditorium: green),
+                new Seat(row: 2, place: 2, isVip: true, auditorium: green),
+                new Seat(row: 2, place: 3, isVip: true, auditorium: green),
+                new Seat(row: 2, place: 4, isVip: true, auditorium: green),
+                new Seat(row: 2, place: 5, isVip: true, auditorium: green),
 
-                new Seat(row: 3, place: 1, isVip: false),
-                new Seat(row: 3, place: 2, isVip: false),
-                new Seat(row: 3, place: 3, isVip: false),
-                new Seat(row: 3, place: 4, isVip: false),
-                new Seat(row: 3, place: 5, isVip: false),
+                new Seat(row: 3, place: 1, isVip: false, auditorium: green),
+                new Seat(row: 3, place: 2, isVip: false, auditorium: green),
+                new Seat(row: 3, place: 3, isVip: false, auditorium: green),
+                new Seat(row: 3, place: 4, isVip: false, auditorium: green),
+                new Seat(row: 3, place: 5, isVip: false, auditorium: green),
 
-                new Seat(row: 4, place: 1, isVip: false),
-                new Seat(row: 4, place: 2, isVip: false),
-                new Seat(row: 4, place: 3, isVip: false),
-                new Seat(row: 4, place: 4, isVip: false),
-                new Seat(row: 4, place: 5, isVip: false),
+                new Seat(row: 4, place: 1, isVip: false, auditorium: green),
+                new Seat(row: 4, place: 2, isVip: false, auditorium: green),
+                new Seat(row: 4, place: 3, isVip: false, auditorium: green),
+                new Seat(row: 4, place: 4, isVip: false, auditorium: green),
+                new Seat(row: 4, place: 5, isVip: false, auditorium: green),
 
-                new Seat(row: 5, place: 1, isVip: false),
-                new Seat(row: 5, place: 2, isVip: false),
-                new Seat(row: 5, place: 3, isVip: false),
-                new Seat(row: 5, place: 4, isVip: false),
-                new Seat(row: 5, place: 5, isVip: false),
+                new Seat(row: 5, place: 1, isVip: false, auditorium: green),
+                new Seat(row: 5, place: 2, isVip: false, auditorium: green),
+                new Seat(row: 5, place: 3, isVip: false, auditorium: green),
+                new Seat(row: 5, place: 4, isVip: false, auditorium: green),
+                new Seat(row: 5, place: 5, isVip: false, auditorium: green),
 
-                new Seat(row: 6, place: 1, isVip: false),
-                new Seat(row: 6, place: 2, isVip: false),
-                new Seat(row: 6, place: 3, isVip: false),
-                new Seat(row: 6, place: 4, isVip: false),
-                new Seat(row: 6, place: 5, isVip: false)
+                new Seat(row: 6, place: 1, isVip: false, auditorium: green),
+                new Seat(row: 6, place: 2, isVip: false, auditorium: green),
+                new Seat(row: 6, place: 3, isVip: false, auditorium: green),
+                new Seat(row: 6, place: 4, isVip: false, auditorium: green),
+                new Seat(row: 6, place: 5, isVip: false, auditorium: green)
         ]
-        seats.each {
-            it.auditorium = green
-        }
+
 
         Auditorium red = new Auditorium(
                 name: "red",
-
         )
 
-        red.seats = [
+        def redSeats = [
                 new Seat(row: 1, place: 1, isVip: true, auditorium: red),
                 new Seat(row: 1, place: 2, isVip: true, auditorium: red),
                 new Seat(row: 1, place: 3, isVip: true, auditorium: red),
@@ -216,7 +213,79 @@ class InitialParams {
                 new Seat(row: 6, place: 8, isVip: false, auditorium: red)
         ]
 
+        Auditorium brown = new Auditorium(
+                name: "brown",
+        )
+
+        def brownSeats = [
+                new Seat(row: 1, place: 1, isVip: true, auditorium: brown),
+                new Seat(row: 1, place: 2, isVip: true, auditorium: brown),
+                new Seat(row: 1, place: 3, isVip: true, auditorium: brown),
+                new Seat(row: 1, place: 4, isVip: true, auditorium: brown),
+                new Seat(row: 1, place: 5, isVip: true, auditorium: brown),
+                new Seat(row: 1, place: 6, isVip: true, auditorium: brown),
+                new Seat(row: 1, place: 7, isVip: true, auditorium: brown),
+                new Seat(row: 1, place: 8, isVip: true, auditorium: brown),
+
+                new Seat(row: 2, place: 1, isVip: false, auditorium: brown),
+                new Seat(row: 2, place: 2, isVip: false, auditorium: brown),
+                new Seat(row: 2, place: 3, isVip: false, auditorium: brown),
+                new Seat(row: 2, place: 4, isVip: false, auditorium: brown),
+                new Seat(row: 2, place: 5, isVip: false, auditorium: brown),
+                new Seat(row: 2, place: 6, isVip: false, auditorium: brown),
+                new Seat(row: 2, place: 7, isVip: false, auditorium: brown),
+                new Seat(row: 2, place: 8, isVip: false, auditorium: brown),
+
+                new Seat(row: 3, place: 1, isVip: false, auditorium: brown),
+                new Seat(row: 3, place: 2, isVip: false, auditorium: brown),
+                new Seat(row: 3, place: 3, isVip: false, auditorium: brown),
+                new Seat(row: 3, place: 4, isVip: false, auditorium: brown),
+                new Seat(row: 3, place: 5, isVip: false, auditorium: brown),
+                new Seat(row: 3, place: 6, isVip: false, auditorium: brown),
+                new Seat(row: 3, place: 7, isVip: false, auditorium: brown),
+                new Seat(row: 3, place: 8, isVip: false, auditorium: brown),
+
+                new Seat(row: 4, place: 1, isVip: false, auditorium: brown),
+                new Seat(row: 4, place: 2, isVip: false, auditorium: brown),
+                new Seat(row: 4, place: 3, isVip: false, auditorium: brown),
+                new Seat(row: 4, place: 4, isVip: false, auditorium: brown),
+                new Seat(row: 4, place: 5, isVip: false, auditorium: brown),
+                new Seat(row: 4, place: 6, isVip: false, auditorium: brown),
+                new Seat(row: 4, place: 7, isVip: false, auditorium: brown),
+                new Seat(row: 4, place: 8, isVip: false, auditorium: brown),
+
+                new Seat(row: 5, place: 1, isVip: false, auditorium: brown),
+                new Seat(row: 5, place: 2, isVip: false, auditorium: brown),
+                new Seat(row: 5, place: 3, isVip: false, auditorium: brown),
+                new Seat(row: 5, place: 4, isVip: false, auditorium: brown),
+                new Seat(row: 5, place: 5, isVip: false, auditorium: brown),
+                new Seat(row: 5, place: 6, isVip: false, auditorium: brown),
+                new Seat(row: 5, place: 7, isVip: false, auditorium: brown),
+                new Seat(row: 5, place: 8, isVip: false, auditorium: brown),
+
+                new Seat(row: 6, place: 1, isVip: false, auditorium: brown),
+                new Seat(row: 6, place: 2, isVip: false, auditorium: brown),
+                new Seat(row: 6, place: 3, isVip: false, auditorium: brown),
+                new Seat(row: 6, place: 4, isVip: false, auditorium: brown),
+                new Seat(row: 6, place: 5, isVip: false, auditorium: brown),
+                new Seat(row: 6, place: 6, isVip: false, auditorium: brown),
+                new Seat(row: 6, place: 7, isVip: false, auditorium: brown),
+                new Seat(row: 6, place: 8, isVip: false, auditorium: brown)
+        ]
+        red.seats = redSeats
+        green.seats = seats
+        brown.seats = brownSeats
+
+
+        def popcorn = new Popcorn(name: 'with sault')
+        user1.popcorns = [popcorn]
+        popcorn.users = [user1]
+
         entityManager.persist(user1)
+        entityManager.persist(popcorn)
+
+        user1.popcorns = Arrays.asList(popcorn)
+
 
         [user2, user3, user4, user5]*.each {
             userRepository.saveUser it
@@ -231,12 +300,12 @@ class InitialParams {
         }
         [green]*.each {
             createTicketsForAuditoriumAndEvent(it, harryPotter, LocalDateTime.of(2017, Month.AUGUST, 28, 12,30));
-            createTicketsForAuditoriumAndEvent(it, starWars, LocalDateTime.of(2017, Month.AUGUST, 26, 12,30));
+//            createTicketsForAuditoriumAndEvent(it, starWars, LocalDateTime.of(2017, Month.AUGUST, 26, 12,30));
         }
 
         [red]*.each {
             createTicketsForAuditoriumAndEvent(it, titanic, LocalDateTime.of(2017, Month.AUGUST, 29, 12,30));
-            createTicketsForAuditoriumAndEvent(it, toyStory, LocalDateTime.of(2017, Month.AUGUST, 27, 12,30));
+//            createTicketsForAuditoriumAndEvent(it, toyStory, LocalDateTime.of(2017, Month.AUGUST, 27, 12,30));
         }
 
 

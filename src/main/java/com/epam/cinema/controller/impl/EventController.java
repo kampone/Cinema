@@ -4,7 +4,6 @@ import com.epam.cinema.model.Event;
 import com.epam.cinema.service.AuditoriumService;
 import com.epam.cinema.service.EventService;
 import com.epam.cinema.service.UserService;
-import com.epam.cinema.util.InitialParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.User;
@@ -12,12 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+
+//import com.epam.cinema.util.InitialParams;
 
 @Controller
 public class EventController {
@@ -28,13 +26,10 @@ public class EventController {
     private UserService userService;
 
     @Autowired
-    private EntityManager entityManager;
-
-    @Autowired
     private AuditoriumService auditoriumService;
-
-    @Autowired
-    private InitialParams initialParams;
+//
+//    @Autowired
+//    private InitialParams initialParams;
 
     @RequestMapping("/")
     public String getAllEvents(Model model, HttpSession session) {
@@ -65,7 +60,7 @@ public class EventController {
     public String addEvent(Event event, Model model) {
         model.addAttribute("event", event);
         eventService.save(event);
-        initialParams.createTicketsForAuditoriumAndEvent(auditoriumService.getByName("green"), event, LocalDateTime.of(2017, Month.AUGUST, 26, 12, 30));
+//        initialParams.createTicketsForAuditoriumAndEvent(auditoriumService.getByName("brown"), event, LocalDateTime.of(2017, Month.AUGUST, 26, 12, 30));
         return "redirect:/";
     }
 

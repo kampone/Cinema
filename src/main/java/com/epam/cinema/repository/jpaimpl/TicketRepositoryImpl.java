@@ -21,7 +21,7 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public List<Ticket> getAllTickets() {
-        return  entityManager.createQuery("select t from Ticket t", Ticket.class).getResultList();
+        return entityManager.createQuery("select t from Ticket t", Ticket.class).getResultList();
     }
 
     @Override
@@ -31,7 +31,6 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public void bookTicketForUser(Ticket ticket, Long userId) {
-
         User user = entityManager.find(User.class, userId);
         ticket.setUser(user);
         ticket.setBooked(true);

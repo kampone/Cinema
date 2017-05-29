@@ -3,7 +3,6 @@ package com.epam.cinema.service.impl;
 import com.epam.cinema.model.User;
 import com.epam.cinema.repository.AuthorityRepository;
 import com.epam.cinema.repository.UserRepository;
-import com.epam.cinema.service.TicketService;
 import com.epam.cinema.service.UserService;
 
 import java.util.Set;
@@ -11,11 +10,9 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private AuthorityRepository authorityRepository;
-    private TicketService ticketService;
 
-    public UserServiceImpl(UserRepository repository, TicketService ticketService, AuthorityRepository authorityRepository) {
+    public UserServiceImpl(UserRepository repository, AuthorityRepository authorityRepository) {
         this.userRepository = repository;
-        this.ticketService = ticketService;
         this.authorityRepository = authorityRepository;
     }
 
@@ -48,6 +45,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAdmin(String username){
-        return authorityRepository.getAuthority(username).equals("admin");
+        return "admin".equals(authorityRepository.getAuthority(username));
     }
 }

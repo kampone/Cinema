@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class DiscountServiceImpl implements DiscountService {
-
     private List<DiscountStrategy> strategies;
 
     public List<DiscountStrategy> getStrategies() {

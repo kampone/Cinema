@@ -13,7 +13,6 @@ public class RestTicketBookController {
     @Autowired
     private TicketService ticketService;
 
-    //TODO: change to PUT
     @RequestMapping(value = "/book/{id}/user/{userId}", method = RequestMethod.GET)
     public void bookTicket(@PathVariable Long id, @PathVariable Long userId) {
         ticketService.bookTicketWithIdForUser(id, userId);

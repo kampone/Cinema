@@ -1,6 +1,9 @@
 package com.epam.cinema.service.impl;
 
-import com.epam.cinema.model.*;
+import com.epam.cinema.model.Event;
+import com.epam.cinema.model.Rating;
+import com.epam.cinema.model.Seat;
+import com.epam.cinema.model.User;
 import com.epam.cinema.repository.UserTicketsRepository;
 import com.epam.cinema.service.BookingService;
 import com.epam.cinema.service.DiscountService;
@@ -44,7 +47,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public BigDecimal getTicketsPrice(Event event, LocalDateTime dateTime, User user, List<Seat> seats) {
         BigDecimal price = BigDecimal.ZERO;
-        Integer discount = discountService.getDiscount(user, event, dateTime, user.getTickets().size());
+        Integer discount = discountService.getDiscount(user, event, dateTime, user.getTickets() == null ? 0 : user.getTickets().size());
         BigDecimal basePrice = event.getBasePrice();
         for (Seat seat : seats) {
             if (!seat.isVip()) {
@@ -56,22 +59,10 @@ public class BookingServiceImpl implements BookingService {
         if (event.getRating().equals(Rating.HIGH)) {
             price = price.multiply(new BigDecimal(1.2));
         }
-        price = discount == BigDecimal.ZERO.intValue() ? price : price.multiply(new BigDecimal((double) discount / ONE_HUNDRED_PERCENTS));
+        price = discount == BigDecimal.ZERO.intValue() ? price : price.multiply(
+                new BigDecimal(
+                        1 - (double) discount / ONE_HUNDRED_PERCENTS
+                ).round(new MathContext(2, RoundingMode.CEILING)));
         return price.round(new MathContext(2, RoundingMode.CEILING));
-    }
-
-    @Override
-    public void bookTicket(Ticket ticket) {
-        ticket.setBooked(true);
-    }
-
-    @Override
-    public void bookTicketWithId(Long ticketId) {
-        ticketService.bookTicketWithId(ticketId);
-    }
-
-    @Override
-    public List<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime) {
-        return ticketService.getPurchasedTicketsForEventAndDate(event, dateTime);
     }
 }

@@ -2,7 +2,6 @@ package com.epam.cinema.service;
 
 import com.epam.cinema.model.Event;
 import com.epam.cinema.model.Seat;
-import com.epam.cinema.model.Ticket;
 import com.epam.cinema.model.User;
 
 import java.math.BigDecimal;
@@ -23,22 +22,4 @@ public interface BookingService {
      * @return total price
      */
     BigDecimal getTicketsPrice(Event event, LocalDateTime dateTime, User user, List<Seat> seats);
-
-    /**
-     * Book the ticket. Ticket should contain information about event, air dateTime, seat, and user. The user could be registered or not.
-     *
-     * @param ticket Ticket should contain information about event, air dateTime, seat, and user.
-     */
-    void bookTicket(Ticket ticket);
-
-
-    void bookTicketWithId(Long ticketId);
-
-    /**
-     * Get all purchased tickets for event for specific date and Time
-     * @param event specific event
-     * @param dateTime specific date and Time
-     * @return purchased tickets for event for specific date and Time
-     */
-    List<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime);
 }

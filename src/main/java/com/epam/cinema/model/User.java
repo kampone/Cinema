@@ -33,6 +33,14 @@ public class User {
     @Column(name = "enabled")
     private Boolean enabled;
 
+    @ManyToMany
+    @JoinTable(
+            name = "POPCORN_USER",
+            joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "popcorn_id", referencedColumnName = "id")
+    )
+    private List<Popcorn> popcorns;
+
     public User() {
     }
 
@@ -82,6 +90,14 @@ public class User {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public List<Popcorn> getPopcorns() {
+        return popcorns;
+    }
+
+    public void setPopcorns(List<Popcorn> popcorns) {
+        this.popcorns = popcorns;
     }
 
     @Override
