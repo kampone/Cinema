@@ -1,5 +1,6 @@
 package com.epam.cinema.configuration;
 
+import net.sourceforge.cobertura.CoverageIgnore;
 import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 @Configuration
+@CoverageIgnore
 public class DBConfiguration {
     @Bean
     @Primary

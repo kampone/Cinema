@@ -26,6 +26,7 @@ public class DiscountServiceImplTest {
     @Test
     public void getDiscount_withoutStrategies() throws Exception {
         discountService.setStrategies(null);
+
         Integer discount = discountService.getDiscount(null, null, null, null);
 
         assertEquals(new Integer(0), discount);
@@ -36,6 +37,7 @@ public class DiscountServiceImplTest {
         discountService.setStrategies(asList(strategy, moreThanTenTicketsDiscountStrategy));
         when(strategy.getDiscount(null, null, null, null)).thenReturn(15);
         when(moreThanTenTicketsDiscountStrategy.getDiscount(null, null, null, null)).thenReturn(10);
+
         Integer discount = discountService.getDiscount(null, null, null, null);
 
         assertEquals(new Integer(15), discount);
@@ -46,6 +48,7 @@ public class DiscountServiceImplTest {
         discountService.setStrategies(asList(strategy, moreThanTenTicketsDiscountStrategy));
         when(strategy.getDiscount(null, null, null, null)).thenReturn(10);
         when(moreThanTenTicketsDiscountStrategy.getDiscount(null, null, null, null)).thenReturn(15);
+
         Integer discount = discountService.getDiscount(null, null, null, null);
 
         assertEquals(new Integer(15), discount);

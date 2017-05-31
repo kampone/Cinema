@@ -9,14 +9,15 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 public class TicketServiceImplTest {
@@ -37,11 +38,11 @@ public class TicketServiceImplTest {
         Ticket ticket = new Ticket();
         ticket.setEvent(event);
 
-        Mockito.when(ticketRepository.getAllTickets()).thenReturn(Arrays.asList(ticket));
+        when(ticketRepository.getAllTickets()).thenReturn(asList(ticket));
 
         List<Ticket> ticketsForEvent = ticketService.getTicketsForEvent(event);
 
-        Mockito.verify(ticketRepository).getAllTickets();
+        verify(ticketRepository).getAllTickets();
         assertTrue(ticketsForEvent.contains(ticket));
     }
 
@@ -51,8 +52,8 @@ public class TicketServiceImplTest {
         Long userId = 1L;
         ticketService.bookTicketWithIdForUser(ticketId, userId);
 
-        Mockito.verify(ticketRepository).bookTicketForUser(Matchers.any(Ticket.class), eq(userId));
-        Mockito.verify(ticketRepository).getAllTickets();
+        verify(ticketRepository).bookTicketForUser(Matchers.any(Ticket.class), eq(userId));
+        verify(ticketRepository).getAllTickets();
     }
 
     @Test
@@ -61,8 +62,8 @@ public class TicketServiceImplTest {
         Long userId = 1L;
         ticketService.unbookTicketWithId(ticketId, userId);
 
-        Mockito.verify(ticketRepository).unbookTicketForUser(Matchers.any(Ticket.class), eq(userId));
-        Mockito.verify(ticketRepository).getAllTickets();
+        verify(ticketRepository).unbookTicketForUser(Matchers.any(Ticket.class), eq(userId));
+        verify(ticketRepository).getAllTickets();
     }
 
     @Test
@@ -70,7 +71,7 @@ public class TicketServiceImplTest {
         Long id = 1L;
         ticketService.buyTicket(id);
 
-        Mockito.verify(ticketRepository).buyTicket(id);
+        verify(ticketRepository).buyTicket(id);
     }
 
     @Test
@@ -78,7 +79,7 @@ public class TicketServiceImplTest {
         Long id = 1L;
         ticketService.getTicketsForUser(id);
 
-        Mockito.verify(ticketRepository).getTicketsForUser(id);
+        verify(ticketRepository).getTicketsForUser(id);
     }
 
 }

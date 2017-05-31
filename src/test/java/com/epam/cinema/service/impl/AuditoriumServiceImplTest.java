@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.mockito.Mockito.verify;
@@ -17,16 +16,18 @@ public class AuditoriumServiceImplTest {
 
     @InjectMocks
     private AuditoriumServiceImpl auditoriumService;
+
     @Test
     public void getAll() throws Exception {
         auditoriumService.getAll();
 
-        Mockito.verify(auditoriumRepository).getAllAuditoriums();
+        verify(auditoriumRepository).getAllAuditoriums();
     }
 
     @Test
     public void getByName() throws Exception {
         String name = "name";
+
         auditoriumService.getByName(name);
 
         verify(auditoriumRepository).findAuditoriumByName(name);

@@ -1,6 +1,7 @@
 package com.epam.cinema.configuration;
 
 
+import net.sourceforge.cobertura.CoverageIgnore;
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
@@ -18,6 +19,7 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"com.epam.cinema.configuration", "com.epam.cinema.util", "com.epam.cinema.controller", "com.epam.cinema.repository.jpaimpl"})
+@CoverageIgnore
 public class SpringConfiguration {
     @Value("${tomcat.ajp.port}")
     int ajpPort;

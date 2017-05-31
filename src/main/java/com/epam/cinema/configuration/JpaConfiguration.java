@@ -1,5 +1,6 @@
 package com.epam.cinema.configuration;
 
+import net.sourceforge.cobertura.CoverageIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ import java.util.Map;
 @Configuration
 @Profile("jpa")
 @EnableTransactionManagement
+@CoverageIgnore
 public class JpaConfiguration {
     @Autowired
     private JpaVendorAdapter jpaVendorAdapter;

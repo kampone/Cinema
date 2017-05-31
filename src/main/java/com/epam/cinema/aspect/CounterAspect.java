@@ -3,11 +3,13 @@ package com.epam.cinema.aspect;
 import com.epam.cinema.model.Counter;
 import com.epam.cinema.model.Ticket;
 import com.epam.cinema.repository.CounterRepository;
+import net.sourceforge.cobertura.CoverageIgnore;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
 @Aspect
+@CoverageIgnore
 public class CounterAspect {
     private final Logger log = Logger.getLogger(CounterAspect.class);
     private CounterRepository counterRepository;

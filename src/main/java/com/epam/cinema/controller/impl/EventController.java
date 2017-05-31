@@ -5,8 +5,6 @@ import com.epam.cinema.service.AuditoriumService;
 import com.epam.cinema.service.EventService;
 import com.epam.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +25,11 @@ public class EventController {
 
     @Autowired
     private AuditoriumService auditoriumService;
-//
-//    @Autowired
-//    private InitialParams initialParams;
 
     @RequestMapping("/")
     public String getAllEvents(Model model, HttpSession session) {
-        String username = ((User) ((SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getPrincipal()).getUsername();
-        Long id = userService.getAll().stream().filter(user -> user.getName().equals(username)).findFirst().get().getId();
+        String username = "admin";//= getUserName(session);
+        Long id = userService.getAll().stream().filter(user -> user.getName().equals(username)).findFirst().orElse(new com.epam.cinema.model.User()).getId();
         boolean admin = userService.isAdmin(username);
         session.setAttribute("userId", id);
         session.setAttribute("isAdmin", admin);
@@ -42,6 +37,7 @@ public class EventController {
         model.addAttribute("events", events);
         return "index";
     }
+
 
     @RequestMapping("/events/{eventId}")
     public String getAllEvents(@PathVariable Long eventId, Model model) {
@@ -60,7 +56,6 @@ public class EventController {
     public String addEvent(Event event, Model model) {
         model.addAttribute("event", event);
         eventService.save(event);
-//        initialParams.createTicketsForAuditoriumAndEvent(auditoriumService.getByName("brown"), event, LocalDateTime.of(2017, Month.AUGUST, 26, 12, 30));
         return "redirect:/";
     }
 
@@ -76,4 +71,8 @@ public class EventController {
         model.addAttribute("events", Arrays.asList(event));
         return "index";
     }
+//
+//    private String getUserName(HttpSession session) {
+//        return ((User) ((SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT")).getAuthentication().getPrincipal()).getUsername();
+//    }
 }

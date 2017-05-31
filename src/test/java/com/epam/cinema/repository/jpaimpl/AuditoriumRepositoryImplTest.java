@@ -56,6 +56,7 @@ public class AuditoriumRepositoryImplTest {
         verify(criteriaQuery).from(Auditorium.class);
         verify(criteriaQuery).select(root);
         verify(entityManager).createQuery(criteriaQuery);
+        verify(query).getSingleResult();
     }
 
     @Test

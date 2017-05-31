@@ -6,6 +6,7 @@ import com.epam.cinema.model.User;
 import com.epam.cinema.repository.DiscountCounterRepository;
 import com.epam.cinema.service.discount.impl.BirthdayDiscountStrategy;
 import com.epam.cinema.service.discount.impl.MoreThanTenTicketsDiscountStrategy;
+import net.sourceforge.cobertura.CoverageIgnore;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,6 +14,7 @@ import org.aspectj.lang.annotation.Aspect;
 import java.time.LocalDateTime;
 
 @Aspect
+@CoverageIgnore
 public class DiscountCounterAspect {
     private DiscountCounterRepository discountCounterRepository;
     private final Logger log = Logger.getLogger(DiscountCounterAspect.class);

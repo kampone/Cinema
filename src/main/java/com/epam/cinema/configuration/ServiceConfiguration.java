@@ -4,6 +4,7 @@ import com.epam.cinema.repository.*;
 import com.epam.cinema.service.*;
 import com.epam.cinema.service.discount.DiscountStrategy;
 import com.epam.cinema.service.impl.*;
+import net.sourceforge.cobertura.CoverageIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
+@CoverageIgnore
 public class ServiceConfiguration {
     @Bean
     public UserService userService(@Autowired UserRepository repository, @Autowired AuthorityRepository authorityRepository){
